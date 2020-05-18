@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  SOS Flightlight & Morse Code
+//  SOS Flashlight & Morse Code
 //
 //  Created by Mark Wong on 6/5/20.
 //  Copyright © 2020 Mark Wong. All rights reserved.

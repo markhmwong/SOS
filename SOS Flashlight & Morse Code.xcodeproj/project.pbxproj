@@ -1,0 +1,790 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */; };
+		4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */; };
+		4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */; };
+		4D6B8BBC24693D4F00C6AD60 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAD24693D4F00C6AD60 /* Int+Extension.swift */; };
+		4D6B8BBD24693D4F00C6AD60 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAE24693D4F00C6AD60 /* Date+Extension.swift */; };
+		4D6B8BBE24693D4F00C6AD60 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAF24693D4F00C6AD60 /* UIView+Extension.swift */; };
+		4D6B8BBF24693D4F00C6AD60 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB024693D4F00C6AD60 /* UIImage+Extension.swift */; };
+		4D6B8BC024693D4F00C6AD60 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB124693D4F00C6AD60 /* Bundle+Extension.swift */; };
+		4D6B8BC124693D4F00C6AD60 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB224693D4F00C6AD60 /* UIViewController+Extension.swift */; };
+		4D6B8BC224693D4F00C6AD60 /* CAShapelayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB324693D4F00C6AD60 /* CAShapelayerExtension.swift */; };
+		4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB424693D4F00C6AD60 /* String+Extension.swift */; };
+		4D6B8BC424693D4F00C6AD60 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB524693D4F00C6AD60 /* UITextView+Extension.swift */; };
+		4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB624693D4F00C6AD60 /* UIBarButtonItem+Extension.swift */; };
+		4D6B8BC624693D4F00C6AD60 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB724693D4F00C6AD60 /* UIBezierPath+Extension.swift */; };
+		4D6B8BC724693D4F00C6AD60 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BB824693D4F00C6AD60 /* UITableView+Extension.swift */; };
+		4D6B8BC92469528800C6AD60 /* MorseCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BC82469528800C6AD60 /* MorseCodeView.swift */; };
+		4D6B8BCC2469542500C6AD60 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BCB2469542500C6AD60 /* Theme.swift */; };
+		4D6B8BCE246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */; };
+		4D6B8BD0246BB93F00C6AD60 /* ImpactFeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */; };
+		4D6B8BD3246C3B8B00C6AD60 /* BottomContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD2246C3B8B00C6AD60 /* BottomContainerView.swift */; };
+		4D6B8BD5246C3B9100C6AD60 /* TopContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD4246C3B9100C6AD60 /* TopContainerView.swift */; };
+		4D6B8BD8246CEE9100C6AD60 /* ViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */; };
+		4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */; };
+		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
+		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
+		4DED82D6246504870027F385 /* MorseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D5246504870027F385 /* MorseParser.swift */; };
+		4DED82D9246524E20027F385 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D8246524E20027F385 /* States.swift */; };
+		4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */; };
+		4DFC0D342461AE460033634E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D332461AE460033634E /* AppDelegate.swift */; };
+		4DFC0D362461AE460033634E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D352461AE460033634E /* SceneDelegate.swift */; };
+		4DFC0D382461AE460033634E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D372461AE460033634E /* ViewController.swift */; };
+		4DFC0D3B2461AE460033634E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DFC0D392461AE460033634E /* Main.storyboard */; };
+		4DFC0D3E2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D3C2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld */; };
+		4DFC0D402461AE4B0033634E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFC0D3F2461AE4B0033634E /* Assets.xcassets */; };
+		4DFC0D432461AE4B0033634E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DFC0D412461AE4B0033634E /* LaunchScreen.storyboard */; };
+		4DFC0D4E2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D4D2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift */; };
+		4DFC0D592461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */; };
+		4DFC0D692461CC800033634E /* Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D682461CC800033634E /* Flashlight.swift */; };
+		4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D6A2461CC9A0033634E /* MorseType.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4DFC0D4A2461AE4B0033634E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DFC0D282461AE460033634E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DFC0D2F2461AE460033634E;
+			remoteInfo = "SOS Flightlight & Morse Code";
+		};
+		4DFC0D552461AE4B0033634E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DFC0D282461AE460033634E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DFC0D2F2461AE460033634E;
+			remoteInfo = "SOS Flightlight & Morse Code";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BAD24693D4F00C6AD60 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BAE24693D4F00C6AD60 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BAF24693D4F00C6AD60 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB024693D4F00C6AD60 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB124693D4F00C6AD60 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB224693D4F00C6AD60 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB324693D4F00C6AD60 /* CAShapelayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAShapelayerExtension.swift; sourceTree = "<group>"; };
+		4D6B8BB424693D4F00C6AD60 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB524693D4F00C6AD60 /* UITextView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB624693D4F00C6AD60 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB724693D4F00C6AD60 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BB824693D4F00C6AD60 /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BC82469528800C6AD60 /* MorseCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeView.swift; sourceTree = "<group>"; };
+		4D6B8BCB2469542500C6AD60 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedbackService.swift; sourceTree = "<group>"; };
+		4D6B8BD2246C3B8B00C6AD60 /* BottomContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomContainerView.swift; sourceTree = "<group>"; };
+		4D6B8BD4246C3B9100C6AD60 /* TopContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContainerView.swift; sourceTree = "<group>"; };
+		4D6B8BD6246C3DC100C6AD60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
+		4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
+		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
+		4DED82D5246504870027F385 /* MorseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseParser.swift; sourceTree = "<group>"; };
+		4DED82D8246524E20027F385 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
+		4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachine.swift; sourceTree = "<group>"; };
+		4DFC0D302461AE460033634E /* SOS Flashlight & Morse Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SOS Flashlight & Morse Code.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFC0D332461AE460033634E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4DFC0D352461AE460033634E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4DFC0D372461AE460033634E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4DFC0D3A2461AE460033634E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4DFC0D3D2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SOS_Flightlight___Morse_Code.xcdatamodel"; sourceTree = "<group>"; };
+		4DFC0D3F2461AE4B0033634E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4DFC0D422461AE4B0033634E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4DFC0D442461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DFC0D492461AE4B0033634E /* SOS Flashlight & Morse CodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SOS Flashlight & Morse CodeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFC0D4D2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SOS_Flightlight___Morse_CodeTests.swift"; sourceTree = "<group>"; };
+		4DFC0D4F2461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DFC0D542461AE4B0033634E /* SOS Flashlight & Morse CodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SOS Flashlight & Morse CodeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SOS_Flightlight___Morse_CodeUITests.swift"; sourceTree = "<group>"; };
+		4DFC0D5A2461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DFC0D682461CC800033634E /* Flashlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashlight.swift; sourceTree = "<group>"; };
+		4DFC0D6A2461CC9A0033634E /* MorseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseType.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4DFC0D2D2461AE460033634E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D462461AE4B0033634E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D512461AE4B0033634E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4D6B8BA924693D4F00C6AD60 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */,
+				4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */,
+				4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */,
+				4D6B8BAD24693D4F00C6AD60 /* Int+Extension.swift */,
+				4D6B8BAE24693D4F00C6AD60 /* Date+Extension.swift */,
+				4D6B8BAF24693D4F00C6AD60 /* UIView+Extension.swift */,
+				4D6B8BB024693D4F00C6AD60 /* UIImage+Extension.swift */,
+				4D6B8BB124693D4F00C6AD60 /* Bundle+Extension.swift */,
+				4D6B8BB224693D4F00C6AD60 /* UIViewController+Extension.swift */,
+				4D6B8BB324693D4F00C6AD60 /* CAShapelayerExtension.swift */,
+				4D6B8BB424693D4F00C6AD60 /* String+Extension.swift */,
+				4D6B8BB524693D4F00C6AD60 /* UITextView+Extension.swift */,
+				4D6B8BB624693D4F00C6AD60 /* UIBarButtonItem+Extension.swift */,
+				4D6B8BB724693D4F00C6AD60 /* UIBezierPath+Extension.swift */,
+				4D6B8BB824693D4F00C6AD60 /* UITableView+Extension.swift */,
+				4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4D6B8BCA2469542500C6AD60 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BCB2469542500C6AD60 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		4D6B8BD1246C3B7800C6AD60 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BC82469528800C6AD60 /* MorseCodeView.swift */,
+				4D6B8BD4246C3B9100C6AD60 /* TopContainerView.swift */,
+				4D6B8BD2246C3B8B00C6AD60 /* BottomContainerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4D6B8BDB246D7E4F00C6AD60 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		4DED82D7246524CE0027F385 /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */,
+				4DED82D8246524E20027F385 /* States.swift */,
+				4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
+		4DFC0D272461AE460033634E = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BD6246C3DC100C6AD60 /* README.md */,
+				4DFC0D322461AE460033634E /* SOS Flashlight & Morse Code */,
+				4DFC0D4C2461AE4B0033634E /* SOS Flashlight & Morse CodeTests */,
+				4DFC0D572461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */,
+				4DFC0D312461AE460033634E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4DFC0D312461AE460033634E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC0D302461AE460033634E /* SOS Flashlight & Morse Code.app */,
+				4DFC0D492461AE4B0033634E /* SOS Flashlight & Morse CodeTests.xctest */,
+				4DFC0D542461AE4B0033634E /* SOS Flashlight & Morse CodeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4DFC0D322461AE460033634E /* SOS Flashlight & Morse Code */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC0D372461AE460033634E /* ViewController.swift */,
+				4D6B8BDB246D7E4F00C6AD60 /* Coordinator */,
+				4D6B8BCA2469542500C6AD60 /* Theme */,
+				4D6B8BA924693D4F00C6AD60 /* Extensions */,
+				4DFC0D672461CC720033634E /* Flashlight */,
+				4DFC0D662461CC6C0033634E /* Morse */,
+				4D6B8BD1246C3B7800C6AD60 /* View */,
+				4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */,
+				4DFC0D332461AE460033634E /* AppDelegate.swift */,
+				4DFC0D352461AE460033634E /* SceneDelegate.swift */,
+				4DFC0D392461AE460033634E /* Main.storyboard */,
+				4DFC0D3F2461AE4B0033634E /* Assets.xcassets */,
+				4DFC0D412461AE4B0033634E /* LaunchScreen.storyboard */,
+				4DFC0D442461AE4B0033634E /* Info.plist */,
+				4DFC0D3C2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld */,
+			);
+			path = "SOS Flashlight & Morse Code";
+			sourceTree = "<group>";
+		};
+		4DFC0D4C2461AE4B0033634E /* SOS Flashlight & Morse CodeTests */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC0D4D2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift */,
+				4DFC0D4F2461AE4B0033634E /* Info.plist */,
+			);
+			path = "SOS Flashlight & Morse CodeTests";
+			sourceTree = "<group>";
+		};
+		4DFC0D572461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */,
+				4DFC0D5A2461AE4B0033634E /* Info.plist */,
+			);
+			path = "SOS Flashlight & Morse CodeUITests";
+			sourceTree = "<group>";
+		};
+		4DFC0D662461CC6C0033634E /* Morse */ = {
+			isa = PBXGroup;
+			children = (
+				4DED82D7246524CE0027F385 /* StateMachine */,
+				4DFC0D6A2461CC9A0033634E /* MorseType.swift */,
+				4DED82D5246504870027F385 /* MorseParser.swift */,
+				4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */,
+				4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */,
+			);
+			path = Morse;
+			sourceTree = "<group>";
+		};
+		4DFC0D672461CC720033634E /* Flashlight */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC0D682461CC800033634E /* Flashlight.swift */,
+			);
+			path = Flashlight;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DFC0D2F2461AE460033634E /* SOS Flashlight & Morse Code */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DFC0D5D2461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse Code" */;
+			buildPhases = (
+				4DFC0D2C2461AE460033634E /* Sources */,
+				4DFC0D2D2461AE460033634E /* Frameworks */,
+				4DFC0D2E2461AE460033634E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SOS Flashlight & Morse Code";
+			productName = "SOS Flightlight & Morse Code";
+			productReference = 4DFC0D302461AE460033634E /* SOS Flashlight & Morse Code.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4DFC0D482461AE4B0033634E /* SOS Flashlight & Morse CodeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DFC0D602461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeTests" */;
+			buildPhases = (
+				4DFC0D452461AE4B0033634E /* Sources */,
+				4DFC0D462461AE4B0033634E /* Frameworks */,
+				4DFC0D472461AE4B0033634E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DFC0D4B2461AE4B0033634E /* PBXTargetDependency */,
+			);
+			name = "SOS Flashlight & Morse CodeTests";
+			productName = "SOS Flightlight & Morse CodeTests";
+			productReference = 4DFC0D492461AE4B0033634E /* SOS Flashlight & Morse CodeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4DFC0D532461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DFC0D632461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeUITests" */;
+			buildPhases = (
+				4DFC0D502461AE4B0033634E /* Sources */,
+				4DFC0D512461AE4B0033634E /* Frameworks */,
+				4DFC0D522461AE4B0033634E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DFC0D562461AE4B0033634E /* PBXTargetDependency */,
+			);
+			name = "SOS Flashlight & Morse CodeUITests";
+			productName = "SOS Flightlight & Morse CodeUITests";
+			productReference = 4DFC0D542461AE4B0033634E /* SOS Flashlight & Morse CodeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4DFC0D282461AE460033634E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Mark Wong";
+				TargetAttributes = {
+					4DFC0D2F2461AE460033634E = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					4DFC0D482461AE4B0033634E = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 4DFC0D2F2461AE460033634E;
+					};
+					4DFC0D532461AE4B0033634E = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 4DFC0D2F2461AE460033634E;
+					};
+				};
+			};
+			buildConfigurationList = 4DFC0D2B2461AE460033634E /* Build configuration list for PBXProject "SOS Flashlight & Morse Code" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4DFC0D272461AE460033634E;
+			productRefGroup = 4DFC0D312461AE460033634E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DFC0D2F2461AE460033634E /* SOS Flashlight & Morse Code */,
+				4DFC0D482461AE4B0033634E /* SOS Flashlight & Morse CodeTests */,
+				4DFC0D532461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4DFC0D2E2461AE460033634E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFC0D432461AE4B0033634E /* LaunchScreen.storyboard in Resources */,
+				4DFC0D402461AE4B0033634E /* Assets.xcassets in Resources */,
+				4DFC0D3B2461AE460033634E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D472461AE4B0033634E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D522461AE4B0033634E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DFC0D2C2461AE460033634E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D6B8BBC24693D4F00C6AD60 /* Int+Extension.swift in Sources */,
+				4DFC0D3E2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld in Sources */,
+				4D6B8BD5246C3B9100C6AD60 /* TopContainerView.swift in Sources */,
+				4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */,
+				4D6B8BBF24693D4F00C6AD60 /* UIImage+Extension.swift in Sources */,
+				4DFC0D382461AE460033634E /* ViewController.swift in Sources */,
+				4DFC0D692461CC800033634E /* Flashlight.swift in Sources */,
+				4D6B8BD3246C3B8B00C6AD60 /* BottomContainerView.swift in Sources */,
+				4D6B8BC624693D4F00C6AD60 /* UIBezierPath+Extension.swift in Sources */,
+				4D6B8BBD24693D4F00C6AD60 /* Date+Extension.swift in Sources */,
+				4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */,
+				4DFC0D342461AE460033634E /* AppDelegate.swift in Sources */,
+				4D6B8BC124693D4F00C6AD60 /* UIViewController+Extension.swift in Sources */,
+				4D6B8BC424693D4F00C6AD60 /* UITextView+Extension.swift in Sources */,
+				4D6B8BD8246CEE9100C6AD60 /* ViewControllerViewModel.swift in Sources */,
+				4D6B8BBE24693D4F00C6AD60 /* UIView+Extension.swift in Sources */,
+				4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */,
+				4D6B8BCC2469542500C6AD60 /* Theme.swift in Sources */,
+				4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */,
+				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
+				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
+				4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */,
+				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,
+				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,
+				4DED82D9246524E20027F385 /* States.swift in Sources */,
+				4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */,
+				4D6B8BD0246BB93F00C6AD60 /* ImpactFeedbackService.swift in Sources */,
+				4D6B8BC224693D4F00C6AD60 /* CAShapelayerExtension.swift in Sources */,
+				4D6B8BC92469528800C6AD60 /* MorseCodeView.swift in Sources */,
+				4D6B8BCE246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift in Sources */,
+				4DFC0D362461AE460033634E /* SceneDelegate.swift in Sources */,
+				4DED82D6246504870027F385 /* MorseParser.swift in Sources */,
+				4D6B8BC024693D4F00C6AD60 /* Bundle+Extension.swift in Sources */,
+				4D6B8BC724693D4F00C6AD60 /* UITableView+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D452461AE4B0033634E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFC0D4E2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFC0D502461AE4B0033634E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFC0D592461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4DFC0D4B2461AE4B0033634E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DFC0D2F2461AE460033634E /* SOS Flashlight & Morse Code */;
+			targetProxy = 4DFC0D4A2461AE4B0033634E /* PBXContainerItemProxy */;
+		};
+		4DFC0D562461AE4B0033634E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DFC0D2F2461AE460033634E /* SOS Flashlight & Morse Code */;
+			targetProxy = 4DFC0D552461AE4B0033634E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4DFC0D392461AE460033634E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DFC0D3A2461AE460033634E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4DFC0D412461AE4B0033634E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DFC0D422461AE4B0033634E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4DFC0D5B2461AE4B0033634E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4DFC0D5C2461AE4B0033634E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4DFC0D5E2461AE4B0033634E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4DFC0D5F2461AE4B0033634E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4DFC0D612461AE4B0033634E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse CodeTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-CodeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SOS Flashlight & Morse Code.app/SOS Flashlight & Morse Code";
+			};
+			name = Debug;
+		};
+		4DFC0D622461AE4B0033634E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse CodeTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-CodeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SOS Flashlight & Morse Code.app/SOS Flashlight & Morse Code";
+			};
+			name = Release;
+		};
+		4DFC0D642461AE4B0033634E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse CodeUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-CodeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SOS Flashlight & Morse Code";
+			};
+			name = Debug;
+		};
+		4DFC0D652461AE4B0033634E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GEKZN86RYS;
+				INFOPLIST_FILE = "SOS Flashlight & Morse CodeUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-CodeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SOS Flashlight & Morse Code";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DFC0D2B2461AE460033634E /* Build configuration list for PBXProject "SOS Flashlight & Morse Code" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFC0D5B2461AE4B0033634E /* Debug */,
+				4DFC0D5C2461AE4B0033634E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DFC0D5D2461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse Code" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFC0D5E2461AE4B0033634E /* Debug */,
+				4DFC0D5F2461AE4B0033634E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DFC0D602461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFC0D612461AE4B0033634E /* Debug */,
+				4DFC0D622461AE4B0033634E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DFC0D632461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFC0D642461AE4B0033634E /* Debug */,
+				4DFC0D652461AE4B0033634E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4DFC0D3C2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4DFC0D3D2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodel */,
+			);
+			currentVersion = 4DFC0D3D2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodel */;
+			path = "SOS_Flightlight___Morse_Code.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4DFC0D282461AE460033634E /* Project object */;
+}
