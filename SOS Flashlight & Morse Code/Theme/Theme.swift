@@ -105,7 +105,7 @@ struct Theme {
             case h4 = 20.0
 			case h5 = 18.0
             //body sizes
-            case b0 = 15.0
+            case b0 = 17.0
             case b1 = 14.0
             case b2 = 12.0
             case b3 = 11.0

@@ -77,6 +77,7 @@ extension TopContainer: UITextViewDelegate {
 
 class TopContainer: UIView {
 
+	// MARK: - Top Toolbar
 	lazy var toolBar: UIStackView = {
 		let view = UIStackView()
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -85,14 +86,10 @@ class TopContainer: UIView {
 		return view
 	}()
 	
-	lazy var messageContainer: UIView = {
-		let view = UIView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-		return view
-	}()
-	
+	// MARK: - Top Toolbar buttons
 	lazy var loopButton: UIButton = {
 		let view = UIButton()
+		view.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
 		view.setAttributedTitle(NSMutableAttributedString().primaryTextAttributes(string: "Loop"), for: .normal)
 		view.addTarget(self, action: #selector(handleLoop), for: .touchDown)
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -101,11 +98,30 @@ class TopContainer: UIView {
 	
 	lazy var infoButton: UIButton = {
 		let view = UIButton()
+		view.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
 		view.setAttributedTitle(NSMutableAttributedString().primaryTextAttributes(string: "Info"), for: .normal)
 		view.addTarget(self, action: #selector(handleInfo), for: .touchDown)
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
+	
+	override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+		let biggerButtonFrame = loopButton.frame.insetBy(dx: -30, dy: -30)
+
+		if biggerButtonFrame.contains(point) {
+		   return loopButton
+		}
+
+		return super.hitTest(point, with: event)
+	}
+	
+	lazy var messageContainer: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+	
+
 	
 	lazy var conversionView: UIView = {
 		let view = UIView()

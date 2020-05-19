@@ -61,6 +61,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	// MARK: - Buttons
 	lazy var switchSideButton: UIButton = {
 		let button = UIButton()
+		button.accessibilityLabel = "Front/Rear"
 		button.setImage(UIImage(named: "switchSide.png"), for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.addTarget(self, action: #selector(handleSideSwitch), for: .touchDown)
@@ -69,6 +70,8 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	
 	lazy var toggleButton: UIButton = {
 		let button = UIButton()
+		button.accessibilityLabel = "Toggle Flash"
+		button.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
 		button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
@@ -76,6 +79,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	
 	lazy var messageButton: UIButton = {
 		let button = UIButton()
+		button.accessibilityLabel = "Compose message"
 		button.addTarget(self, action: #selector(handleMessage), for: .touchDown)
 		button.setImage(UIImage(named: "compose.png"), for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +118,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.backgroundColor = .clear
 		label.textAlignment = .center
+		label.adjustsFontForContentSizeCategory = true
 		label.attributedText = NSMutableAttributedString().secondaryTitleAttributes(string: "SOS")
 		return label
 	}()
@@ -215,7 +220,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		buttonShapeLayer.position = CGPoint(x: toggleButton.bounds.midX, y: toggleButton.bounds.midY)
 		buttonShapeOutline.position = CGPoint(x: toggleButton.bounds.midX, y: toggleButton.bounds.midY)
 		
-		let iconSize = CGSize(width: bounds.width * 0.08, height: bounds.width * 0.08)
+		let iconSize = CGSize(width: bounds.width * 0.11, height: bounds.width * 0.11)
 		
 		switchSideButton.anchorView(top: nil, bottom: nil, leading: nil, trailing: trailingAnchor, centerY: centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -20.0), size: iconSize)
 		toggleButton.anchorView(top: nil, bottom: nil, leading: nil, trailing: nil, centerY: centerYAnchor, centerX: centerXAnchor, padding: .zero, size: .zero)
@@ -474,4 +479,10 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 				toggleButton.addGestureRecognizer(createLongGestureRecognizer())
 		}
 	}
+	
+	// MARK: - Trait
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+
+        sosLabel.sizeToFit()
+    }
 }

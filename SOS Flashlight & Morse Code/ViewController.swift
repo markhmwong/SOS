@@ -75,9 +75,11 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		light.toggleTorch(on: false)
+		
 //		let parser = MorseParser(message: "SOS")
 //		stateMachine = MorseStateMachineSystem(morseParser: parser, delegate: self)
 //		stateMachine?.startSystemAtIdle()
+		
 		mainView.setupView()
 	}
 	
