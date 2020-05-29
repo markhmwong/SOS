@@ -8,9 +8,6 @@
 
 import Foundation
 
-
-
-
 class MorseStateMachineSystem {
 	private var currState: String = ""
 	// Timer variables
@@ -29,7 +26,7 @@ class MorseStateMachineSystem {
 	
 	private var c: MorseType // characterType
 	
-	private var loopState: Bool = true
+	var loopState: Bool = false
 	
 	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate) {
 		self.morseParser = morseParser
@@ -43,6 +40,7 @@ class MorseStateMachineSystem {
 		delegate.start()
 		c = morseParser.readNextCharacter()
 		reviseTime(time: c.unitTime)
+		// nil timer
 		self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 		
 		process(transition: state.characterExists(exists: morseParser.isEndOfMessage()))
@@ -65,13 +63,17 @@ class MorseStateMachineSystem {
 	func end() {
 		process(transition: state.end())
 		// end timer
+		endTimer()
+	}
+	
+	func endTimer() {
 		timer?.invalidate()
 		timer = nil
 	}
 	
 	private func process(transition: Transition?) {
-//		print("transition \(transition)")
-        guard let transition = transition else { return }
+
+		guard let transition = transition else { return }
         state.exit(self)
 		transition.effect?(self)
 		state = transition.targetState
@@ -100,7 +102,6 @@ class MorseStateMachineSystem {
 					delegate.willLoop()
 					morseParser.reinstateMessage()
 					startSystemAtIdle()
-					print("\(c)")
 				} else {
 					// end
 					end()
@@ -112,14 +113,8 @@ class MorseStateMachineSystem {
 				characterExists()
 				c = morseParser.readNextCharacter()
 				reviseTime(time: c.unitTime)
-				
-//				print("Next letter")
-//				print(morseParser.convertedMessage, c.unitTime)
-//				print(c)
-			}
 
-		} else {
-			
+			}
 		}
 	}
 	

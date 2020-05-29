@@ -18,4 +18,10 @@ class ImpactFeedbackService {
 		impactFeedbackgenerator.impactOccurred()
 	}
 	
+	func failedFeedback() {
+		let generator = UINotificationFeedbackGenerator()
+		generator.prepare()
+		generator.notificationOccurred(.error)
+	}
+	
 }

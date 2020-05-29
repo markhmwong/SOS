@@ -31,6 +31,10 @@ struct Theme {
 		static var primary: UIColor = UIColor.black.adjust(by: 5)!
 		static var secondary: UIColor = UIColor.black.adjust(by: 10)!
 		static var tertiary: UIColor = UIColor.black.adjust(by: 30)!
+		
+		struct FlashButton {
+			static var background: UIColor = UIColor.white
+		}
 	}
 	
 	struct Light {

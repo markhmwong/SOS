@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum TextFieldError: Error {
+	case empty
+}
+
 //MARK: - Bottom Container
 class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 	
@@ -16,17 +20,18 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		case right
 	}
 	
+	private weak var viewModel: ViewControllerViewModel?
+	
+	private weak var viewController: ViewController?
+	
+	//move to viewModel
 	// MARK: - Class variables and states
 	private var contentSize: CGFloat = .zero
 	
 	private var currIndex: Int
 	
 	var currState: MorseCodeMode
-	
-	private weak var viewModel: ViewControllerViewModel?
-	
-	private weak var viewController: ViewController?
-	
+
 	var buttonToggleState: Bool = true {
 		didSet {
 			toggleButton.isEnabled = buttonToggleState
@@ -59,35 +64,18 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	}()
 	
 	// MARK: - Buttons
-	lazy var switchSideButton: UIButton = {
-		let button = UIButton()
-		button.accessibilityLabel = "Front/Rear"
-		button.setImage(UIImage(named: "switchSide.png"), for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.addTarget(self, action: #selector(handleSideSwitch), for: .touchDown)
-		return button
-	}()
 	
 	lazy var toggleButton: UIButton = {
 		let button = UIButton()
 		button.accessibilityLabel = "Toggle Flash"
-		button.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
 		button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
+		button.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Flash"), for: .normal)
+		button.setTitleColor(UIColor.black, for: .normal)
+		button.layer.backgroundColor = Theme.Dark.FlashButton.background.cgColor
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
-	
-	lazy var messageButton: UIButton = {
-		let button = UIButton()
-		button.accessibilityLabel = "Compose message"
-		button.addTarget(self, action: #selector(handleMessage), for: .touchDown)
-		button.setImage(UIImage(named: "compose.png"), for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.alpha = 0.3
-		button.isEnabled = false
-		return button
-	}()
-	
+
 	// MARK: - Gestures
 	private var longPressGesture: UILongPressGestureRecognizer = {
 		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
@@ -179,7 +167,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		super.init(coder: coder)
 	}
 	
-	// MARK: - Setupview
+	// MARK: - Setup view
 	func setupView() {
 		addSubview(scrollView)
 		
@@ -198,17 +186,15 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		scrollView.addSubview(holdLabel)
 		scrollView.addSubview(conversionLabel)
 		
-		addSubview(messageButton)
-		addSubview(switchSideButton)
 		addSubview(toggleButton)
 		
 		let path = UIBezierPath(arcCenter: .zero, radius: 25, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
 		buttonShapeLayer = CAShapeLayer().circularShapeLayer(path: path.cgPath, color: UIColor.white.cgColor, fillColor: UIColor.white.cgColor, strokeEnd: 1, lineWidth: 5)
-		toggleButton.layer.addSublayer(buttonShapeLayer)
+//		toggleButton.layer.addSublayer(buttonShapeLayer)
 		
 		let outlinePath = UIBezierPath(arcCenter: .zero, radius: 35, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
 		buttonShapeOutline = CAShapeLayer().circularShapeLayer(path: outlinePath.cgPath, color: UIColor.white.cgColor, fillColor: UIColor.clear.cgColor, strokeEnd: 1, lineWidth: 3)
-		toggleButton.layer.addSublayer(buttonShapeOutline)
+//		toggleButton.layer.addSublayer(buttonShapeOutline)
 
 	}
 	
@@ -222,10 +208,9 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		
 		let iconSize = CGSize(width: bounds.width * 0.11, height: bounds.width * 0.11)
 		
-		switchSideButton.anchorView(top: nil, bottom: nil, leading: nil, trailing: trailingAnchor, centerY: centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -20.0), size: iconSize)
 		toggleButton.anchorView(top: nil, bottom: nil, leading: nil, trailing: nil, centerY: centerYAnchor, centerX: centerXAnchor, padding: .zero, size: .zero)
-		messageButton.anchorView(top: nil, bottom: nil, leading: leadingAnchor, trailing: nil, centerY: centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0), size: iconSize)
-		
+		toggleButton.contentEdgeInsets = UIEdgeInsets(top: 25.0, left: 15.0, bottom: 25.0, right: 15.0)
+		toggleButton.layer.cornerRadius = toggleButton.bounds.height / 3
 		scrollView.anchorView(top: topAnchor, bottom: toggleButton.topAnchor, leading: leadingAnchor, trailing: trailingAnchor, centerY: nil, centerX: nil, padding: .zero, size: .zero)
 		scrollView.contentSize = CGSize(width: contentSize * 4, height: 0.0)
 		
@@ -259,16 +244,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		}
 	}
 	
-	// MARK: - Handlers
-	@objc func handleMessage() {
-		// fade in textview
-		
-		guard let messageField = viewController?.mainView.topContainer.messageField else { return }
-		messageField.backgroundColor = UIColor.white.adjust(by: -70.0)!
-		messageField.isEditable = true
-		messageField.isHidden = false
-		messageField.becomeFirstResponder()
-	}
+	// MARK: - Button Handlers
 	
 	@objc func handleLeftArea() {
 		scrollFlashTypeWithTouch(direction: .left)
@@ -278,26 +254,25 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		scrollFlashTypeWithTouch(direction: .right)
 	}
 	
+	// handle main flash toggle button
 	@objc func handleToggle() {
 		if (toggleButton.isEnabled) {
-			ImpactFeedbackService.shared.impactType(feedBackStyle: .rigid)
 			switch currState {
 				case .kSos:
+					ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 					viewController?.toggleSos()
 				case .kMessage:
-					()
+					viewController?.toggleMessage()
 				case .kSwitch:
+					ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 					viewController?.toggleLight()
 				case .kHold:
-					()
+					ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 				case .kConversion:
-					viewModel?.convertMessageMode()
+					ImpactFeedbackService.shared.impactType(feedBackStyle: .soft)
+					viewModel?.convertMessageMode(text:	viewController?.mainView.topContainer.conversionField.text ?? "")
 			}
 		}
-	}
-	
-	@objc func handleSideSwitch() {
-		viewController?.switchSide()
 	}
 	
 	@objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
@@ -316,25 +291,13 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 			} else {
 				buttonToggleState = true
 			}
-			
-			UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-				self.messageButton.alpha = 1.0
-				self.messageButton.isEnabled = true
-			}) { (_) in
-				//
-			}
 		} else {
-			UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-				self.messageButton.alpha = 0.3
-				self.messageButton.isEnabled = false
-			}) { (_) in
-				//
-			}
+
 			buttonToggleState = true
 		}
 	}
 	
-	// MARK: - Horizontal Swipe UI Logic
+	// MARK: - Bottom Menu Swipe Logic
 	// to switch between morse code modes
 	@objc func handleHorizontalGestureRecognizer(gesture: UIPanGestureRecognizer) {
 		viewController?.resetLight()
@@ -347,10 +310,11 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		let leftDetection = translation.x <= 0
 		let rightDetection = translation.x >= 0
 		
-		
 		// turn off light
 		viewController?.resetLight()
 		
+		viewController?.shutDownStateMachine()
+
 		if (leftDetection && currIndex != MorseCodeMode.allCases.count - 1) {
 			gestureRecognizer.isEnabled = false
 			currIndex = Int((scrollView.contentOffset.x / contentSize)) + 1
@@ -375,27 +339,15 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		}
 		
 		// hide/show the conversion view
-		if (currIndex == MorseCodeMode.kConversion.rawValue) {
-			
-			self.viewController?.mainView.topContainer.frontCircleIndicator.isHidden = true
-			self.viewController?.mainView.topContainer.conversionView.isHidden = false
-			UIView.animate(withDuration: 0.1, animations: {
-				self.viewController?.mainView.topContainer.conversionView.alpha = 1.0
-			})
-		} else {
-			self.viewController?.mainView.topContainer.frontCircleIndicator.isHidden = false
-			self.viewController?.mainView.topContainer.conversionView.isHidden = true
-			UIView.animate(withDuration: 0.1, animations: {
-				self.viewController?.mainView.topContainer.conversionView.alpha = 0.0
-			})
-		}
+		hideConversionView()
+		
+		// hide/show message field
+		hideMessageField()
 		
 		updateCurrentFlashState()
 		
 		// disable message button
 		handleMessageButtonState()
-
-		
 		
 		// handle the gesture for a long press
 		manageLongGestureRecognizer()
@@ -413,13 +365,18 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		return gesture
 	}
 	
-	// MARK: -  Touch scrolling
+	// MARK: -  Bottom Menu Touch Response
 	func scrollFlashTypeWithTouch(direction: TapDirection) {
 		scrollView.isUserInteractionEnabled = false
+		
 		// turn off light
 		viewController?.resetLight()
 		
-		if (direction == .right && currIndex != MorseCodeMode.allCases.count) {
+		viewController?.shutDownStateMachine()
+		
+		// control the direction and handle edge case
+		
+		if (direction == .right && currIndex < MorseCodeMode.allCases.count - 1) {
 			currIndex = Int((scrollView.contentOffset.x / contentSize)) + 1
 			scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x + contentSize, y: scrollView.contentOffset.y), animated: true)
 		} else if (direction == .left && currIndex != 0) {
@@ -428,7 +385,7 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		}
 		
 		// hide the Loop button
-		if currIndex >= 2 {
+		if currIndex >= MorseCodeMode.kConversion.rawValue {
 			UIView.animate(withDuration: 0.1, animations: {
 				self.viewController?.mainView.topContainer.loopButton.isEnabled = false
 			})
@@ -439,11 +396,27 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 			})
 		}
 		
+		hideConversionView()
+		
+		// hide message box for Message Mode
+		hideMessageField()
+		
+		updateCurrentFlashState()
+		
+		// disable message button
+		handleMessageButtonState()
+		
+		// handle the gesture for a long press
+		manageLongGestureRecognizer()
+	}
+	
+	func hideConversionView() {
 		// hide/show the conversion view
 		if (currIndex == MorseCodeMode.kConversion.rawValue) {
-			
 			self.viewController?.mainView.topContainer.frontCircleIndicator.isHidden = true
 			self.viewController?.mainView.topContainer.conversionView.isHidden = false
+			toggleButton.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Convert"), for: .normal)
+
 			UIView.animate(withDuration: 0.1, animations: {
 				self.viewController?.mainView.topContainer.conversionView.alpha = 1.0
 			})
@@ -453,15 +426,20 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 			UIView.animate(withDuration: 0.1, animations: {
 				self.viewController?.mainView.topContainer.conversionView.alpha = 0.0
 			})
+			toggleButton.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Flash"), for: .normal)
+
 		}
-		
-		updateCurrentFlashState()
-		
-		// disable message button
-		handleMessageButtonState()
-		
-		// handle the gesture for a long press
-		manageLongGestureRecognizer()
+	}
+	
+	func hideMessageField() {
+		// hide message box for Message Mode
+		if (currIndex != MorseCodeMode.kMessage.rawValue) {
+			self.viewController?.mainView.topContainer.messageContainer.isHidden = true
+			self.viewController?.mainView.topContainer.messageField.isEditable = false
+		} else {
+			self.viewController?.mainView.topContainer.messageContainer.isHidden = false
+			self.viewController?.mainView.topContainer.messageField.isEditable = true
+		}
 	}
 	
 	func updateCurrentFlashState() {
@@ -482,7 +460,6 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	
 	// MARK: - Trait
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-
         sosLabel.sizeToFit()
     }
 }

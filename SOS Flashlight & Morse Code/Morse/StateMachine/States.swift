@@ -13,7 +13,6 @@ struct Idle: State {
 	let stateName: String = "Idle"
 	
 	func enter(_: MorseStateMachineSystem) {
-//		print("did enter idle state")
 	}
 	
 	func characterExists(exists: Bool) -> Transition? {
@@ -59,6 +58,5 @@ struct End: State {
 	let stateName: String = "End"
 
 	func end() {
-//		print("end")
 	}
 }

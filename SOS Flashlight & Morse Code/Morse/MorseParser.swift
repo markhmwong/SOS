@@ -40,7 +40,6 @@ class MorseParser: NSObject {
 				convertedMessage.append(MorseType.breakBetweenLetters.letter)
 			}
 		}
-		print("convertedMessage \(convertedMessage)")
 	}
 	
 	func popCharacter() {
@@ -87,7 +86,6 @@ class MorseParser: NSObject {
 	
 	// remove characters representing time for in between letters
 	func removeErroneousCharacters() -> [Character] {
-		print(convertedMessage)
 		return convertedMessage.filter { (ch) -> Bool in
 			return ch != MorseType.breakBetweenLetters.letter
 		}.filter { (ch) -> Bool in

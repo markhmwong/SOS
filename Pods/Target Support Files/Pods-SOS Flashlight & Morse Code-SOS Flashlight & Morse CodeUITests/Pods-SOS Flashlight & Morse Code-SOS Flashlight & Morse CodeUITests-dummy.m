@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests : NSObject
+@end
+@implementation PodsDummy_Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests
+@end

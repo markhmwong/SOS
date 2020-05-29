@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03FA7BF93C08D9469AFEF354 /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */; };
+		202171FC8395FE39BE4DDCE4 /* Pods_SOS_Flashlight___Morse_Code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */; };
+		4D19106A24757E9D00202FA0 /* MorseCodeSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D19106924757E9D00202FA0 /* MorseCodeSheetViewController.swift */; };
+		4D19106E24757EAF00202FA0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D19106D24757EAF00202FA0 /* AboutViewController.swift */; };
+		4D1910712476381900202FA0 /* SettingsCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1910702476381900202FA0 /* SettingsCellTypes.swift */; };
 		4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */; };
 		4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */; };
 		4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */; };
@@ -32,9 +37,22 @@
 		4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
+		4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */; };
+		4DC69EAE24797E6D009AC9FC /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */; };
+		4DC69EB224797EAD009AC9FC /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EB024797EAD009AC9FC /* KeychainWrapper.swift */; };
+		4DC69EB324797EAD009AC9FC /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EB124797EAD009AC9FC /* KeychainItemAccessibility.swift */; };
+		4DC69EB524797FA0009AC9FC /* LocalProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EB424797FA0009AC9FC /* LocalProductManager.swift */; };
+		4DE7EFA8247BA2BF0017958E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7EFA7247BA2BF0017958E /* SettingsViewModel.swift */; };
+		4DE7EFAA247CE9250017958E /* Whizbang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7EFA9247CE9250017958E /* Whizbang.swift */; };
+		4DE7EFAC247D35530017958E /* SeizureWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */; };
+		4DE7EFAE247D47DA0017958E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DE7EFAD247D47DA0017958E /* GoogleService-Info.plist */; };
 		4DED82D6246504870027F385 /* MorseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D5246504870027F385 /* MorseParser.swift */; };
 		4DED82D9246524E20027F385 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D8246524E20027F385 /* States.swift */; };
+		4DEDB26A247BD8A40032B958 /* ProductCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEDB269247BD8A40032B958 /* ProductCache.swift */; };
 		4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */; };
+		4DF00D5B247437F9008FD867 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5A247437F9008FD867 /* SettingsCoordinator.swift */; };
+		4DF00D5D24743800008FD867 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5C24743800008FD867 /* MainCoordinator.swift */; };
+		4DF00D5F2474381C008FD867 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5E2474381C008FD867 /* SettingsViewController.swift */; };
 		4DFC0D342461AE460033634E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D332461AE460033634E /* AppDelegate.swift */; };
 		4DFC0D362461AE460033634E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D352461AE460033634E /* SceneDelegate.swift */; };
 		4DFC0D382461AE460033634E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D372461AE460033634E /* ViewController.swift */; };
@@ -46,6 +64,7 @@
 		4DFC0D592461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */; };
 		4DFC0D692461CC800033634E /* Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D682461CC800033634E /* Flashlight.swift */; };
 		4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D6A2461CC9A0033634E /* MorseType.swift */; };
+		5A74A5FEB388B715413F8781 /* Pods_SOS_Flashlight___Morse_CodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +85,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code.debug.xcconfig"; sourceTree = "<group>"; };
+		086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_Code.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse CodeTests/Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse CodeTests.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse CodeTests/Pods-SOS Flashlight & Morse CodeTests.release.xcconfig"; sourceTree = "<group>"; };
+		4D19106924757E9D00202FA0 /* MorseCodeSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeSheetViewController.swift; sourceTree = "<group>"; };
+		4D19106D24757EAF00202FA0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		4D1910702476381900202FA0 /* SettingsCellTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellTypes.swift; sourceTree = "<group>"; };
 		4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
 		4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -92,9 +120,22 @@
 		4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
+		4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
+		4DC69EB024797EAD009AC9FC /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		4DC69EB124797EAD009AC9FC /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		4DC69EB424797FA0009AC9FC /* LocalProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProductManager.swift; sourceTree = "<group>"; };
+		4DE7EFA7247BA2BF0017958E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		4DE7EFA9247CE9250017958E /* Whizbang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whizbang.swift; sourceTree = "<group>"; };
+		4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeizureWarningViewController.swift; sourceTree = "<group>"; };
+		4DE7EFAD247D47DA0017958E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DED82D5246504870027F385 /* MorseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseParser.swift; sourceTree = "<group>"; };
 		4DED82D8246524E20027F385 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
+		4DEDB269247BD8A40032B958 /* ProductCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCache.swift; sourceTree = "<group>"; };
 		4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachine.swift; sourceTree = "<group>"; };
+		4DF00D5A247437F9008FD867 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		4DF00D5C24743800008FD867 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		4DF00D5E2474381C008FD867 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4DFC0D302461AE460033634E /* SOS Flashlight & Morse Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SOS Flashlight & Morse Code.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFC0D332461AE460033634E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DFC0D352461AE460033634E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +153,9 @@
 		4DFC0D5A2461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DFC0D682461CC800033634E /* Flashlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashlight.swift; sourceTree = "<group>"; };
 		4DFC0D6A2461CC9A0033634E /* MorseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseType.swift; sourceTree = "<group>"; };
+		97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code.release.xcconfig"; sourceTree = "<group>"; };
+		CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_CodeTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202171FC8395FE39BE4DDCE4 /* Pods_SOS_Flashlight___Morse_Code.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A74A5FEB388B715413F8781 /* Pods_SOS_Flashlight___Morse_CodeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,12 +179,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03FA7BF93C08D9469AFEF354 /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D01FA922480C86B00F105B9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */,
+				4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */,
+				4DFC0D372461AE460033634E /* ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4D19106F2476380A00202FA0 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				4DF00D5E2474381C008FD867 /* SettingsViewController.swift */,
+				4DE7EFA7247BA2BF0017958E /* SettingsViewModel.swift */,
+				4DE7EFA9247CE9250017958E /* Whizbang.swift */,
+				4DEDB269247BD8A40032B958 /* ProductCache.swift */,
+				4D1910702476381900202FA0 /* SettingsCellTypes.swift */,
+				4D19106D24757EAF00202FA0 /* AboutViewController.swift */,
+				4D19106924757E9D00202FA0 /* MorseCodeSheetViewController.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		4D6B8BA924693D4F00C6AD60 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,8 +255,29 @@
 			isa = PBXGroup;
 			children = (
 				4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */,
+				4DF00D5A247437F9008FD867 /* SettingsCoordinator.swift */,
+				4DF00D5C24743800008FD867 /* MainCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		4DC69EAA24797E6D009AC9FC /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */,
+				4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */,
+				4DC69EB424797FA0009AC9FC /* LocalProductManager.swift */,
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
+		4DC69EAF24797EAD009AC9FC /* KeyChainHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4DC69EB024797EAD009AC9FC /* KeychainWrapper.swift */,
+				4DC69EB124797EAD009AC9FC /* KeychainItemAccessibility.swift */,
+			);
+			path = KeyChainHelper;
 			sourceTree = "<group>";
 		};
 		4DED82D7246524CE0027F385 /* StateMachine */ = {
@@ -206,6 +298,8 @@
 				4DFC0D4C2461AE4B0033634E /* SOS Flashlight & Morse CodeTests */,
 				4DFC0D572461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */,
 				4DFC0D312461AE460033634E /* Products */,
+				DBB5C5E4984CB7D6A49D0EA6 /* Pods */,
+				E02945BFD9C4D31199146F86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,14 +316,18 @@
 		4DFC0D322461AE460033634E /* SOS Flashlight & Morse Code */ = {
 			isa = PBXGroup;
 			children = (
-				4DFC0D372461AE460033634E /* ViewController.swift */,
+				4DE7EFAD247D47DA0017958E /* GoogleService-Info.plist */,
+				4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */,
+				4DC69EAF24797EAD009AC9FC /* KeyChainHelper */,
+				4DC69EAA24797E6D009AC9FC /* IAP */,
+				4D19106F2476380A00202FA0 /* SettingsView */,
+				4D01FA922480C86B00F105B9 /* Main */,
 				4D6B8BDB246D7E4F00C6AD60 /* Coordinator */,
 				4D6B8BCA2469542500C6AD60 /* Theme */,
 				4D6B8BA924693D4F00C6AD60 /* Extensions */,
 				4DFC0D672461CC720033634E /* Flashlight */,
 				4DFC0D662461CC6C0033634E /* Morse */,
 				4D6B8BD1246C3B7800C6AD60 /* View */,
-				4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */,
 				4DFC0D332461AE460033634E /* AppDelegate.swift */,
 				4DFC0D352461AE460033634E /* SceneDelegate.swift */,
 				4DFC0D392461AE460033634E /* Main.storyboard */,
@@ -266,7 +364,6 @@
 				4DFC0D6A2461CC9A0033634E /* MorseType.swift */,
 				4DED82D5246504870027F385 /* MorseParser.swift */,
 				4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */,
-				4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */,
 			);
 			path = Morse;
 			sourceTree = "<group>";
@@ -279,6 +376,29 @@
 			path = Flashlight;
 			sourceTree = "<group>";
 		};
+		DBB5C5E4984CB7D6A49D0EA6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */,
+				97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */,
+				E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */,
+				0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */,
+				201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */,
+				20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E02945BFD9C4D31199146F86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */,
+				193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */,
+				CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,9 +406,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D5D2461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse Code" */;
 			buildPhases = (
+				B5D9442EEE7DAF0D101076D9 /* [CP] Check Pods Manifest.lock */,
 				4DFC0D2C2461AE460033634E /* Sources */,
 				4DFC0D2D2461AE460033634E /* Frameworks */,
 				4DFC0D2E2461AE460033634E /* Resources */,
+				D8BF421F3187157D259ACC2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,6 +425,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D602461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeTests" */;
 			buildPhases = (
+				E4C4725FE2A073C106E206DA /* [CP] Check Pods Manifest.lock */,
 				4DFC0D452461AE4B0033634E /* Sources */,
 				4DFC0D462461AE4B0033634E /* Frameworks */,
 				4DFC0D472461AE4B0033634E /* Resources */,
@@ -321,9 +444,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D632461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeUITests" */;
 			buildPhases = (
+				FB0124237501D8FFF6CC07B9 /* [CP] Check Pods Manifest.lock */,
 				4DFC0D502461AE4B0033634E /* Sources */,
 				4DFC0D512461AE4B0033634E /* Frameworks */,
 				4DFC0D522461AE4B0033634E /* Resources */,
+				64F2085441F4E705755020BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -384,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DFC0D432461AE4B0033634E /* LaunchScreen.storyboard in Resources */,
+				4DE7EFAE247D47DA0017958E /* GoogleService-Info.plist in Resources */,
 				4DFC0D402461AE4B0033634E /* Assets.xcassets in Resources */,
 				4DFC0D3B2461AE460033634E /* Main.storyboard in Resources */,
 			);
@@ -405,44 +531,162 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		64F2085441F4E705755020BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5D9442EEE7DAF0D101076D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse Code-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8BF421F3187157D259ACC2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4C4725FE2A073C106E206DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse CodeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB0124237501D8FFF6CC07B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DFC0D2C2461AE460033634E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4D6B8BBC24693D4F00C6AD60 /* Int+Extension.swift in Sources */,
+				4DE7EFA8247BA2BF0017958E /* SettingsViewModel.swift in Sources */,
 				4DFC0D3E2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld in Sources */,
+				4DE7EFAA247CE9250017958E /* Whizbang.swift in Sources */,
 				4D6B8BD5246C3B9100C6AD60 /* TopContainerView.swift in Sources */,
+				4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */,
+				4DC69EB524797FA0009AC9FC /* LocalProductManager.swift in Sources */,
 				4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */,
 				4D6B8BBF24693D4F00C6AD60 /* UIImage+Extension.swift in Sources */,
 				4DFC0D382461AE460033634E /* ViewController.swift in Sources */,
 				4DFC0D692461CC800033634E /* Flashlight.swift in Sources */,
 				4D6B8BD3246C3B8B00C6AD60 /* BottomContainerView.swift in Sources */,
 				4D6B8BC624693D4F00C6AD60 /* UIBezierPath+Extension.swift in Sources */,
+				4DE7EFAC247D35530017958E /* SeizureWarningViewController.swift in Sources */,
 				4D6B8BBD24693D4F00C6AD60 /* Date+Extension.swift in Sources */,
 				4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */,
 				4DFC0D342461AE460033634E /* AppDelegate.swift in Sources */,
 				4D6B8BC124693D4F00C6AD60 /* UIViewController+Extension.swift in Sources */,
 				4D6B8BC424693D4F00C6AD60 /* UITextView+Extension.swift in Sources */,
 				4D6B8BD8246CEE9100C6AD60 /* ViewControllerViewModel.swift in Sources */,
+				4DC69EAE24797E6D009AC9FC /* IAPProducts.swift in Sources */,
 				4D6B8BBE24693D4F00C6AD60 /* UIView+Extension.swift in Sources */,
 				4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */,
 				4D6B8BCC2469542500C6AD60 /* Theme.swift in Sources */,
+				4DEDB26A247BD8A40032B958 /* ProductCache.swift in Sources */,
 				4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */,
+				4DC69EB324797EAD009AC9FC /* KeychainItemAccessibility.swift in Sources */,
 				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
 				4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */,
+				4D19106A24757E9D00202FA0 /* MorseCodeSheetViewController.swift in Sources */,
 				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,
 				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,
 				4DED82D9246524E20027F385 /* States.swift in Sources */,
+				4DF00D5F2474381C008FD867 /* SettingsViewController.swift in Sources */,
+				4DF00D5D24743800008FD867 /* MainCoordinator.swift in Sources */,
+				4DF00D5B247437F9008FD867 /* SettingsCoordinator.swift in Sources */,
 				4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */,
 				4D6B8BD0246BB93F00C6AD60 /* ImpactFeedbackService.swift in Sources */,
 				4D6B8BC224693D4F00C6AD60 /* CAShapelayerExtension.swift in Sources */,
 				4D6B8BC92469528800C6AD60 /* MorseCodeView.swift in Sources */,
 				4D6B8BCE246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift in Sources */,
 				4DFC0D362461AE460033634E /* SceneDelegate.swift in Sources */,
+				4DC69EB224797EAD009AC9FC /* KeychainWrapper.swift in Sources */,
 				4DED82D6246504870027F385 /* MorseParser.swift in Sources */,
 				4D6B8BC024693D4F00C6AD60 /* Bundle+Extension.swift in Sources */,
+				4D1910712476381900202FA0 /* SettingsCellTypes.swift in Sources */,
+				4D19106E24757EAF00202FA0 /* AboutViewController.swift in Sources */,
 				4D6B8BC724693D4F00C6AD60 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +799,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -609,47 +854,57 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		4DFC0D5E2461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		4DFC0D5F2461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		4DFC0D612461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -672,6 +927,7 @@
 		};
 		4DFC0D622461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -694,6 +950,7 @@
 		};
 		4DFC0D642461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -714,6 +971,7 @@
 		};
 		4DFC0D652461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

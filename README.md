@@ -3,7 +3,6 @@
 phrase conversion (page)
 
 Brightness
-Repeat feature (SOS/Message)
 Word animation
 
 info page

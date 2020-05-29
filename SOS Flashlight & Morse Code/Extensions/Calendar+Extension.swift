@@ -76,7 +76,7 @@ extension Calendar {
         return Int16(Calendar.current.component(.month, from: today!))
     }
     
-    func yearToInt() -> Int16 {
+    func currentYearToInt() -> Int16 {
         let today = Calendar.current.date(byAdding: .day, value: 0, to: self.today())
         return Int16(Calendar.current.component(.year, from: today!))
     }
@@ -88,7 +88,7 @@ extension Calendar {
     
     func daysInMonth() -> Int {
         let month = self.monthToInt()
-        let year = self.yearToInt()
+        let year = self.currentYearToInt()
         
         let calendar = Calendar.current
         let date = calendar.date(from: DateComponents(calendar: nil, timeZone: nil, era: nil, year: Int(year), month: Int(month), day: nil, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil))!

@@ -60,8 +60,6 @@ class MorseCodeView: UIView, UITextFieldDelegate {
 		
 		topContainer.setupView()
 		bottomContainer.setupView()
-		backgroundColor = Theme.Dark.primary
-
 	}
 	
 	override func layoutSubviews() {
