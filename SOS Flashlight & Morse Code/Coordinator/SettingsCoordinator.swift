@@ -54,9 +54,20 @@ class SettingsCoordinator: NSObject, Coordinator, UINavigationControllerDelegate
 		childCoordinators.append(aboutCoordinator)
 	}
 	
+	func showThankYou() {
+		guard let parentNavigationController = parentNavController else { return }
+		let vc = ThankYouViewController(parentCoordinator: self)
+		let nav = UINavigationController(rootViewController: vc)
+		nav.navigationBar.isHidden = true
+		parentNavigationController.present(nav, animated: true) {
+			//
+		}
+	}
+	
 	@objc func handleDismiss() {
 		navigationController.dismiss(animated: true) {
 			//
 		}
 	}
 }
+

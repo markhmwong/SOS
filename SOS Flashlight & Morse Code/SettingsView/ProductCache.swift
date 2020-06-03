@@ -16,7 +16,6 @@ final class ProductCache: NSCache<NSString, AnyObject> {
 	
 	private override init() {
         super.init()
-
 		memoryWarningObserver = NotificationCenter.default.addObserver(forName:  UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { [weak self] notification in
             self?.removeAllObjects()
         }
@@ -29,14 +28,13 @@ final class ProductCache: NSCache<NSString, AnyObject> {
 	func retrieveCache(for key: NSString) -> AnyObject {
 		return object(forKey: key) as AnyObject
 	}
-
-//	func retrieveCache<T: AnyObject>(for key: NSString, completion: @escaping (T) -> ()) {
-//		let obj = object(forKey: key)
-//		completion(obj as! T)
-//	}
+	
+	func removaAll() {
+		removeAllObjects()
+	}
 	
 	deinit {
-        NotificationCenter.default.removeObserver(memoryWarningObserver)
+		NotificationCenter.default.removeObserver(memoryWarningObserver!)
     }
 	
 }

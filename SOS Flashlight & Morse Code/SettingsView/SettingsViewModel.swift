@@ -9,9 +9,7 @@
 import StoreKit
 
 class SettingsViewModel {
-	
-//	let productCache = NSCache<NSString, AnyObject>()
-	
+		
     let priceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.formatterBehavior = .behavior10_4
@@ -47,11 +45,15 @@ class SettingsViewModel {
 	
 	var settingsViewController: SettingsViewController?
 	
+	var rowSelected: Int? = nil
+	
 	init() {
-		
+		NotificationCenter.default.addObserver(self, selector: #selector(handleFailedTransaction), name: .IAPHelperPurchaseCancelledNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(handleSuccessfulTransaction), name: .IAPHelperPurchaseCompleteNotification, object: nil)
 	}
 	
 	func grabTipsProducts() {
+		
 		if let cachedVersionProducts = ProductCache.shared.retrieveCache(for: tipProductCache as NSString) as? [SKProduct] {
 			// assume all tip products still exist and retrieve from cache
 			self.updateTipButtons(products: cachedVersionProducts)
@@ -62,6 +64,7 @@ class SettingsViewModel {
 					guard let self = self, let products = products else { return }
 
 					if (success) {
+//						print("successfully retrieved")
 						ProductCache.shared.setObject(products as NSArray, forKey: self.tipProductCache as NSString)
 						self.updateTipButtons(products: products)
 					} else {
@@ -78,7 +81,7 @@ class SettingsViewModel {
 			SettingsTip(name: "Small Tip", description: "", section: .tips, price: "N/A"),
 			SettingsTip(name: "Medium Tip", description: "", section: .tips, price: "N/A"),
 			SettingsTip(name: "Big Tip", description: "", section: .tips, price: "N/A"),
-			SettingsTip(name: "Enormous Tip", description: "", section: .tips, price: "N/A"),
+			SettingsTip(name: "Astronomical Tip", description: "", section: .tips, price: "N/A"),
 		]
 		
 		datasourceDict[.main] = [
@@ -93,7 +96,6 @@ class SettingsViewModel {
 
 		datasourceDict[.tips]?.removeAll()
 		datasourceDict[.tips] = []
-		
 
 		if let products = products {
 			// sort by price
@@ -104,8 +106,10 @@ class SettingsViewModel {
 			for product in sortedByPrice {
 				priceFormatter.locale = product.priceLocale
 				if let price = priceFormatter.string(from: product.price) {
+					// Price Confirmed
 					datasourceDict[.tips]?.append(SettingsTip(name: "\(product.localizedTitle)", description: "\(product.localizedDescription)", section: .tips, price: "\(price)", tipProduct: product))
 				} else {
+					// No price / Price error / No product
 					datasourceDict[.tips]?.append(SettingsTip(name: "\(product.localizedTitle)", description: "\(product.localizedDescription)", section: .tips, price: "N/A"))
 				}
 			}
@@ -114,7 +118,7 @@ class SettingsViewModel {
 				SettingsTip(name: "Small Tip", description: "", section: .tips, price: "N/A"),
 				SettingsTip(name: "Medium Tip", description: "", section: .tips, price: "N/A"),
 				SettingsTip(name: "Big Tip", description: "", section: .tips, price: "N/A"),
-				SettingsTip(name: "Enormous Tip", description: "", section: .tips, price: "N/A"),
+				SettingsTip(name: "Astronomical Tip", description: "", section: .tips, price: "N/A"),
 			]
 		}
 		
@@ -127,7 +131,9 @@ class SettingsViewModel {
 			]
 		}
 		
-		updateSnapshot()
+		DispatchQueue.main.async {
+			self.updateSnapshot()
+		}
 	}
 	
 	func registerCellids(tableView: UITableView) {
@@ -142,7 +148,7 @@ class SettingsViewModel {
 						SettingsTip(name: "Small Tip", description: "", section: .tips, price: "loading.."),
 						SettingsTip(name: "Medium Tip", description: "", section: .tips, price: "loading.."),
 						SettingsTip(name: "Big Tip", description: "", section: .tips, price: "loading.."),
-						SettingsTip(name: "Enormous Tip", description: "", section: .tips, price: "loading.."),
+						SettingsTip(name: "Astronomical Tip", description: "", section: .tips, price: "loading.."),
 					],
 			.main : [
 						SettingsMain(name: "Morse Code Sheet", section: .main),
@@ -183,7 +189,7 @@ class SettingsViewModel {
 	// cell factory
 	func cellForRowTip(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId, for: indexPath) as! SettingsTipCell
-		cell.setupCell(with: row as! SettingsTip)
+		cell.setupCell(with: row as! SettingsTip, indexPath: indexPath)
 		return cell
 	}
 	
@@ -204,5 +210,18 @@ class SettingsViewModel {
 		return cell
 	}
 	
+	// MARK: - Handle Transaction Activity
+	@objc func handleFailedTransaction() {
+		print("failed transaction")
+		updateSnapshot()
+	}
 	
+	@objc func handleSuccessfulTransaction() {
+		print("successful")
+		updateSnapshot()
+		
+//		bring up thank you vc
+		guard let settingsViewController = settingsViewController else { return }
+		settingsViewController.showThankYou()
+	}
 }

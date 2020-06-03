@@ -55,6 +55,7 @@ class SettingsViewController: UITableViewController {
 		
 	}
 	
+	
     func emailFeedback() {
         guard let vm = viewModel else {
             return
@@ -74,7 +75,7 @@ class SettingsViewController: UITableViewController {
     }
 	
     func writeReview() {
-        let productURL = URL(string: "https://apps.apple.com/app/")!
+        let productURL = URL(string: "https://apps.apple.com/app/id1514947015")!
         var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
         
         components?.queryItems = [
@@ -111,11 +112,15 @@ class SettingsViewController: UITableViewController {
 						writeReview()
 				}
 				case .tips:
-					()
+					() // does not need to open a new ViewController
 			}
-			
 		}
 	}
+	
+	func showThankYou() {
+		coordinator.showThankYou()
+	}
+
 }
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {
@@ -130,7 +135,7 @@ class FooterView: UIView {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Copyright Whizbang \(Calendar.current.currentYearToInt())")
+		label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Copyright \(Calendar.current.currentYearToInt()) Whizbang")
 		return label
 	}()
 	

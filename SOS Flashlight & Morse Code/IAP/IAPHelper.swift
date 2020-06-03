@@ -51,14 +51,22 @@ extension IAPHelper {
     productsRequestCompletionHandler = completionHandler
 
     productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
-    productsRequest!.delegate = self
-    productsRequest!.start()
+	guard let productsRequest = productsRequest else {
+		print("Product Request nil")
+		return
+	}
+    productsRequest.delegate = self
+    productsRequest.start()
   }
 
   public func buyProduct(_ product: SKProduct) {
     let payment = SKPayment(product: product)
     SKPaymentQueue.default().add(payment)
   }
+	
+	func stopObserving() {
+		SKPaymentQueue.default().remove(self)
+	}
 
   public func isProductPurchased(_ productIdentifier: ProductIdentifier) -> Bool {
     return purchasedProductIdentifiers.contains(productIdentifier)
@@ -80,7 +88,13 @@ extension IAPHelper {
 // MARK: - SKProductsRequestDelegate
 
 extension IAPHelper: SKProductsRequestDelegate {
+	
+	public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+		return true
+	}
+	
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+		
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
@@ -104,7 +118,6 @@ extension IAPHelper: SKProductsRequestDelegate {
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
-//        print(transactions.count)
     }
 }
 
@@ -113,10 +126,11 @@ extension IAPHelper: SKProductsRequestDelegate {
 extension IAPHelper: SKPaymentTransactionObserver {
 
   public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-    
+	
     for transaction in transactions {
       switch (transaction.transactionState) {
           case .purchased:
+            //save to userdefeualts and keychain?
             complete(transaction: transaction)
             queue.finishTransaction(transaction)
             break
@@ -154,7 +168,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
 
   private func fail(transaction: SKPaymentTransaction) {
     NotificationCenter.default.post(name: .IAPHelperPurchaseCancelledNotification, object: nil)
-
+	print("failed")
     if let transactionError = transaction.error as NSError?,
       let _ = transaction.error?.localizedDescription,
         transactionError.code != SKError.paymentCancelled.rawValue {

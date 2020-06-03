@@ -56,7 +56,7 @@ extension NSMutableAttributedString {
 	
 	//MARK: - CELL
 	func primaryCellTextAttributes(string: String) -> NSMutableAttributedString {
-		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b1).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Bold, size: Theme.Font.FontSize.Standard(.b1).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
 	}
 	
 	func secondaryCellTextAttributes(string: String) -> NSMutableAttributedString {
@@ -67,8 +67,7 @@ extension NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b3).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
 	}
 	
-//	quaternary
-	
+	//	quaternary
 	func cellTitleAttributes(string: String) -> NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: cellTitleProperties())
 	}
@@ -76,8 +75,6 @@ extension NSMutableAttributedString {
 	func cellTitlePlaceholderAttributes(string: String) -> NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: cellTitlePlaceHolderProperties())
 	}
-	
-
 	
 	//MARK: - TIMER
 	func timeAttributes(string: String) -> NSMutableAttributedString {

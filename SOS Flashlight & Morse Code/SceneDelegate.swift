@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
 		
 		FirebaseApp.configure()
-		
+		IAPProducts.tipStore.addStoreObserver()
+
 		window = UIWindow()
 		window?.makeKeyAndVisible()
 		

@@ -44,6 +44,8 @@ enum SettingsSection: Int, CaseIterable {
 
 class SettingsTipCell: UITableViewCell {
 	
+	private var spinner = UIActivityIndicatorView(style: .medium)
+	
 	// title
 	private lazy var tipLabel: UILabel = {
 		let label = UILabel()
@@ -71,7 +73,9 @@ class SettingsTipCell: UITableViewCell {
 		return label
 	}()
 	
-	var buttonHandler: (() -> ())?
+	private var buttonHandler: (() -> ())?
+	
+	private var indexPath: IndexPath? = nil
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,26 +86,36 @@ class SettingsTipCell: UITableViewCell {
 		super.init(coder: coder)
 	}
 	
-	func setupCell(with data: SettingsTip) {
-		
+	func setupCell(with data: SettingsTip, indexPath: IndexPath) {
+		self.indexPath = indexPath
 		// cache it
 		// setup IAP purchase closure triggered by the button
 		buttonHandler = {
+			// Start activity spinner
+			self.purchaseInProgressActivitySpinner()
+			self.tipButton.clearButtonTitle()
 			guard let product = data.tipProduct else { return }
+			print("Purchasing --- \(product.localizedTitle)")
+			
+			// Purchase product
 			IAPProducts.tipStore.buyProduct(product)
 		}
 		
-		tipLabel.attributedText = NSMutableAttributedString().primaryCellTextAttributes(string: data.name)
-		descriptionLabel.attributedText = NSMutableAttributedString().tertiaryCellTextAttributes(string: data.description)
-		tipButton.setTitle("\(data.price)", for: .normal)
-		
+		self.tipLabel.attributedText = NSMutableAttributedString().primaryCellTextAttributes(string: data.name)
+		self.descriptionLabel.attributedText = NSMutableAttributedString().tertiaryCellTextAttributes(string: data.description)
+		self.tipButton.setTitle("\(data.price)", for: .normal)
+
 		contentView.addSubview(tipLabel)
 		contentView.addSubview(descriptionLabel)
 		contentView.addSubview(tipButton)
+		contentView.addSubview(spinner)
+		spinner.translatesAutoresizingMaskIntoConstraints = false
 		
 		tipLabel.anchorView(top: contentView.topAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), size: .zero)
 		descriptionLabel.anchorView(top: tipLabel.bottomAnchor, bottom: nil, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
 		tipButton.anchorView(top: descriptionLabel.bottomAnchor, bottom: contentView.bottomAnchor, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
+		spinner.anchorView(top: nil, bottom: nil, leading: tipButton.trailingAnchor, trailing: nil, centerY: tipButton.centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 0.0), size: .zero)
+
 	}
 	
 	@objc func handleTipButton() {
@@ -110,8 +124,20 @@ class SettingsTipCell: UITableViewCell {
 	
 	override func layoutIfNeeded() {
 		super.layoutIfNeeded()
-
 	}
+
+	func purchaseInProgressActivitySpinner() {
+		DispatchQueue.main.async {
+			self.spinner.startAnimating()
+		}
+	}
+	
+	func purchaseCompleteActivitySpinner() {
+		DispatchQueue.main.async {
+			self.spinner.stopAnimating()
+		}
+	}
+	
 }
 
 class SettingsMainCell: UITableViewCell {
@@ -124,43 +150,4 @@ class SettingsMainCell: UITableViewCell {
 	}
 }
 
-class TipButton: UIButton {	
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
-		setupButton()
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	func setupButton() {
-		layer.backgroundColor = Theme.Dark.secondary.cgColor
-		layer.cornerRadius = 10.0
-		contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
-	}
 
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		
-		UIView.animate(withDuration: 0.1) {
-			self.layer.backgroundColor = Theme.Dark.tertiary.cgColor
-		}
-	}
-	
-	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-		UIView.animate(withDuration: 0.2) {
-			self.layer.backgroundColor = Theme.Dark.secondary.cgColor
-		}
-	}
-}
-
-extension UIButton {
-	func setBackgroundColor(_ color: UIColor, for forState: UIControl.State) {
-		UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-		UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)
-		UIGraphicsGetCurrentContext()!.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
-		let colorImage = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-		self.setBackgroundImage(colorImage, for: forState)
-	}
-}

@@ -89,6 +89,8 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		AppStoreReviewManager.requestReviewIfAppropriate()
+
 		light.toggleTorch(on: false)
 		mainView.setupView()
 		//check if new version
