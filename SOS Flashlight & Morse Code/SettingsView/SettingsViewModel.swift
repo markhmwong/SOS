@@ -138,7 +138,6 @@ class SettingsViewModel {
 	
 	func registerCellids(tableView: UITableView) {
 		tableView.register(SettingsTipCell.self, forCellReuseIdentifier: SettingsSection.tips.cellId)
-		// registering SettignsMainCell is not required, as the need for a subtitle cell (with a detail label) is necessary
 		// we initialise the SettingsMainCell within cellForRowMain
 	}
 	
@@ -196,9 +195,11 @@ class SettingsViewModel {
 	func cellForRowMain(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
 		let casted = row as! SettingsMain
 		var cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId)
+		
 		if cell == nil {
 			cell = SettingsMainCell(style: .subtitle, reuseIdentifier: row.section.cellId)
 		}
+		
 		cell?.textLabel?.attributedText = NSMutableAttributedString().primaryCellTextAttributes(string: casted.name)
 		cell?.detailTextLabel?.attributedText = NSMutableAttributedString().secondaryTextAttributes(string: casted.detail ?? "")
 		return cell!
