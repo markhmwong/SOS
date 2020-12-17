@@ -28,7 +28,7 @@ extension NSMutableAttributedString {
 	}
 	
 	func tertiaryTitleAttributes(string: String) -> NSMutableAttributedString {
-		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b5).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor.adjust(by: -20)!])
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b5).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
 	}
 	
 	

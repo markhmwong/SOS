@@ -20,7 +20,6 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 	}
 	
 	func start() {
-
 		navigationController.delegate = self
 		let vc = ViewController(coordinator: self)
 		rootViewController = vc
@@ -33,8 +32,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		navigationController.navigationBar.shadowImage = UIImage()
 		navigationController.navigationBar.backgroundColor = UIColor.clear
-		
-		let options = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(showSettings))
+		let options = UIBarButtonItem().settingsButton(target: self, action: #selector(showSettings))
+
 		options.tintColor = Theme.Font.DefaultColor
 		vc.navigationItem.rightBarButtonItem = options
 	}

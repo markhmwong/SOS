@@ -168,7 +168,6 @@ extension IAPHelper: SKPaymentTransactionObserver {
 
   private func fail(transaction: SKPaymentTransaction) {
     NotificationCenter.default.post(name: .IAPHelperPurchaseCancelledNotification, object: nil)
-	print("failed")
     if let transactionError = transaction.error as NSError?,
       let _ = transaction.error?.localizedDescription,
         transactionError.code != SKError.paymentCancelled.rawValue {

@@ -107,6 +107,7 @@ class SettingsViewModel {
 				priceFormatter.locale = product.priceLocale
 				if let price = priceFormatter.string(from: product.price) {
 					// Price Confirmed
+					print("localizedTitle \(product.localizedTitle)")
 					datasourceDict[.tips]?.append(SettingsTip(name: "\(product.localizedTitle)", description: "\(product.localizedDescription)", section: .tips, price: "\(price)", tipProduct: product))
 				} else {
 					// No price / Price error / No product
@@ -131,9 +132,7 @@ class SettingsViewModel {
 			]
 		}
 		
-		DispatchQueue.main.async {
-			self.updateSnapshot()
-		}
+		self.updateSnapshot()
 	}
 	
 	func registerCellids(tableView: UITableView) {
@@ -156,13 +155,13 @@ class SettingsViewModel {
 						SettingsMain(name: "About", section: .main)
 					],
 		]
-		
 		updateSnapshot()
 	}
 	
 	func updateSnapshot() {
 		var diffableDataSourceSnapshot = NSDiffableDataSourceSnapshot<SettingsSection, AnyHashable>()
 		diffableDataSourceSnapshot.appendSections(SettingsSection.allCases)
+		
 		diffableDataSourceSnapshot.appendItems(datasourceDict[.tips]!, toSection: .tips)
 		diffableDataSourceSnapshot.appendItems(datasourceDict[.main]!, toSection: .main)
 		diffableDatasource?.apply(diffableDataSourceSnapshot, animatingDifferences: false, completion: {
@@ -188,6 +187,7 @@ class SettingsViewModel {
 	// cell factory
 	func cellForRowTip(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId, for: indexPath) as! SettingsTipCell
+
 		cell.setupCell(with: row as! SettingsTip, indexPath: indexPath)
 		return cell
 	}
@@ -213,12 +213,10 @@ class SettingsViewModel {
 	
 	// MARK: - Handle Transaction Activity
 	@objc func handleFailedTransaction() {
-		print("failed transaction")
 		updateSnapshot()
 	}
 	
 	@objc func handleSuccessfulTransaction() {
-		print("successful")
 		updateSnapshot()
 		
 //		bring up thank you vc

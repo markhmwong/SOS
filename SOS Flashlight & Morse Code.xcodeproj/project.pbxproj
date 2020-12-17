@@ -53,7 +53,7 @@
 		4DED82D6246504870027F385 /* MorseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D5246504870027F385 /* MorseParser.swift */; };
 		4DED82D9246524E20027F385 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED82D8246524E20027F385 /* States.swift */; };
 		4DEDB26A247BD8A40032B958 /* ProductCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEDB269247BD8A40032B958 /* ProductCache.swift */; };
-		4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */; };
+		4DEF0EF32463232F007B7382 /* MorseCodeStateMachineSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF0EF22463232F007B7382 /* MorseCodeStateMachineSystem.swift */; };
 		4DF00D5B247437F9008FD867 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5A247437F9008FD867 /* SettingsCoordinator.swift */; };
 		4DF00D5D24743800008FD867 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5C24743800008FD867 /* MainCoordinator.swift */; };
 		4DF00D5F2474381C008FD867 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF00D5E2474381C008FD867 /* SettingsViewController.swift */; };
@@ -140,7 +140,7 @@
 		4DED82D5246504870027F385 /* MorseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseParser.swift; sourceTree = "<group>"; };
 		4DED82D8246524E20027F385 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		4DEDB269247BD8A40032B958 /* ProductCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCache.swift; sourceTree = "<group>"; };
-		4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachine.swift; sourceTree = "<group>"; };
+		4DEF0EF22463232F007B7382 /* MorseCodeStateMachineSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeStateMachineSystem.swift; sourceTree = "<group>"; };
 		4DF00D5A247437F9008FD867 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		4DF00D5C24743800008FD867 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		4DF00D5E2474381C008FD867 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +201,7 @@
 				4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */,
 				4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */,
 				4DFC0D372461AE460033634E /* ViewController.swift */,
+				4D6B8BD1246C3B7800C6AD60 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -293,7 +294,7 @@
 		4DED82D7246524CE0027F385 /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
-				4DEF0EF22463232F007B7382 /* MorseStateMachine.swift */,
+				4DEF0EF22463232F007B7382 /* MorseCodeStateMachineSystem.swift */,
 				4DED82D8246524E20027F385 /* States.swift */,
 				4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */,
 			);
@@ -333,13 +334,12 @@
 				4DC69EAF24797EAD009AC9FC /* KeyChainHelper */,
 				4DC69EAA24797E6D009AC9FC /* IAP */,
 				4D19106F2476380A00202FA0 /* SettingsView */,
-				4D01FA922480C86B00F105B9 /* Main */,
 				4D6B8BDB246D7E4F00C6AD60 /* Coordinator */,
 				4D6B8BCA2469542500C6AD60 /* Theme */,
 				4D6B8BA924693D4F00C6AD60 /* Extensions */,
+				4D01FA922480C86B00F105B9 /* Main */,
 				4DFC0D672461CC720033634E /* Flashlight */,
 				4DFC0D662461CC6C0033634E /* Morse */,
-				4D6B8BD1246C3B7800C6AD60 /* View */,
 				4DFC0D332461AE460033634E /* AppDelegate.swift */,
 				4DFC0D352461AE460033634E /* SceneDelegate.swift */,
 				4DFC0D392461AE460033634E /* Main.storyboard */,
@@ -678,7 +678,7 @@
 				4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */,
 				4D6B8BCC2469542500C6AD60 /* Theme.swift in Sources */,
 				4DEDB26A247BD8A40032B958 /* ProductCache.swift in Sources */,
-				4DEF0EF32463232F007B7382 /* MorseStateMachine.swift in Sources */,
+				4DEF0EF32463232F007B7382 /* MorseCodeStateMachineSystem.swift in Sources */,
 				4DC69EB324797EAD009AC9FC /* KeychainItemAccessibility.swift in Sources */,
 				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
@@ -880,14 +880,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -902,14 +903,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

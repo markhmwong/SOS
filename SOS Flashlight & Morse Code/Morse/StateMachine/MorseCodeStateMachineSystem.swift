@@ -8,9 +8,13 @@
 
 import Foundation
 
-class MorseStateMachineSystem {
+class MorseCodeStateMachineSystem {
+	// Private variables
 	private var currState: String = ""
+	
 	// Timer variables
+	private	let unitTime = 0.01
+
 	private var timer: Timer?
 	
 	private var timeRemaining: TimeInterval = 0.0
@@ -26,6 +30,7 @@ class MorseStateMachineSystem {
 	
 	private var c: MorseType // characterType
 	
+	// Public variable
 	var loopState: Bool = false
 	
 	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate) {
@@ -41,8 +46,7 @@ class MorseStateMachineSystem {
 		c = morseParser.readNextCharacter()
 		reviseTime(time: c.unitTime)
 		// nil timer
-		self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-		
+		self.timer = Timer.scheduledTimer(timeInterval: unitTime, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 		process(transition: state.characterExists(exists: morseParser.isEndOfMessage()))
 	}
 	
@@ -66,13 +70,13 @@ class MorseStateMachineSystem {
 		endTimer()
 	}
 	
+	// flush timer
 	func endTimer() {
 		timer?.invalidate()
 		timer = nil
 	}
 	
 	private func process(transition: Transition?) {
-
 		guard let transition = transition else { return }
         state.exit(self)
 		transition.effect?(self)
@@ -80,6 +84,7 @@ class MorseStateMachineSystem {
         state.enter(self)
     }
 	
+	// Main loop of the state machine
 	@objc func fireTimer() {
 		guard let expires = self.expires else { return }
 		timeRemaining = expires.timeIntervalSince(Date())
@@ -97,23 +102,21 @@ class MorseStateMachineSystem {
 			}
 			
 			if (c == .none) {
-				// loop
+				// user triggers loop
 				if (loopState) {
 					delegate.willLoop()
 					morseParser.reinstateMessage()
 					startSystemAtIdle()
 				} else {
-					// end
+					// otherwise end the state machine
 					end()
 					delegate.didEnd()
 				}
 			} else {
-
 				morseParser.popCharacter()
 				characterExists()
 				c = morseParser.readNextCharacter()
 				reviseTime(time: c.unitTime)
-
 			}
 		}
 	}
@@ -122,7 +125,6 @@ class MorseStateMachineSystem {
 	func reviseTime(time: TimeInterval) {
 		expires = Date().addingTimeInterval(time)
 	}
-	
 }
 
 

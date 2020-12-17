@@ -49,7 +49,7 @@ class SeizureWarningViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = Theme.Dark.secondary
+		view.backgroundColor = Theme.mainBackground
 		
 		warningTitle.attributedText = NSMutableAttributedString().secondaryTitleAttributes(string: "PHOTOSENSITIVE SEIZURE WARNING")
 		warningLabel.attributedText = NSMutableAttributedString().secondaryTextAttributes(string: "This app contains flashing lights using the rear camera and front screen. Please stop using this app and consult a doctor if you experience lightheadedness, altered vision, eye or face twitching, jerking or shaking of arms or legs, or basically anything that you shouldn't normally experience; contrary to popular beliefs, these are not symptoms for utter joy but of photosensitive epileptic seizures. Be careful, it's serious.")

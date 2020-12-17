@@ -24,8 +24,8 @@ enum LightState {
 }
 
 class Flashlight {
-	
-	var state: LightState = .kOff
+
+	private var state: LightState = .kOff
 	
 	func toggleTorch(on: Bool) {
 		guard let device = AVCaptureDevice.default(for: .video) else { return }
@@ -59,5 +59,4 @@ class Flashlight {
 				toggleTorch(on: state.truthValueForState)
 		}
 	}
-	
 }

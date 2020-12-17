@@ -42,6 +42,7 @@ enum SettingsSection: Int, CaseIterable {
 	}
 }
 
+//MARK: Tip Cell
 class SettingsTipCell: UITableViewCell {
 	
 	private var spinner = UIActivityIndicatorView(style: .medium)
@@ -79,7 +80,15 @@ class SettingsTipCell: UITableViewCell {
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		
+		contentView.addSubview(tipLabel)
+		contentView.addSubview(descriptionLabel)
+		contentView.addSubview(tipButton)
+		spinner.translatesAutoresizingMaskIntoConstraints = false
+		contentView.addSubview(spinner)
+		tipLabel.anchorView(top: contentView.topAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), size: .zero)
+		descriptionLabel.anchorView(top: tipLabel.bottomAnchor, bottom: nil, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
+		tipButton.anchorView(top: descriptionLabel.bottomAnchor, bottom: contentView.bottomAnchor, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
+		spinner.anchorView(top: nil, bottom: nil, leading: tipButton.trailingAnchor, trailing: nil, centerY: tipButton.centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 0.0), size: .zero)
 	}
 	
 	required init?(coder: NSCoder) {
@@ -88,6 +97,15 @@ class SettingsTipCell: UITableViewCell {
 	
 	func setupCell(with data: SettingsTip, indexPath: IndexPath) {
 		self.indexPath = indexPath
+
+		DispatchQueue.main.async {
+//			self.tipLabel.text = data.name
+//			self.tipLabel.textColor = Theme.Font.DefaultColor
+			self.tipLabel.attributedText = NSMutableAttributedString().primaryCellTextAttributes(string: data.name)
+			self.descriptionLabel.attributedText = NSMutableAttributedString().tertiaryCellTextAttributes(string: data.description)
+			self.tipButton.setTitle("\(data.price)", for: .normal)
+		}
+		
 		// cache it
 		// setup IAP purchase closure triggered by the button
 		buttonHandler = {
@@ -95,35 +113,15 @@ class SettingsTipCell: UITableViewCell {
 			self.purchaseInProgressActivitySpinner()
 			self.tipButton.clearButtonTitle()
 			guard let product = data.tipProduct else { return }
-			print("Purchasing --- \(product.localizedTitle)")
-			
+//			print("Purchasing --- \(product.localizedTitle)")
+
 			// Purchase product
 			IAPProducts.tipStore.buyProduct(product)
 		}
-		
-		self.tipLabel.attributedText = NSMutableAttributedString().primaryCellTextAttributes(string: data.name)
-		self.descriptionLabel.attributedText = NSMutableAttributedString().tertiaryCellTextAttributes(string: data.description)
-		self.tipButton.setTitle("\(data.price)", for: .normal)
-
-		contentView.addSubview(tipLabel)
-		contentView.addSubview(descriptionLabel)
-		contentView.addSubview(tipButton)
-		contentView.addSubview(spinner)
-		spinner.translatesAutoresizingMaskIntoConstraints = false
-		
-		tipLabel.anchorView(top: contentView.topAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0), size: .zero)
-		descriptionLabel.anchorView(top: tipLabel.bottomAnchor, bottom: nil, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
-		tipButton.anchorView(top: descriptionLabel.bottomAnchor, bottom: contentView.bottomAnchor, leading: nil, trailing: nil, centerY: nil, centerX: contentView.centerXAnchor, padding: UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10, right: 0.0), size: .zero)
-		spinner.anchorView(top: nil, bottom: nil, leading: tipButton.trailingAnchor, trailing: nil, centerY: tipButton.centerYAnchor, centerX: nil, padding: UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 0.0), size: .zero)
-
 	}
 	
 	@objc func handleTipButton() {
 		buttonHandler?()
-	}
-	
-	override func layoutIfNeeded() {
-		super.layoutIfNeeded()
 	}
 
 	func purchaseInProgressActivitySpinner() {
@@ -140,6 +138,7 @@ class SettingsTipCell: UITableViewCell {
 	
 }
 
+//MARK: Main Cell
 class SettingsMainCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)

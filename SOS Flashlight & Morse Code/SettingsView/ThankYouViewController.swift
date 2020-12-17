@@ -31,7 +31,7 @@ class ThankYouViewController: UIViewController {
 		label.translatesAutoresizingMaskIntoConstraints = false
 //		label.numberOfLines = 0
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().primaryTextAttributes(string: "Tips help out a lot. Don't forget to rate my app!")
+		label.attributedText = NSMutableAttributedString().primaryTextAttributes(string: "Tips help out a lot but don't forget to rate my app!")
 		return label
 	}()
 	

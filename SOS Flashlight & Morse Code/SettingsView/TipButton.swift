@@ -22,7 +22,7 @@ class TipButton: UIButton {
 	func setupButton() {
 		self.layer.backgroundColor = Theme.Dark.secondary.cgColor
 		self.layer.cornerRadius = 8.0
-		self.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
+		self.contentEdgeInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
 	}
 
 	func clearButtonTitle() {

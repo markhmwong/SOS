@@ -116,7 +116,6 @@ class TopContainer: UIView {
 	
 	lazy var facingFlash: UIButton = {
 		let view = UIButton()
-//		view.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
 		view.setAttributedTitle(NSMutableAttributedString().secondaryTitleAttributes(string: "Rear"), for: .normal)
 		view.addTarget(self, action: #selector(handleFacingFlash), for: .touchDown)
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -243,8 +242,6 @@ class TopContainer: UIView {
 		]
 		keyboardToolbar.barStyle = .default
 		messageField.inputAccessoryView = keyboardToolbar
-		
-		
 
 		addSubview(conversionView)
 		conversionView.addSubview(shareButton)
@@ -300,12 +297,14 @@ class TopContainer: UIView {
 	}
 	
 	// MARK: - Handle Buttons
+	// Looping forces the phrase to be repeated
 	@objc func handleLoop() {
-		guard let viewModel = viewController?.viewModel else { return }
+		guard let viewModel = viewController?.viewModel, let viewController = viewController else { return }
 		viewModel.loopState = !viewModel.loopState
-		// turn off light
-		viewController?.resetLight()
-		viewController?.shutDownStateMachine()
+		
+		// Reset the machine and turn off light
+		viewController.resetLight()
+		viewController.shutDownStateMachine()
 	}
 	
 	@objc func handleFacingFlash() {

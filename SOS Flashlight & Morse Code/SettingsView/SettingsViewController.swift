@@ -75,7 +75,7 @@ class SettingsViewController: UITableViewController {
     }
 	
     func writeReview() {
-        let productURL = URL(string: "https://apps.apple.com/app/id1514947015")!
+		let productURL = URL(string: Whizbang.appStoreUrl)!
         var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
         
         components?.queryItems = [
@@ -135,7 +135,7 @@ class FooterView: UIView {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Copyright \(Calendar.current.currentYearToInt()) Whizbang")
+		label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Copyright \(Calendar.current.currentYearToInt()) Whizbang. Build \(Whizbang.appBuild), Version \(Whizbang.appVersion).")
 		return label
 	}()
 	
@@ -152,5 +152,4 @@ class FooterView: UIView {
 		super.layoutSubviews()
 		copyright.anchorView(top: topAnchor, bottom: nil, leading: leadingAnchor, trailing: trailingAnchor, centerY: nil, centerX: nil, padding: .zero, size: .zero)
 	}
-	
 }

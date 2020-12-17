@@ -8,12 +8,48 @@
 
 import UIKit
 
+extension UIColor {
+	static let defaultBlack: UIColor = UIColor.init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+}
+
 struct Theme {
-    
+	
+	
 	//MARK: - Background colors
 	struct MessageBox {
-		static var primary: UIColor = UIColor.black.adjust(by: 10)!
-		static var secondary: UIColor = UIColor.black.adjust(by: 5)!
+//		static var primary: UIColor = UIColor.black.adjust(by: 10)!
+		static let primary: UIColor = {
+			if #available(iOS 13.0, *) {
+				return UIColor.init { (UITraitCollection) -> UIColor in
+					switch (UITraitCollection.userInterfaceStyle) {
+						case .dark, .unspecified:
+							return UIColor.black.adjust(by: 20)!
+						case .light:
+							return UIColor.white.adjust(by: -20)!
+						@unknown default:
+							return UIColor.white.adjust(by: -20)!
+					}
+				}
+			} else {
+				return .red
+			}
+		}()
+		static let secondary: UIColor = {
+			if #available(iOS 13.0, *) {
+				return UIColor.init { (UITraitCollection) -> UIColor in
+					switch (UITraitCollection.userInterfaceStyle) {
+						case .dark, .unspecified:
+							return UIColor.black.adjust(by: 10)!
+						case .light:
+							return UIColor.white.adjust(by: -10)!
+						@unknown default:
+							return UIColor.white.adjust(by: -10)!
+					}
+				}
+			} else {
+				return .red
+			}
+		}()
 		static var tertiary: UIColor = UIColor.black.adjust(by: 20)!
 	}
 	
@@ -22,15 +58,75 @@ struct Theme {
 		static var dim: UIColor = UIColor.white.adjust(by: -60)!
 	}
 	
-	struct FrontScreenFlash {
-		static var flashing: UIColor = UIColor.white
-		static var dim: UIColor = UIColor.white.adjust(by: -90)!
-	}
+	static let mainBackgrounInverse: UIColor = {
+		if #available(iOS 13.0, *) {
+			return UIColor.init { (UITraitCollection) -> UIColor in
+				switch (UITraitCollection.userInterfaceStyle) {
+					case .dark, .unspecified:
+						return .white
+					case .light:
+						return UIColor.white.adjust(by: -90)!
+					@unknown default:
+						return UIColor.white.adjust(by: -90)!
+				}
+			}
+		} else {
+			return .red
+		}
+	}()
+	// background color for the main view
+	static let mainBackground: UIColor = {
+		if #available(iOS 13.0, *) {
+			return UIColor.init { (UITraitCollection) -> UIColor in
+				switch (UITraitCollection.userInterfaceStyle) {
+					case .dark, .unspecified:
+						return UIColor.white.adjust(by: -90)!
+					case .light:
+						return .white
+					@unknown default:
+						return UIColor.white.adjust(by: -90)!
+				}
+			}
+		} else {
+			return .red
+		}
+	}()
 	
 	struct Dark {
 		static var primary: UIColor = UIColor.black.adjust(by: 5)!
-		static var secondary: UIColor = UIColor.black.adjust(by: 10)!
-		static var tertiary: UIColor = UIColor.black.adjust(by: 30)!
+//		static var secondary: UIColor = UIColor.black.adjust(by: 10)!
+		static let secondary: UIColor = {
+			if #available(iOS 13.0, *) {
+				return UIColor.init { (UITraitCollection) -> UIColor in
+					switch (UITraitCollection.userInterfaceStyle) {
+						case .dark, .unspecified:
+							return UIColor.white.adjust(by: -90)!
+						case .light:
+							return UIColor.black.adjust(by: 10)!
+						@unknown default:
+							return UIColor.white.adjust(by: -90)!
+					}
+				}
+			} else {
+				return .red
+			}
+		}()
+		static let tertiary: UIColor = {
+			if #available(iOS 13.0, *) {
+				return UIColor.init { (UITraitCollection) -> UIColor in
+					switch (UITraitCollection.userInterfaceStyle) {
+						case .dark, .unspecified:
+							return UIColor.white.adjust(by: -90)!
+						case .light:
+							return UIColor.black.adjust(by: 30)!
+						@unknown default:
+							return UIColor.white.adjust(by: -90)!
+					}
+				}
+			} else {
+				return .red
+			}
+		}()
 		
 		struct FlashButton {
 			static var background: UIColor = UIColor.white
@@ -73,7 +169,7 @@ struct Theme {
 						case .dark, .unspecified:
 							return UIColor.white.adjust(by: 40.0)!
 						case .light:
-							return UIColor.black.adjust(by: 40.0)!
+							return .defaultBlack
 						@unknown default:
 							return UIColor.white.adjust(by: 40.0)!
 					}
@@ -90,7 +186,7 @@ struct Theme {
 						case .dark, .unspecified:
 							return .white
 						case .light:
-							return .white
+							return .defaultBlack
 						@unknown default:
 							return .white
 					}

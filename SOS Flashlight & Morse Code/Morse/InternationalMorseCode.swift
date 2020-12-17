@@ -9,7 +9,7 @@
 import Foundation
 
 /*
-
+Conditions and Requirements of Morse Code
 The length of a dot is one unit
 A dash is three units
 The space between parts of the same letter is one unit
@@ -18,9 +18,11 @@ The space between words is seven units
 A B
 .- -...
 [(1) 1 (3)] (3) [(3) 1 (1) 1 (1) 1 (1)] (7)
+
 */
 
-let InternationalMorseCode: [Letter: MorseCode] = [
+// Letter and MorseCode typealias found in MorseStatemachineSystemDelegate.swift
+let InternationalMorseCode: [Letter : MorseCode] = [
 	"a" : ".-",
 	"b" : "-...",
 	"c" : "-.-.",

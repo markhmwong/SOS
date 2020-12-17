@@ -32,7 +32,7 @@ class ViewController: UIViewController {
 	
 	private var frontScreenFlashView: UIView = {
 		let view = UIView()
-		view.backgroundColor = Theme.FrontScreenFlash.dim
+		view.backgroundColor = Theme.mainBackground
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
 	
 	private let light = Flashlight()
 		
-	private var stateMachine: MorseStateMachineSystem?
+	private var stateMachine: MorseCodeStateMachineSystem? = nil
 	
 	private var readNextLetter: TimeInterval = 0.0
 	
@@ -89,6 +89,7 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		AppStoreReviewManager.requestReviewIfAppropriate()
 
 		light.toggleTorch(on: false)
@@ -114,7 +115,7 @@ class ViewController: UIViewController {
 			shutDownStateMachine()
 		} else {
 			let parser = MorseParser(message: "SOS")
-			stateMachine = MorseStateMachineSystem(morseParser: parser, delegate: self)
+			stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
 			guard let stateMachine = stateMachine, let viewModel = viewModel else { return }
 			stateMachine.loopState = viewModel.loopState
 			stateMachine.startSystemAtIdle()
@@ -127,7 +128,7 @@ class ViewController: UIViewController {
 		} else {
 			if let message = viewModel?.message, message != "" {
 				let parser = MorseParser(message: message)
-				stateMachine = MorseStateMachineSystem(morseParser: parser, delegate: self)
+				stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
 				guard let stateMachine = stateMachine, let viewModel = viewModel else { return }
 				stateMachine.loopState = viewModel.loopState
 				stateMachine.startSystemAtIdle()
@@ -183,13 +184,13 @@ class ViewController: UIViewController {
 				viewModel.flashFacingSideState = .rear
 		}
 	}
-	
+
 	func updateFrontScreenFlash(state: Bool) {
 		guard let viewModel = viewModel else { return }
 
 		viewModel.kFrontLightState = state
 		DispatchQueue.main.async {
-			self.frontScreenFlashView.backgroundColor = viewModel.kFrontLightState ? Theme.FrontScreenFlash.flashing : Theme.FrontScreenFlash.dim
+			self.frontScreenFlashView.backgroundColor = viewModel.kFrontLightState ? Theme.mainBackgrounInverse : Theme.mainBackground
 		}
 	}
 	
@@ -202,21 +203,28 @@ class ViewController: UIViewController {
 		self.stateMachine = nil
 	}
 	
+	// Navigation methods
 	func showSettings() {
 		coordinator?.showSettings()
+	}
+	
+	func showSharePanel(text: String) {
+		coordinator?.showShare(textToShare: text)
 	}
 }
 
 extension ViewController: MorseStateMachineSystemDelegate {
+	// Right before the state machine begins to loop.
 	func willLoop() {
 		guard let viewModel = viewModel, let stateMachine = stateMachine else { return }
 		stateMachine.loopState = viewModel.loopState
 	}
 	
 	func willBreak() {
-		
+		// Do nothing
 	}
 	
+	// Right before the device will cast the flash
 	func willFlash(type: MorseType) {
 		guard let viewModel = viewModel else { return }
 		switch type {
@@ -227,7 +235,6 @@ extension ViewController: MorseStateMachineSystemDelegate {
 				} else {
 					light.toggleTorch(on: false)
 				}
-
 			case .dash, .dot:
 				viewModel.kLightState = true
 				if (viewModel.flashFacingSideState == .front) {
@@ -242,16 +249,14 @@ extension ViewController: MorseStateMachineSystemDelegate {
 		
 	}
 	
+	// State machine ends
 	func didEnd() {
 		shutDownStateMachine()
 	}
 	
+	// State machine begins
 	func start() {
 		stateMachine?.endTimer()
-	}
-	
-	func showSharePanel(text: String) {
-		coordinator?.showShare(textToShare: text)
 	}
 }
 

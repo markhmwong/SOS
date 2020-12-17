@@ -27,7 +27,7 @@ class AboutViewModel: NSObject {
 	
 	let appDescription: String = "A simple morse code app."
 	
-	let copyright: String = "Whizbang Apps Copyright \(Calendar.current.currentYearToInt())\nPrivacy Policy - This app uses Google Analytics, by using this app you also allow me to gather analytics that will help me make my apps better. No personal information is gathered or sent from this app to an external sever that was programmed by the author of this app.\nWarning - This app contains flashing lights using the rear camera and front screen. Please stop using this app and consult a doctor if you experience lightheadedness, altered vision, eye or face twitching, jerking or shaking of arms or legs, or basically anything that you shouldn't normally experience; contrary to popular beliefs, these are not symptoms for utter joy but of photosensitive epileptic seizures. Be careful, it's serious."
+	let copyright: String = "Whizbang Apps Copyright \(Calendar.current.currentYearToInt())\nPrivacy Policy - This app no longer uses Google Analytics. Looking for a new tool!\nWarning - This app contains flashing lights using the rear camera and front screen. Please stop using this app and consult a doctor if you experience lightheadedness, altered vision, eye or face twitching, jerking or shaking of arms or legs, or basically anything that you shouldn't normally experience; contrary to popular beliefs, these are not symptoms for utter joy but of photosensitive epileptic seizures. Be careful, it's serious."
 	
 	let support: String = "Twitter: @markhmwong Email: hello@whizbangapps.xyz"
 }
@@ -69,9 +69,9 @@ class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> 
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
 		view.addSubview(descriptionLabel)
 		view.addSubview(copyrightLabel)
 		view.addSubview(supportLabel)
@@ -80,5 +80,4 @@ class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> 
 		supportLabel.anchorView(top: descriptionLabel.bottomAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: .zero, size: .zero)
 		copyrightLabel.anchorView(top: nil, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, centerY: nil, centerX: view.centerXAnchor, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: -20.0, right: 0.0), size: .zero)
 	}
-	
 }

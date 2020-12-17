@@ -23,7 +23,7 @@ class BaseViewController<VM, C>: UIViewController, BaseViewControllerProtocol {
 		self.viewModel = viewModel
 		self.coordinator = coordinator
 		super.init(nibName: nil, bundle: nil)
-		self.view.backgroundColor = UIColor.black
+		self.view.backgroundColor = Theme.mainBackground
 
 	}
 	
