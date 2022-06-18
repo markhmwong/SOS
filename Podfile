@@ -6,7 +6,7 @@ target 'SOS Flashlight & Morse Code' do
   use_frameworks!
 
   # Pods for SOS Flashlight & Morse Code
-  pod 'Firebase/Analytics'
+  
 
   target 'SOS Flashlight & Morse CodeTests' do
     inherit! :search_paths

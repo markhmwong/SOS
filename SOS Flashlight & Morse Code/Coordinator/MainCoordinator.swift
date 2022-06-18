@@ -13,7 +13,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 	
 	var navigationController: UINavigationController
 	
-	var rootViewController: ViewController?
+	var rootViewController: MainMorseViewController? = nil
 	
 	init(navigationController: UINavigationController) {
 		self.navigationController = navigationController
@@ -21,9 +21,12 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 	
 	func start() {
 		navigationController.delegate = self
-		let vc = ViewController(coordinator: self)
-		rootViewController = vc
-		vc.viewModel = ViewControllerViewModel(viewController: vc)
+//		let vc = ViewController(coordinator: self)
+        
+        let vm = MainMorseViewModel()
+        let vc = MainMorseViewController(viewModel: vm)
+        rootViewController = vc
+//		vc.viewModel = ViewControllerViewModel(viewController: vc)
 		navigationController.pushViewController(vc, animated: false)
 		
 		// navigation buttons

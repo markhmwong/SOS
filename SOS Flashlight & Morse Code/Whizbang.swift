@@ -22,15 +22,15 @@ final class Whizbang {
     static let systemVersion = UIDevice.current.systemVersion
 	static let appStoreUrl: String = "https://apps.apple.com/app/id1514947015"
 	
-	let emailBody: String = """
+	static let emailBody: String = """
 	</br>
 	</br>\(appName): \(appVersion)\n
 	</br>iOS: \(systemVersion)
 	</br>Device: \(deviceType.rawValue)
 	"""
 	
-	let emailToRecipient: String = "hello@whizbangapps.xyz"
+	static let emailToRecipient: String = "hello@whizbangapps.xyz"
 	
-	let emailSubject: String = "Morse Code Tool App Feedback"
+	static let emailSubject: String = "\(appName) App Feedback"
 	
 }

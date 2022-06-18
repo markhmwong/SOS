@@ -27,14 +27,14 @@ class SettingsViewModel {
     }
 	
     // Email parameters
-	let emailToRecipient = Whizbang.shared.emailToRecipient
+	let emailToRecipient = Whizbang.emailToRecipient
 	
-	let emailSubject: String = Whizbang.shared.emailSubject
+	let emailSubject: String = Whizbang.emailSubject
 	
 	let tipProductCache: String = "com.whizbang.sos.tipProducts"
 	
     func emailBody() -> String {
-        return Whizbang.shared.emailBody
+        return Whizbang.emailBody
     }
 	
 	private var diffableDatasource: UITableViewDiffableDataSource<SettingsSection, AnyHashable>?

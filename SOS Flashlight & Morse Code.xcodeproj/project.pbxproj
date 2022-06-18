@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03FA7BF93C08D9469AFEF354 /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */; };
-		202171FC8395FE39BE4DDCE4 /* Pods_SOS_Flashlight___Morse_Code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */; };
+		4319980B285DE31E00AA897A /* MainMorseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319980A285DE31E00AA897A /* MainMorseViewController.swift */; };
+		4319980D285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319980C285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift */; };
+		4319980F285DE7B000AA897A /* FlashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319980E285DE7B000AA897A /* FlashSettings.swift */; };
 		4D05F3902487259400FA71D2 /* TipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D05F38F2487259400FA71D2 /* TipButton.swift */; };
 		4D05F39224873F0800FA71D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D05F39124873F0800FA71D2 /* StoreKit.framework */; };
 		4D05F3992487ABEE00FA71D2 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D05F3982487ABEE00FA71D2 /* ThankYouViewController.swift */; };
@@ -68,7 +69,6 @@
 		4DFC0D592461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */; };
 		4DFC0D692461CC800033634E /* Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D682461CC800033634E /* Flashlight.swift */; };
 		4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D6A2461CC9A0033634E /* MorseType.swift */; };
-		5A74A5FEB388B715413F8781 /* Pods_SOS_Flashlight___Morse_CodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,12 +89,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code.debug.xcconfig"; sourceTree = "<group>"; };
-		086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_Code.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig"; sourceTree = "<group>"; };
-		193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse CodeTests/Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse CodeTests.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse CodeTests/Pods-SOS Flashlight & Morse CodeTests.release.xcconfig"; sourceTree = "<group>"; };
+		4319980A285DE31E00AA897A /* MainMorseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMorseViewController.swift; sourceTree = "<group>"; };
+		4319980C285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
+		4319980E285DE7B000AA897A /* FlashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashSettings.swift; sourceTree = "<group>"; };
 		4D05F38F2487259400FA71D2 /* TipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipButton.swift; sourceTree = "<group>"; };
 		4D05F39124873F0800FA71D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4D05F3982487ABEE00FA71D2 /* ThankYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
@@ -161,9 +158,6 @@
 		4DFC0D5A2461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DFC0D682461CC800033634E /* Flashlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashlight.swift; sourceTree = "<group>"; };
 		4DFC0D6A2461CC9A0033634E /* MorseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseType.swift; sourceTree = "<group>"; };
-		97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code.release.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code.release.xcconfig"; sourceTree = "<group>"; };
-		CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_SOS_Flashlight___Morse_CodeTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig"; path = "Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				202171FC8395FE39BE4DDCE4 /* Pods_SOS_Flashlight___Morse_Code.framework in Frameworks */,
 				4D05F39224873F0800FA71D2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A74A5FEB388B715413F8781 /* Pods_SOS_Flashlight___Morse_CodeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +180,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03FA7BF93C08D9469AFEF354 /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,10 +189,12 @@
 		4D01FA922480C86B00F105B9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4DFC0D372461AE460033634E /* ViewController.swift */,
 				4D6B8BD7246CEE9100C6AD60 /* ViewControllerViewModel.swift */,
 				4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */,
-				4DFC0D372461AE460033634E /* ViewController.swift */,
 				4D6B8BD1246C3B7800C6AD60 /* View */,
+				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
+				4319980E285DE7B000AA897A /* FlashSettings.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -240,6 +233,7 @@
 				4D6B8BB724693D4F00C6AD60 /* UIBezierPath+Extension.swift */,
 				4D6B8BB824693D4F00C6AD60 /* UITableView+Extension.swift */,
 				4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */,
+				4319980C285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -309,7 +303,6 @@
 				4DFC0D4C2461AE4B0033634E /* SOS Flashlight & Morse CodeTests */,
 				4DFC0D572461AE4B0033634E /* SOS Flashlight & Morse CodeUITests */,
 				4DFC0D312461AE460033634E /* Products */,
-				DBB5C5E4984CB7D6A49D0EA6 /* Pods */,
 				E02945BFD9C4D31199146F86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -388,26 +381,10 @@
 			path = Flashlight;
 			sourceTree = "<group>";
 		};
-		DBB5C5E4984CB7D6A49D0EA6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */,
-				97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */,
-				E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */,
-				0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */,
-				201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */,
-				20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		E02945BFD9C4D31199146F86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				4D05F39124873F0800FA71D2 /* StoreKit.framework */,
-				086F6C71F14DF8BE954AF258 /* Pods_SOS_Flashlight___Morse_Code.framework */,
-				193010207047AF3A7C6F2E4A /* Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests.framework */,
-				CE04972E21201F0381918A47 /* Pods_SOS_Flashlight___Morse_CodeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -419,11 +396,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D5D2461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse Code" */;
 			buildPhases = (
-				B5D9442EEE7DAF0D101076D9 /* [CP] Check Pods Manifest.lock */,
 				4DFC0D2C2461AE460033634E /* Sources */,
 				4DFC0D2D2461AE460033634E /* Frameworks */,
 				4DFC0D2E2461AE460033634E /* Resources */,
-				D8BF421F3187157D259ACC2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -438,7 +413,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D602461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeTests" */;
 			buildPhases = (
-				E4C4725FE2A073C106E206DA /* [CP] Check Pods Manifest.lock */,
 				4DFC0D452461AE4B0033634E /* Sources */,
 				4DFC0D462461AE4B0033634E /* Frameworks */,
 				4DFC0D472461AE4B0033634E /* Resources */,
@@ -457,11 +431,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DFC0D632461AE4B0033634E /* Build configuration list for PBXNativeTarget "SOS Flashlight & Morse CodeUITests" */;
 			buildPhases = (
-				FB0124237501D8FFF6CC07B9 /* [CP] Check Pods Manifest.lock */,
 				4DFC0D502461AE4B0033634E /* Sources */,
 				4DFC0D512461AE4B0033634E /* Frameworks */,
 				4DFC0D522461AE4B0033634E /* Resources */,
-				64F2085441F4E705755020BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -480,7 +452,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Mark Wong";
 				TargetAttributes = {
 					4DFC0D2F2461AE460033634E = {
@@ -544,109 +516,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		64F2085441F4E705755020BB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B5D9442EEE7DAF0D101076D9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse Code-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8BF421F3187157D259ACC2E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SOS Flashlight & Morse Code/Pods-SOS Flashlight & Morse Code-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4C4725FE2A073C106E206DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse CodeTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB0124237501D8FFF6CC07B9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		4DFC0D2C2461AE460033634E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -656,6 +525,7 @@
 				4DE7EFA8247BA2BF0017958E /* SettingsViewModel.swift in Sources */,
 				4DFC0D3E2461AE460033634E /* SOS_Flightlight___Morse_Code.xcdatamodeld in Sources */,
 				4DE7EFAA247CE9250017958E /* Whizbang.swift in Sources */,
+				4319980F285DE7B000AA897A /* FlashSettings.swift in Sources */,
 				4D6B8BD5246C3B9100C6AD60 /* TopContainerView.swift in Sources */,
 				4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */,
 				4DC69EB524797FA0009AC9FC /* LocalProductManager.swift in Sources */,
@@ -666,6 +536,7 @@
 				4DFC0D692461CC800033634E /* Flashlight.swift in Sources */,
 				4D6B8BD3246C3B8B00C6AD60 /* BottomContainerView.swift in Sources */,
 				4D6B8BC624693D4F00C6AD60 /* UIBezierPath+Extension.swift in Sources */,
+				4319980B285DE31E00AA897A /* MainMorseViewController.swift in Sources */,
 				4DE7EFAC247D35530017958E /* SeizureWarningViewController.swift in Sources */,
 				4D6B8BBD24693D4F00C6AD60 /* Date+Extension.swift in Sources */,
 				4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */,
@@ -683,6 +554,7 @@
 				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
 				4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */,
+				4319980D285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift in Sources */,
 				4D19106A24757E9D00202FA0 /* MorseCodeSheetViewController.swift in Sources */,
 				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,
 				4D05F3992487ABEE00FA71D2 /* ThankYouViewController.swift in Sources */,
@@ -784,6 +656,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -845,6 +718,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -876,11 +750,10 @@
 		};
 		4DFC0D5E2461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08352B7E198F1407E14AE08B /* Pods-SOS Flashlight & Morse Code.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -888,7 +761,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.42;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -899,11 +772,10 @@
 		};
 		4DFC0D5F2461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97E7C79546FA74D7EB4FF0C7 /* Pods-SOS Flashlight & Morse Code.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -911,7 +783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.42;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -922,7 +794,6 @@
 		};
 		4DFC0D612461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201799066A683A24AFA7C0A4 /* Pods-SOS Flashlight & Morse CodeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -945,7 +816,6 @@
 		};
 		4DFC0D622461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20778036907A06A0F1C4D9F8 /* Pods-SOS Flashlight & Morse CodeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -968,7 +838,6 @@
 		};
 		4DFC0D642461AE4B0033634E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E846C2D908E986AAD7CE9652 /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -989,7 +858,6 @@
 		};
 		4DFC0D652461AE4B0033634E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D34EC33DE523906ADAB793A /* Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

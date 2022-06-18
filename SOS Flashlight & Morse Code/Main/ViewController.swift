@@ -9,10 +9,7 @@
 import UIKit
 import AVFoundation
 
-enum FlashFacingSide: Int {
-	case rear // LED
-	case front // SCREEN
-}
+
 
 final class Once {
 	private var version: String = KeychainWrapper.standard.string(forKey: "com.whizbang.sos.appversion") ?? "1.0"
@@ -98,15 +95,6 @@ class ViewController: UIViewController {
 		once.run {
 			coordinator?.showSeizureWarning()
 		}
-	}
-	
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
-		
-	}
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
 	}
 	
 	// MARK: - Toggle Light whether it's by a short burst SOS, a Message, a switch or hold

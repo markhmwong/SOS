@@ -8,21 +8,32 @@
 
 import UIKit
 
-class TipButton: UIButton {
+class PaddedButton: UIButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        setupButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupButton() {
+        self.layer.backgroundColor = Theme.Dark.secondary.cgColor
+        self.layer.cornerRadius = 8.0
+        self.contentEdgeInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
+    }
+}
+
+class TipButton: PaddedButton {
 	
 	override init(frame: CGRect) {
 		super.init(frame: .zero)
-		setupButton()
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
-	}
-	
-	func setupButton() {
-		self.layer.backgroundColor = Theme.Dark.secondary.cgColor
-		self.layer.cornerRadius = 8.0
-		self.contentEdgeInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
 	}
 
 	func clearButtonTitle() {

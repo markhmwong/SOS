@@ -69,8 +69,13 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		let button = UIButton()
 		button.accessibilityLabel = "Toggle Flash"
 		button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
-		button.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Flash"), for: .normal)
-		button.setTitleColor(UIColor.black, for: .normal)
+//		button.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Flash"), for: .normal)
+        
+        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 20, weight: .bold, scale: .large)
+        let image = UIImage(systemName: "bolt.circle.fill", withConfiguration: config)
+        
+        button.setImage(image, for: .normal)
+        button.tintColor = .black
 		button.layer.backgroundColor = Theme.Dark.FlashButton.background.cgColor
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
@@ -415,8 +420,10 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 		if (currIndex == MorseCodeMode.kConversion.rawValue) {
 			self.viewController?.mainView.topContainer.frontCircleIndicator.isHidden = true
 			self.viewController?.mainView.topContainer.conversionView.isHidden = false
-			toggleButton.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Convert"), for: .normal)
 
+            let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 20, weight: .bold, scale: .large)
+            let image = UIImage(systemName: "textformat.size", withConfiguration: config)
+            toggleButton.setImage(image, for: .normal)
 			UIView.animate(withDuration: 0.1, animations: {
 				self.viewController?.mainView.topContainer.conversionView.alpha = 1.0
 			})
@@ -426,8 +433,9 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 			UIView.animate(withDuration: 0.1, animations: {
 				self.viewController?.mainView.topContainer.conversionView.alpha = 0.0
 			})
-			toggleButton.setAttributedTitle(NSMutableAttributedString().flashButtonTextAttributes(string: "Flash"), for: .normal)
-
+            let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 20, weight: .bold, scale: .large)
+            let image = UIImage(systemName: "bolt.circle.fill", withConfiguration: config)
+            toggleButton.setImage(image, for: .normal)
 		}
 	}
 	

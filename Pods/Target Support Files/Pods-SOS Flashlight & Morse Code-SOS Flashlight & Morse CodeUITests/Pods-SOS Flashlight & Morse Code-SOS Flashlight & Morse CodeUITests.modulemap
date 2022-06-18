@@ -1,6 +1,0 @@
-framework module Pods_SOS_Flashlight___Morse_Code_SOS_Flashlight___Morse_CodeUITests {
-  umbrella header "Pods-SOS Flashlight & Morse Code-SOS Flashlight & Morse CodeUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
