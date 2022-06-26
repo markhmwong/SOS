@@ -10,18 +10,18 @@ import Foundation
 
 class ViewControllerViewModel {
 	
+    var viewController: ViewController?
+    
 	var flashFacingSideState: FlashFacingSide = .rear
 
 	var lightState: LightState = .kOff
-	
-	var viewController: ViewController?
 	
 	var kFrontLightState: Bool = false
 	
 	var kLightState: Bool =  false {
 		didSet {
-			kLightState ? viewController?.mainView.topContainer.updateFrontIndicator(Theme.Indicator.flashing.cgColor)
-				: viewController?.mainView.topContainer.updateFrontIndicator(Theme.Indicator.dim.cgColor)
+//			kLightState ? viewController?.mainView.topContainer.updateFrontIndicator(Theme.Indicator.flashing.cgColor)
+//				: viewController?.mainView.topContainer.updateFrontIndicator(Theme.Indicator.dim.cgColor)
 		}
 	}
 	

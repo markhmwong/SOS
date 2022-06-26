@@ -268,10 +268,9 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 					viewController?.toggleSos()
 				case .kMessage:
 					viewController?.toggleMessage()
-				case .kSwitch:
+				case .kTool:
 					ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 					viewController?.toggleLight()
-				case .kHold:
 					ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 				case .kConversion:
 					ImpactFeedbackService.shared.impactType(feedBackStyle: .soft)
@@ -457,11 +456,11 @@ class BottomContainer: UIView, UIGestureRecognizerDelegate, UIScrollViewDelegate
 	// long gesture recognizer allows the light to be switched hold for as long as the user holds the button or until the phone runs out of battery....
 	func manageLongGestureRecognizer() {
 		switch currState {
-			case .kSwitch, .kMessage, .kSos, .kConversion:
+			case .kMessage, .kSos, .kConversion:
 				if (!(toggleButton.gestureRecognizers?.isEmpty ?? true)) {
 					toggleButton.removeGestureRecognizer((toggleButton.gestureRecognizers?.first)!)
 				}
-			case .kHold:
+        case .kTool:
 				toggleButton.addGestureRecognizer(createLongGestureRecognizer())
 		}
 	}

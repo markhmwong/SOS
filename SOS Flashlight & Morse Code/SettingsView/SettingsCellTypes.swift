@@ -29,13 +29,11 @@ struct SettingsMain: Hashable, SettingsRowHashable {
 }
 
 enum SettingsSection: Int, CaseIterable {
-	case tips
+
 	case main
 	
 	var cellId: String {
 		switch self {
-			case .tips:
-				return "tipCell"
 			case .main:
 				return "mainCell"
 		}

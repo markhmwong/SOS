@@ -21,31 +21,17 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 	
 	func start() {
 		navigationController.delegate = self
-//		let vc = ViewController(coordinator: self)
         
         let vm = MainMorseViewModel()
-        let vc = MainMorseViewController(viewModel: vm)
+        let vc = MainMorseViewController(viewModel: vm, coordinator: self)
         rootViewController = vc
-//		vc.viewModel = ViewControllerViewModel(viewController: vc)
+        
 		navigationController.pushViewController(vc, animated: false)
-		
-		// navigation buttons
-		navigationController.navigationBar.isHidden = false
-		navigationController.navigationBar.isTranslucent = true
-		navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-		navigationController.navigationBar.shadowImage = UIImage()
-		navigationController.navigationBar.backgroundColor = UIColor.clear
-		let options = UIBarButtonItem().settingsButton(target: self, action: #selector(showSettings))
-
-		options.tintColor = Theme.Font.DefaultColor
-		vc.navigationItem.rightBarButtonItem = options
 	}
 	
 	func showSeizureWarning() {
 		let vc = SeizureWarningViewController(coordinator: self)
-		navigationController.present(vc, animated: true) {
-			//
-		}
+		navigationController.present(vc, animated: true)
 	}
 	
 	func showError(error: TextFieldError) {
@@ -59,6 +45,12 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 		coordinator.start()
 		childCoordinators.append(coordinator)
 	}
+    
+    @objc func showTipJar() {
+        let coordinator = TipJarCoordinator(navigationController: navigationController)
+        coordinator.start()
+        childCoordinators.append(coordinator)
+    }
 	
 	/// Show the share panel
 	func showShare(textToShare: String = "") {

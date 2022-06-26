@@ -322,7 +322,6 @@ class TopContainer: UIView {
 			viewController.viewModel?.message = messageField.text
 			messageField.resignFirstResponder()
 		}
-		
 	}
 	
 	@objc func handleClear() {

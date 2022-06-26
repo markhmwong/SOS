@@ -18,3 +18,17 @@ uiscrollview top to change the uicollectionview cell
 move loop/rear options to the bottom to next the flash/conversion button
 split the tipping and settings
 move tipping to the top right navigation
+
+
+To do
+refactoring and new ui
+    - sos @done
+    - message @done
+    - tools @done
+    - morse conversion @done
+hidden cat photo
+remove tips from settings @done
+highlight image in menubar @done
+fix color for dark/light mode @done
+front/rear facing light @done
+link indicator to tools screen @done

@@ -149,7 +149,7 @@ class ViewController: UIViewController {
 	func holdLight(state: LightState) {
 		guard let viewModel = viewModel else { return }
 
-		viewModel.kLightState = state.truthValueForState
+		viewModel.kLightState = state.currentStatus
 		
 		switch viewModel.flashFacingSideState {
 			case .rear:

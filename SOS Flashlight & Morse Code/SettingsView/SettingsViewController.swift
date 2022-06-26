@@ -40,10 +40,9 @@ class SettingsViewController: UITableViewController {
 		tableView.separatorStyle = .none
 		
 		guard let viewModel = viewModel else { return }
-		viewModel.registerCellids(tableView: tableView)
 		viewModel.configureDiffableDataSource(tableView: tableView)
 		viewModel.prepareDatasource()
-		viewModel.grabTipsProducts()
+
 		let footerView = FooterView()
 		tableView.tableFooterView = footerView
 	}
@@ -109,8 +108,6 @@ class SettingsViewController: UITableViewController {
 					} else if (indexPath.row == 2) {
 						writeReview()
 				}
-				case .tips:
-					() // does not need to open a new ViewController
 			}
 		}
 	}

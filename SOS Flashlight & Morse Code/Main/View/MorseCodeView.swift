@@ -12,8 +12,7 @@ enum MorseCodeMode: Int, CaseIterable {
 	case kSos
 	case kMessage
 	case kConversion
-	case kSwitch
-	case kHold
+    case kTool
 }
 
 class MorseCodeView: UIView, UITextFieldDelegate {

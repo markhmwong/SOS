@@ -8,10 +8,6 @@
 
 import UIKit
 
-extension UIColor {
-	static let defaultBlack: UIColor = UIColor.init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
-}
-
 struct Theme {
 	
 	
