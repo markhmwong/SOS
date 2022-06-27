@@ -57,7 +57,13 @@ class MenuBar: UIView, UICollectionViewDelegate {
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubview(collectionView)
         addSubview(horizontalBar)
+        horizontalBar.addSubview(circle)
         
+        circle.centerXAnchor.constraint(equalTo: horizontalBar.centerXAnchor).isActive = true
+        circle.centerYAnchor.constraint(equalTo: horizontalBar.centerYAnchor).isActive = true
+        circle.widthAnchor.constraint(equalToConstant: 2).isActive = true
+        circle.heightAnchor.constraint(equalToConstant: 2).isActive = true
+
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
