@@ -21,7 +21,7 @@ class MenuBar: UIView, UICollectionViewDelegate {
     
     lazy var horizontalBar: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.defaultText
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -29,7 +29,8 @@ class MenuBar: UIView, UICollectionViewDelegate {
     lazy var circle: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor.systemOrange
+        view.layer.cornerRadius = 3
         return view
     }()
     
@@ -61,8 +62,8 @@ class MenuBar: UIView, UICollectionViewDelegate {
         
         circle.centerXAnchor.constraint(equalTo: horizontalBar.centerXAnchor).isActive = true
         circle.centerYAnchor.constraint(equalTo: horizontalBar.centerYAnchor).isActive = true
-        circle.widthAnchor.constraint(equalToConstant: 2).isActive = true
-        circle.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        circle.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        circle.heightAnchor.constraint(equalToConstant: 8).isActive = true
 
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -71,7 +72,7 @@ class MenuBar: UIView, UICollectionViewDelegate {
         
         dataSource.configureDataSource(collectionView: collectionView)
         
-        horizontalBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBar.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         horizontalBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         horizontalBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25).isActive = true
 
