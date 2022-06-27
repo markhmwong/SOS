@@ -43,7 +43,7 @@ class ConversionView: UIView, UIContentView, UITextViewDelegate {
         textField.tintColor = UIColor.defaultText
         textField.layer.cornerRadius = 0
         textField.font = UIFont.preferredFont(forTextStyle: .title2)
-        textField.text = "top"
+        textField.text = "Message to convert"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .alphabet
         textField.returnKeyType = .continue
@@ -55,7 +55,7 @@ class ConversionView: UIView, UIContentView, UITextViewDelegate {
         textField.textContainerInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         textField.textAlignment = .left
         textField.isScrollEnabled = false
-
+        textField.backgroundColor = UIColor.defaultText.inverted
         return textField
     }()
     
@@ -66,7 +66,7 @@ class ConversionView: UIView, UIContentView, UITextViewDelegate {
         textField.tintColor = UIColor.defaultText
         textField.layer.cornerRadius = 0
         textField.font = UIFont.preferredFont(forTextStyle: .title2)
-        textField.text = "bottom"
+        textField.text = "..."
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .alphabet
         textField.returnKeyType = .continue

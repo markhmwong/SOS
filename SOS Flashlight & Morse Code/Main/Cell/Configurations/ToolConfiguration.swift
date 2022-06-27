@@ -86,7 +86,7 @@ class ToolView: UIView, UIContentView, UITextViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.createCircleIndicator()
-        frontCircleIndicator.position = CGPoint(x: center.x, y: center.y - (UIScreen.main.bounds.height / 8))
+        frontCircleIndicator.position = CGPoint(x: center.x, y: center.y - (UIScreen.main.bounds.height / 5))
     }
     
     private func configure() {

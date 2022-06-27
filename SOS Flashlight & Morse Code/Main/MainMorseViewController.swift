@@ -122,7 +122,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         
         viewModel.configureDataSource(collectionView: mainContentCollectionView)
         
-        toggleButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        toggleButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
         toggleButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         toggleButton.contentEdgeInsets = UIEdgeInsets(top: 25.0, left: 15.0, bottom: 25.0, right: 15.0)
         toggleButton.layer.cornerRadius = toggleButton.bounds.height / 3
@@ -130,7 +130,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         facingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         facingButton.centerYAnchor.constraint(equalTo: toggleButton.centerYAnchor).isActive = true
         
-        facingLabel.topAnchor.constraint(equalTo: facingButton.bottomAnchor).isActive = true
+        facingLabel.topAnchor.constraint(equalTo: facingButton.bottomAnchor, constant: 10).isActive = true
         facingLabel.centerXAnchor.constraint(equalTo: facingButton.centerXAnchor).isActive = true
         
         facingLabel.text = viewModel.flashlight.facingSide.name
@@ -157,7 +157,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             guard let newValue = change.newValue else { return }
             guard let self = self else { return }
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
-            
         })
     }
     
@@ -341,6 +340,18 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     }
 }
 
+final class Once {
+    private var version: String = KeychainWrapper.standard.string(forKey: "com.whizbang.sos.appversion") ?? "1.0"
+    
+    func run(action: () -> Void) {
+        // handle new version
+        if (version != Whizbang.appVersion ?? "1.0") {
+            action()
+            KeychainWrapper.standard.set(Whizbang.appVersion ?? "1.0", forKey: "com.whizbang.sos.appversion")
+        }
+    }
+}
 
-
-
+enum TextFieldError: Error {
+    case empty
+}

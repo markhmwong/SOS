@@ -19,10 +19,17 @@ class MenuBar: UIView, UICollectionViewDelegate {
         return vc
     }()
     
-    var horizontalBar: UIView = {
+    lazy var horizontalBar: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.defaultText
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var circle: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .red
         return view
     }()
     

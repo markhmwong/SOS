@@ -41,18 +41,18 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     lazy var messageField: UITextView = {
         let textField = UITextView()
         textField.tintColor = UIColor.defaultText
-        textField.layer.cornerRadius = 15.0
+        textField.font = UIFont.preferredFont(forTextStyle: .title2)
+        textField.layer.cornerRadius = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .alphabet
         textField.returnKeyType = .continue
         textField.enablesReturnKeyAutomatically = false
-        textField.attributedText = NSMutableAttributedString().primaryTextAttributes(string: "a quick brown fox")
+        textField.text = "Let's send a message"
         textField.delegate = self
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.isEditable = true
-        textField.backgroundColor = Theme.MessageBox.secondary
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         textField.isScrollEnabled = false
         textField.backgroundColor = UIColor.defaultText.inverted
         return textField
@@ -93,7 +93,11 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.createCircleIndicator()
-        frontCircleIndicator.position = CGPoint(x: center.x, y: center.y - (UIScreen.main.bounds.height / 8))
+        frontCircleIndicator.position = CGPoint(x: center.x, y: center.y - (UIScreen.main.bounds.height / 5))
+        
+        messageField.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        messageField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        messageField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     private func configure() {
@@ -122,11 +126,6 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         }
         
         addSubview(messageField)
-        messageField.topAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        messageField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        messageField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
-        
         messageToolbar()
     }
     

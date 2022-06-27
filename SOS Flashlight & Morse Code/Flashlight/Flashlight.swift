@@ -61,13 +61,13 @@ class Flashlight: NSObject {
         }
     }
     
+    @objc dynamic var observableToolMode: Int = 0
+    
     var facingSide: FlashFacingSide = .rear {
         didSet {
             observableFacingSide = facingSide.rawValue
         }
     }
-    
-    @objc dynamic var observableToolMode: Int = 0
     
     @objc dynamic var observableFacingSide: Int = 0
     

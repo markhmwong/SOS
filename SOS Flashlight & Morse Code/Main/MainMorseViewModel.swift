@@ -73,7 +73,7 @@ class MainMorseViewModel: NSObject {
         }
     }
     
-    var currState: MorseCodeMode
+//    var currState: MorseCodeMode
 
     private var currIndex: Int
     
@@ -81,7 +81,7 @@ class MainMorseViewModel: NSObject {
     
     override init() {
         self.currIndex = 0
-        self.currState = MorseCodeMode.init(rawValue: currIndex) ?? MorseCodeMode.kMessage
+//        self.currState = MorseCodeMode.init(rawValue: currIndex) ?? MorseCodeMode.kMessage
 
         super.init()
         nc.addObserver(self, selector: #selector(updateMessageToFlash), name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil)

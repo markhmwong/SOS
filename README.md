@@ -19,14 +19,22 @@ move loop/rear options to the bottom to next the flash/conversion button
 split the tipping and settings
 move tipping to the top right navigation
 
+v2.1
+loop
+information for each screen
 
-To do
+monthly subscription 
+    - remove ads
+    - save messages
+    - convert morse to text
+
+v2
 refactoring and new ui
     - sos @done
     - message @done
     - tools @done
     - morse conversion @done
-hidden cat photo
+
 remove tips from settings @done
 highlight image in menubar @done
 fix color for dark/light mode @done

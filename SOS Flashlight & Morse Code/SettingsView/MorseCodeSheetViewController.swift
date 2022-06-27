@@ -71,7 +71,7 @@ class MorseCodeSheetViewController: BaseViewController<MorseCodeSheetViewModel, 
 		}
 		
 		for code in sorted {
-			morseSheet = morseSheet + "\(code.key) - \(code.value)\n"
+			morseSheet = morseSheet + "\(code.key) : \(code.value)\n"
 		}
 		
 		morseCodeSheet.attributedText = NSMutableAttributedString().primaryTextAttributes(string: morseSheet)
