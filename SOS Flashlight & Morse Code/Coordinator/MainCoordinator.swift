@@ -51,6 +51,38 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         coordinator.start()
         childCoordinators.append(coordinator)
     }
+    
+    func showInfo(mode: MainMorseViewModel.FlashLightMode) {
+        
+        var title = ""
+        var descriptionLabel = ""
+        var icon = ""
+        
+        switch mode {
+        case .messageConversion:
+            title = "Message"
+            descriptionLabel = "Have a long message you wish to send through morse? Use this feature to send a longer message."
+            icon = "message.and.waveform.fill"
+        case .morseConversion:
+            title = "Conversion"
+            descriptionLabel = "This feature quickly converts english text to morse code symbols."
+            icon = "text.bubble.fill"
+        case .sos:
+            title = "SOS"
+            descriptionLabel = "The fastest way to send an SOS. The front screen can also be used as the light source to signal an SOS. Use the bottom right button to switch between the front (screen) and rear (light) of the phone"
+            icon = "bolt.fill"
+        case .tools:
+            title = "Tools"
+            descriptionLabel = "Handy tools to easily signal your mates, in either toggle mode or by touch."
+            icon = "hammer.fill"
+        }
+        
+        let vc = SOSInfoViewController(title: title, description: descriptionLabel, icon: icon)
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        navigationController.present(vc, animated: true)
+    }
 	
 	/// Show the share panel
 	func showShare(textToShare: String = "") {

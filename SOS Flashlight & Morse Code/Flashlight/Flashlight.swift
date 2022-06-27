@@ -53,7 +53,13 @@ enum FlashFacingSide: Int {
 
 class Flashlight: NSObject {
 
-    var mode: MainMorseViewModel.FlashLightMode = .sos
+    var loop: Bool = false
+    
+    var mode: MainMorseViewModel.FlashLightMode = .sos {
+        didSet {
+            print(mode)
+        }
+    }
     
     var toolMode: ToolLightMode = .toggle {
         didSet {

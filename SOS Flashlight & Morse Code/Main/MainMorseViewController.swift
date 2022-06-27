@@ -53,6 +53,27 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         return label
     }()
     
+    lazy var loopingButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handleLooping), for: .touchDown)
+        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 50, weight: .bold, scale: .large)
+        let image = UIImage(systemName: "arrow.triangle.2.circlepath", withConfiguration: config)
+        button.setImage(image, for: .normal)
+        button.tintColor = .defaultText
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var loopingLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Loop"
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textColor = UIColor.defaultText
+        return label
+    }()
+    
     var longPress: UILongPressGestureRecognizer! =  nil
     
     private var toolModeObserver: NSKeyValueObservation? = nil
@@ -76,7 +97,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         settings.tintColor = UIColor.defaultText
         navigationItem.leftBarButtonItem = settings
         let tipJar = UIBarButtonItem().tipJarButton(target: self, action: #selector(showTipJar))
-        navigationItem.rightBarButtonItem = tipJar
+        let info = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(showInfo))
+        info.tintColor = UIColor.defaultText
+        navigationItem.rightBarButtonItems = [tipJar, info]
 
         self.setupUI()
     }
@@ -109,11 +132,13 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(toggleButton)
         view.addSubview(facingButton)
         view.addSubview(facingLabel)
+        view.addSubview(loopingButton)
+        view.addSubview(loopingLabel)
         
         menuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 15).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 12.5).isActive = true
         
         mainContentCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
         mainContentCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -133,7 +158,15 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         facingLabel.topAnchor.constraint(equalTo: facingButton.bottomAnchor, constant: 10).isActive = true
         facingLabel.centerXAnchor.constraint(equalTo: facingButton.centerXAnchor).isActive = true
         
+        loopingButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        loopingButton.centerYAnchor.constraint(equalTo: toggleButton.centerYAnchor).isActive = true
+        
+        loopingLabel.topAnchor.constraint(equalTo: loopingButton.bottomAnchor, constant: 10).isActive = true
+        loopingLabel.centerXAnchor.constraint(equalTo: loopingButton.centerXAnchor).isActive = true
+        
         facingLabel.text = viewModel.flashlight.facingSide.name
+        loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
+        loopingLabel.alpha = loopingButton.alpha
         
         longPress = createLongGestureRecognizer()
         
@@ -158,6 +191,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             guard let self = self else { return }
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
+        
     }
     
     func handleToggleButton(state: Bool) {
@@ -173,6 +207,13 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    @objc func showInfo() {
+        if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
+            viewModel.flashlight.updateMode(mode: mode)
+            coordinator.showInfo(mode: viewModel.flashlight.mode)
+        }
+    }
+    
     func scrollToItem(indexPath: IndexPath) {
         mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
@@ -185,7 +226,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             let parser = MorseParser(message: "SOS")
             stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
             guard let stateMachine = stateMachine else { return }
-            stateMachine.loopState = viewModel.loopState
+            stateMachine.loopState = viewModel.flashlight.loop
             stateMachine.startSystemAtIdle()
         }
     }
@@ -199,7 +240,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                 let parser = MorseParser(message: viewModel.messageToFlashlight)
                 stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
                 guard let stateMachine = stateMachine else { return }
-                stateMachine.loopState = viewModel.loopState
+                stateMachine.loopState = viewModel.flashlight.loop
                 stateMachine.startSystemAtIdle()
             } else {
                 coordinator.showError(error: TextFieldError.empty)
@@ -222,6 +263,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             // toggled by handleLongPress under the gesture recogniser
             ()
         }
+        
 //        viewModel.kLightState = !viewModel.kLightState
 //        switch viewModel.flashFacingSideState {
 //            case .rear:
@@ -282,6 +324,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    @objc func handleLooping() {
+        viewModel.flashlight.loop = !viewModel.flashlight.loop
+        loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
+        loopingLabel.alpha = loopingButton.alpha
+    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         shutDownStateMachine()
@@ -292,7 +339,7 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     // Right before the state machine begins to loop.
     func willLoop() {
         guard let stateMachine = stateMachine else { return }
-        stateMachine.loopState = viewModel.loopState
+        stateMachine.loopState = viewModel.flashlight.loop
     }
     
     func willBreak() {

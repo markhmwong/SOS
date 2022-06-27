@@ -19,14 +19,19 @@ move loop/rear options to the bottom to next the flash/conversion button
 split the tipping and settings
 move tipping to the top right navigation
 
-v2.1
-loop
-information for each screen
-
-monthly subscription 
+v2.2
+add subscriptions  (revenue cat)
     - remove ads
     - save messages
     - convert morse to text
+
+v2.1
+loop @done
+information for each screen @done
+fix icons filled or not filled @done  
+include advertisement 
+ 
+circular indicator @done
 
 v2
 refactoring and new ui

@@ -55,7 +55,7 @@ class MenuBarDataSource: NSObject {
     
     private func createItems() -> [MenuItem] {
         let sosItem = MenuItem(name: "SOS", icon: "bolt.fill", section: .main)
-        let messageConversionItem = MenuItem(name: "Message", icon: "message.and.waveform", section: .main)
+        let messageConversionItem = MenuItem(name: "Message", icon: "message.and.waveform.fill", section: .main)
         let morseTextConversionItem = MenuItem(name: "Conversion", icon: "text.bubble.fill", section: .main)
         let cameraToolsItem = MenuItem(name: "Tools", icon: "hammer.fill", section: .main)
         
