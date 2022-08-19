@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TelemetryClient
+import GoogleMobileAds
 
 class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
@@ -20,6 +22,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
     private var stateMachine: MorseCodeStateMachineSystem? = nil
 
+    private var  bannerView: GADBannerView!
+    
     lazy var toggleButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
@@ -140,7 +144,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         menuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 12.5).isActive = true
         
-        mainContentCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
+        mainContentCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor, constant: 10).isActive = true
         mainContentCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         mainContentCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         mainContentCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -192,6 +196,20 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
         
+        
+        // setup ad banner
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.rootViewController = self
+        bannerView.adUnitID = AdDelivery.UnitId
+        view.addSubview(bannerView)
+        
+        bannerView.topAnchor.constraint(equalTo: toggleButton.bottomAnchor).isActive = true
+        bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        bannerView.load(GADRequest())
     }
     
     func handleToggleButton(state: Bool) {
@@ -308,15 +326,21 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             if (toggleButton.isEnabled) {
                 switch mode {
                 case .sos:
+                    TelemetryManager.send(TelemetryManager.Signal.sosToggleDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleSos()
                 case .messageConversion:
+                    TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleMessage()
                 case .tools:
+                    TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
+
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleTools()
                 case .morseConversion:
+                    TelemetryManager.send(TelemetryManager.Signal.sosMorseConversionDidFire.rawValue)
+
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     // message passed via notification center. Look up MESSAGE_TO_TEXT
                 }

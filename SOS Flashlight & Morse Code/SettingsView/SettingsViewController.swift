@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import StoreKit
+import TelemetryClient
 
 struct AppMetaData {
     static let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
@@ -49,7 +50,8 @@ class SettingsViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+        TelemetryManager.send(TelemetryManager.Signal.tipDidShow.rawValue)
+
 	}
 	
 	

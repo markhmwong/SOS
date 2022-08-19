@@ -24,6 +24,12 @@ add subscriptions  (revenue cat)
     - remove ads
     - save messages
     - convert morse to text
+telemetry deck data
+    add-id - F4D1D777-628E-4F25-98D0-6FC8604F3858
+    https://github.com/TelemetryDeck/SwiftClient
+ad banner
+new page describing telemetry deck
+revenue cat
 
 v2.1
 loop @done

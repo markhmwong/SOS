@@ -60,7 +60,14 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     
     @objc dynamic var textMessage: String = ""
     
-
+    lazy var loadMessagesButton: UIButton = {
+        let config = UIButton.Configuration.tinted()
+        let button = UIButton(configuration: config)
+        button.setTitle("Load Messages", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     init(configuration: UIContentConfiguration) {
         self.configuration = configuration
@@ -98,9 +105,15 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         messageField.topAnchor.constraint(equalTo: topAnchor).isActive = true
         messageField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         messageField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
+        loadMessagesButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        loadMessagesButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIScreen.main.bounds.height / 4).isActive = true
     }
     
     private func configure() {
+        addSubview(messageField)
+        addSubview(loadMessagesButton)
+        
         guard let config = self.configuration as? MessageConversionConfiguration else { return }
         flashlightObserver = config.mainItem.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
             guard let light = change.newValue else { return }
@@ -124,8 +137,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
             
             
         }
-        
-        addSubview(messageField)
+
         messageToolbar()
     }
     

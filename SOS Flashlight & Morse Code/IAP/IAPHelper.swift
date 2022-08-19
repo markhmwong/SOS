@@ -7,6 +7,7 @@
 //
 
 import StoreKit
+import TelemetryClient
 
 public typealias ProductIdentifier = String
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
@@ -62,6 +63,7 @@ extension IAPHelper {
   public func buyProduct(_ product: SKProduct) {
     let payment = SKPayment(product: product)
     SKPaymentQueue.default().add(payment)
+      TelemetryManager.send(TelemetryManager.Signal.tipDidPurchase.rawValue)
   }
 	
 	func stopObserving() {

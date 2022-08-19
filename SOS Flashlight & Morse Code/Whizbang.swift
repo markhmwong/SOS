@@ -11,7 +11,6 @@ import UIKit
 // Whizbang data used for all apps
 
 final class Whizbang {
-	
 	static let shared: Whizbang = Whizbang()
 	
     // Device parameters
@@ -33,4 +32,6 @@ final class Whizbang {
 	
 	static let emailSubject: String = "\(appName) App Feedback"
 	
+    static let telemetryDeckAppId: String = "F4D1D777-628E-4F25-98D0-6FC8604F3858"
+
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import StoreKit
+import TelemetryClient
 
 class TipJarViewController: UICollectionViewController {
     
@@ -28,6 +29,8 @@ class TipJarViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TelemetryManager.send(TelemetryManager.Signal.tipDidShow.rawValue)
+
         view.backgroundColor = Theme.mainBackground
         collectionView.backgroundColor = view.backgroundColor
         
