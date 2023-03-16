@@ -17,7 +17,7 @@ class AboutCoordinator: Coordinator {
 		self.navigationController = navigationController
 	}
 	
-	func start() {
+    func start(_ cds: CoreDataStack?) {
 		let vc = AboutViewController(viewModel: AboutViewModel(), coordinator: self)
 		navigationController.pushViewController(vc, animated: true)
 	}
@@ -27,9 +27,9 @@ class AboutViewModel: NSObject {
 	
 	let appDescription: String = "A simple morse code app."
 	
-	let copyright: String = "Whizbang Apps Copyright \(Calendar.current.currentYearToInt())\nPrivacy Policy - This app no longer uses Google Analytics. Looking for a new tool!\nWarning - This app contains flashing lights using the rear camera and front screen. Please stop using this app and consult a doctor if you experience lightheadedness, altered vision, eye or face twitching, jerking or shaking of arms or legs, or basically anything that you shouldn't normally experience; contrary to popular beliefs, these are not symptoms for utter joy but of photosensitive epileptic seizures. Be careful, it's serious."
+	let copyright: String = "Whizbang Apps Copyright \(Calendar.current.currentYearToInt())\nPrivacy Policy - This app uses Telemetry Deck in order for me to track app usage annonymously.\nWarning - This app contains flashing lights using the rear camera and front screen. Please stop using this app and consult a doctor if you experience lightheadedness, altered vision, eye or face twitching, jerking or shaking of arms or legs, or basically anything that you shouldn't normally experience; contrary to popular beliefs, these are not symptoms for utter joy but of photosensitive epileptic seizures. Be careful, it's serious."
 	
-	let support: String = "Twitter: @markhmwong Email: hello@whizbangapps.xyz"
+    let support: String = "Twitter: \(Whizbang.twitter)\nEmail: hello@whizbangapps.xyz"
 }
 
 class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> {
@@ -38,7 +38,7 @@ class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> 
 		let label = UILabel()
 		label.numberOfLines = 0
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().secondaryTitleAttributes(string: viewModel.appDescription)
+		label.attributedText = NSMutableAttributedString().primaryTextAttributes(string: viewModel.appDescription)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -47,7 +47,7 @@ class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> 
 		let label = UILabel()
 		label.numberOfLines = 0
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().secondaryTitleAttributes(string: viewModel.support)
+		label.attributedText = NSMutableAttributedString().primaryTextAttributes(string: viewModel.support)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -77,7 +77,17 @@ class AboutViewController: BaseViewController<AboutViewModel, AboutCoordinator> 
 		view.addSubview(supportLabel)
 		
 		descriptionLabel.anchorView(top: nil, bottom: nil, leading: nil, trailing: nil, centerY: view.centerYAnchor, centerX: view.centerXAnchor, padding: .zero, size: .zero)
-		supportLabel.anchorView(top: descriptionLabel.bottomAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: .zero, size: .zero)
-		copyrightLabel.anchorView(top: nil, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, centerY: nil, centerX: view.centerXAnchor, padding: UIEdgeInsets(top: 0.0, left: 0.0, bottom: -20.0, right: 0.0), size: .zero)
+
+        descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:5).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        descriptionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        
+        supportLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:5).isActive = true
+        supportLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        supportLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5).isActive = true
+        
+        copyrightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:20).isActive = true
+        copyrightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        copyrightLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
 	}
 }

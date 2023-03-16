@@ -21,7 +21,7 @@ class SettingsCoordinator: NSObject, Coordinator, UINavigationControllerDelegate
 		self.navigationController = navigationController
 	}
 	
-	func start() {
+    func start(_ cds: CoreDataStack?) {
 		let vc = SettingsViewController(coordinator: self, viewModel: SettingsViewModel())
 		let nav = UINavigationController(rootViewController: vc)
 		parentNavController = nav
@@ -37,7 +37,7 @@ class SettingsCoordinator: NSObject, Coordinator, UINavigationControllerDelegate
 	func showMorseCodeSheet() {
 		guard let parentNavigationController = parentNavController else { return }
 		let codeSheetCoordinator = MorseCodeSheetCoordinator(navigationController: parentNavigationController)
-		codeSheetCoordinator.start()
+		codeSheetCoordinator.start(nil)
 		childCoordinators.append(codeSheetCoordinator)
 	}
 	
@@ -50,7 +50,7 @@ class SettingsCoordinator: NSObject, Coordinator, UINavigationControllerDelegate
 	func showAboutPage() {
 		guard let parentNavigationController = parentNavController else { return }
 		let aboutCoordinator = AboutCoordinator(navigationController: parentNavigationController)
-		aboutCoordinator.start()
+		aboutCoordinator.start(nil)
 		childCoordinators.append(aboutCoordinator)
 	}
 	

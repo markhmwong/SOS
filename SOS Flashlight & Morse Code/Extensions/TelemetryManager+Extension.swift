@@ -7,6 +7,7 @@
 //
 
 import TelemetryClient
+import UIKit
 
 extension TelemetryManager {
     enum Signal: String {
@@ -27,5 +28,19 @@ extension TelemetryManager {
         case sosMorseConversionDidFire
         
         case appId = "F4D1D777-628E-4F25-98D0-6FC8604F3858"
+    }
+}
+
+extension NSNotification.Name {
+    static var showSavedMessages: Notification.Name {
+        return .init(rawValue: "message.savedMessages")
+    }
+    
+    static var showRecentMessages: Notification.Name {
+        return .init(rawValue: "message.recentMessages")
+    }
+    
+    static var saveMesage: Notification.Name {
+        return .init(rawValue: "message.save")
     }
 }

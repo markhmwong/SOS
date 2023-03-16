@@ -132,7 +132,7 @@ class FooterView: UIView {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
-		label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Copyright \(Calendar.current.currentYearToInt()) Whizbang. Build \(Whizbang.appBuild), Version \(Whizbang.appVersion).")
+        label.attributedText = NSMutableAttributedString().tertiaryTitleAttributes(string: "Made In \(Whizbang.madeInMelb)")
 		return label
 	}()
 	

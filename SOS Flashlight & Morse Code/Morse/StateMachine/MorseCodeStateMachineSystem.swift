@@ -126,6 +126,3 @@ class MorseCodeStateMachineSystem {
 		expires = Date().addingTimeInterval(time)
 	}
 }
-
-
-

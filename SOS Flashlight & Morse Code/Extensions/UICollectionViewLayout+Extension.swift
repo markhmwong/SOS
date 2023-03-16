@@ -54,7 +54,7 @@ extension UICollectionViewLayout {
         section.visibleItemsInvalidationHandler = { (items, offset, environment) in
           items.forEach { item in
               let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
-              let minScale: CGFloat = 0.6
+              let minScale: CGFloat = 1.0
               let maxScale: CGFloat = 1.0
               let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
               item.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -63,38 +63,6 @@ extension UICollectionViewLayout {
           }
         }
         let layout = UICollectionViewCompositionalLayout(section: section, configuration: config)
-        
-//        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-//            let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: cellHeight)
-//
-//            let item = NSCollectionLayoutItem(layoutSize: size)
-//            item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: NSCollectionLayoutSpacing.fixed(0), top: NSCollectionLayoutSpacing.fixed(0), trailing: NSCollectionLayoutSpacing.fixed(0), bottom: NSCollectionLayoutSpacing.fixed(0))
-//            item.contentInsets = itemSpace
-//
-//            let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
-//            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-//            group.interItemSpacing = NSCollectionLayoutSpacing.fixed(10)
-//
-//            let section = NSCollectionLayoutSection(group: group)
-//            section.orthogonalScrollingBehavior = .groupPaging
-//            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-//            section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-//                  items.forEach { item in
-//                      let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//                      let minScale: CGFloat = 0.8
-//                      let maxScale: CGFloat = 1.0
-//                      let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//                      item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//                  }
-//                }
-//            if (header && sectionIndex == 0 && elementKind != "") {
-//                let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80.0))
-//                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: elementKind, alignment: .top)
-//                section.boundarySupplementaryItems = [header]
-//            }
-//
-//            return section
-//        }
         return layout
     }
     
@@ -129,5 +97,14 @@ extension UICollectionViewLayout {
             return section
         }
         return layout
+    }
+    
+    func createCollectionViewListWithSwipe(appearance: UICollectionLayoutListConfiguration.Appearance, swipe: @escaping UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider) -> UICollectionViewCompositionalLayout {
+        var listConfig = UICollectionLayoutListConfiguration(appearance: appearance)
+        listConfig.showsSeparators = false
+        listConfig.headerMode = .none
+        listConfig.headerTopPadding = 10.0
+        listConfig.trailingSwipeActionsConfigurationProvider = swipe
+        return UICollectionViewCompositionalLayout.list(using: listConfig)
     }
 }

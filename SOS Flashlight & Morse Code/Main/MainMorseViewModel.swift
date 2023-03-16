@@ -10,12 +10,6 @@ import UIKit
 
 class MainMorseViewModel: NSObject {
     
-    // cells
-    // sos
-    // morse code message conversion
-    // morse code text conversion
-    // camera tools
-    
     enum Section {
         case main
     }
@@ -79,7 +73,10 @@ class MainMorseViewModel: NSObject {
     
     var nc = NotificationCenter.default
     
-    override init() {
+    var cds: CoreDataStack
+    
+    init(cds: CoreDataStack) {
+        self.cds = cds
         self.currIndex = 0
 //        self.currState = MorseCodeMode.init(rawValue: currIndex) ?? MorseCodeMode.kMessage
 

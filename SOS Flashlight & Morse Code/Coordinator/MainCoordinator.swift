@@ -19,10 +19,11 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 		self.navigationController = navigationController
 	}
 	
-	func start() {
+    func start(_ cds: CoreDataStack?) {
+        guard let cds = cds else { return }
 		navigationController.delegate = self
         
-        let vm = MainMorseViewModel()
+        let vm = MainMorseViewModel(cds: cds)
         let vc = MainMorseViewController(viewModel: vm, coordinator: self)
         rootViewController = vc
         
@@ -42,13 +43,13 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 	
 	@objc func showSettings() {
 		let coordinator = SettingsCoordinator(navigationController: navigationController)
-		coordinator.start()
+		coordinator.start(nil)
 		childCoordinators.append(coordinator)
 	}
     
     @objc func showTipJar() {
         let coordinator = TipJarCoordinator(navigationController: navigationController)
-        coordinator.start()
+        coordinator.start(nil)
         childCoordinators.append(coordinator)
     }
     
@@ -92,6 +93,22 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 			//
 		}
 	}
+    
+    func showSavedMessages(cds: CoreDataStack) {
+        let vm = SavedMessagesViewModel(cds: cds)
+        let vc = SavedMessagesViewController(vm: vm, coordinator: self)
+        let nav = UINavigationController(rootViewController: vc)
+        vc.title = "Saved Messages"
+        navigationController.present(nav, animated: true)
+    }
+    
+    func showRecentMessages(cds: CoreDataStack) {
+        let vm = RecentMessagesViewModel(cds: cds)
+        let vc = RecentMessagesViewController(vm: vm, coordinator: self)
+        let nav = UINavigationController(rootViewController: vc)
+        vc.title = "Recent Messages"
+        navigationController.present(nav, animated: true)
+    }
 	
 	func dismiss() {
 		navigationController.dismiss(animated: true, completion: nil)

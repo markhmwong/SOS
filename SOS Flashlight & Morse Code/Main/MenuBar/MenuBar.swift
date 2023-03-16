@@ -1,9 +1,8 @@
 //
 //  MenuBar.swift
-//  SOS Flashlight & Morse Code
+//  Marquee
 //
-//  Created by Mark Wong on 19/6/2022.
-//  Copyright © 2022 Mark Wong. All rights reserved.
+//  Created by Mark Wong on 9/10/2022.
 //
 
 import UIKit
@@ -83,9 +82,5 @@ class MenuBar: UIView, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.parentViewController.scrollToItem(indexPath: indexPath)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
     }
 }

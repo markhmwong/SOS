@@ -34,4 +34,7 @@ final class Whizbang {
 	
     static let telemetryDeckAppId: String = "F4D1D777-628E-4F25-98D0-6FC8604F3858"
 
+    static let madeInMelb: String = "Melbourne, Australia"
+    
+    static let twitter: String = "@_whizbangapps"
 }

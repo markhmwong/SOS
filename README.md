@@ -19,6 +19,10 @@ move loop/rear options to the bottom to next the flash/conversion button
 split the tipping and settings
 move tipping to the top right navigation
 
+v2.1.24
+High Contrast accessibility
+Korean
+
 v2.2
 add subscriptions  (revenue cat)
     - remove ads

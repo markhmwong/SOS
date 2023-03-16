@@ -83,7 +83,7 @@ class Flashlight: NSObject {
     func toggleTorch(on: Bool, side: FlashFacingSide = .rear) {
         self.lightSwitch = on
         
-        if side == .rear {
+        if side == FlashFacingSide.rear {
             guard let device = AVCaptureDevice.default(for: .video) else { return }
 
             if device.hasTorch {

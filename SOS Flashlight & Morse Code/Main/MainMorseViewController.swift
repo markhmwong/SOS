@@ -95,8 +95,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func handleSavedMessages() {
+        coordinator.showSavedMessages(cds: self.viewModel.cds)
+    }
+    
+    @objc func handleRecentMessages() {
+        coordinator.showRecentMessages(cds: self.viewModel.cds)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
         let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
         settings.tintColor = UIColor.defaultText
         navigationItem.leftBarButtonItem = settings
@@ -104,13 +114,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let info = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(showInfo))
         info.tintColor = UIColor.defaultText
         navigationItem.rightBarButtonItems = [tipJar, info]
-
+        AppStoreReviewManager.requestReviewIfAppropriate()
         self.setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AppStoreReviewManager.requestReviewIfAppropriate()
         viewModel.flashlight.toggleTorch(on: false)
     }
     
@@ -250,7 +259,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func toggleMessage() {
-        
+        // save message to core data in the recent object
         if (stateMachine != nil) {
             shutDownStateMachine()
         } else {
@@ -265,6 +274,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                 ImpactFeedbackService.shared.failedFeedback()
             }
         }
+        
+        guard let moc = viewModel.cds.moc else { return }
+        let r = Recent(context: moc)
+        // id and date are default values in the function argument array
+        r.newRecentObj(value: viewModel.messageToFlashlight)
+        viewModel.cds.saveContext()
     }
     
     // binary state
@@ -333,9 +348,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                     TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleMessage()
+                    viewModel.cds.limitRecentMessages()
                 case .tools:
                     TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
-
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleTools()
                 case .morseConversion:

@@ -168,7 +168,7 @@ class MorseCodeSheetCoordinator: Coordinator {
 		self.navigationController = navigationController
 	}
 	
-	func start() {
+    func start(_ cds: CoreDataStack?) {
 		let vc = MorseCodeSheetViewController(viewModel: MorseCodeSheetViewModel(), coordinator: self)
 		navigationController.pushViewController(vc, animated: true)
 	}

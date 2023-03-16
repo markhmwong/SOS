@@ -19,7 +19,7 @@ class TipJarCoordinator: NSObject, Coordinator {
         super.init()
     }
     
-    func start() {
+    func start(_ cds: CoreDataStack?) {
         let vm = TipJarViewModel()
         let vc = TipJarViewController(viewModel: vm, coordinator: self)
         let nav = UINavigationController(rootViewController: vc)

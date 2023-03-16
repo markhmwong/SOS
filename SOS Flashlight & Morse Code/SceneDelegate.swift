@@ -14,6 +14,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 
+    var cds: CoreDataStack = CoreDataStack.shared
+    
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -28,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
 		let nav = UINavigationController()
 		let coordinator = MainCoordinator(navigationController: nav)
-		coordinator.start()
+		coordinator.start(cds)
 		window?.rootViewController = nav
 		window?.windowScene = windowScene
         
@@ -47,6 +49,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 
 	func sceneDidBecomeActive(_ scene: UIScene) {
+        let ads = AdService()
+        ads.requestPermission()
         TelemetryManager.send(TelemetryManager.Signal.appDidBecomeActive.rawValue)
 	}
 

@@ -14,7 +14,9 @@ typealias Letter = Character
 typealias State = Events & Activities
 
 struct Transition {
+    
 	var targetState: State
+    
 	var effect: Effect?
 	
 	typealias Effect = (MorseCodeStateMachineSystem) -> Void
@@ -22,12 +24,19 @@ struct Transition {
 
 // Triggers at certain parts of the State Machine. This might seem it supercedes the State Machine itself, in the manner that it tracks the machine as it palys out, however this tracking is needed to interface with the viewcontroller and in turn update the view.
 protocol MorseStateMachineSystemDelegate {
+    
 	func start()
+    
 	func willBreak()
+    
 	func willFlash(type: MorseType)
+    
 	func didFlash(type: MorseType)
+    
 	func didEnd()
+    
 	func willLoop()
+    
 }
 
 protocol Events {
