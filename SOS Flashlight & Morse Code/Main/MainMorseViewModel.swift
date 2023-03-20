@@ -10,6 +10,8 @@ import UIKit
 
 class MainMorseViewModel: NSObject {
     
+    
+    
     enum Section {
         case main
     }
@@ -49,6 +51,8 @@ class MainMorseViewModel: NSObject {
     
     let flashlight = Flashlight()
     
+    var sosLock: Bool = false
+    
     // used for custom morse message to delivery via the flash light
     var messageToFlashlight: String = ""
     
@@ -62,8 +66,8 @@ class MainMorseViewModel: NSObject {
     
     var buttonToggleState: Bool = true {
         didSet {
-            mainMorseViewController.toggleButton.isEnabled = buttonToggleState
-            mainMorseViewController.toggleButton.alpha = mainMorseViewController.toggleButton.isEnabled ? 1.0 : 0.1
+            mainMorseViewController.mainToggleButton.isEnabled = buttonToggleState
+            mainMorseViewController.mainToggleButton.alpha = mainMorseViewController.mainToggleButton.isEnabled ? 1.0 : 0.1
         }
     }
     
@@ -128,5 +132,4 @@ class MainMorseViewModel: NSObject {
         }
         return items
     }
-
 }

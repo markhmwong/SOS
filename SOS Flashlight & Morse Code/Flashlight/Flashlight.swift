@@ -58,8 +58,12 @@ class Flashlight: NSObject {
     var mode: MainMorseViewModel.FlashLightMode = .sos {
         didSet {
             print(mode)
+            observableMode = mode.rawValue
         }
     }
+    
+    @objc dynamic var observableMode: Int = 0
+
     
     var toolMode: ToolLightMode = .toggle {
         didSet {

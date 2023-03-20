@@ -24,10 +24,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
     private var  bannerView: GADBannerView!
     
-    lazy var toggleButton: UIButton = {
+    lazy var mainToggleButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
-        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 20, weight: .bold, scale: .large)
+        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 27, weight: .bold, scale: .large)
         let image = UIImage(systemName: "bolt.circle.fill", withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .defaultText
@@ -36,11 +36,20 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         return button
     }()
     
+    lazy var holdToLockLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Hold to lock"
+        label.layer.opacity = 0.0
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        return label
+    }()
+    
     lazy var facingButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleFacingSide), for: .touchDown)
-        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 50, weight: .bold, scale: .large)
-        let image = UIImage(systemName: "arrow.triangle.2.circlepath", withConfiguration: config)
+        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
+        let image = UIImage(systemName: "square.bottomhalf.filled", withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .defaultText
         button.backgroundColor = .clear
@@ -51,7 +60,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     lazy var facingLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Front"
+        label.text = "Front" // front or rear
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textColor = UIColor.defaultText
         return label
@@ -60,13 +69,35 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     lazy var loopingButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleLooping), for: .touchDown)
-        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 50, weight: .bold, scale: .large)
+        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
         let image = UIImage(systemName: "arrow.triangle.2.circlepath", withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .defaultText
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+//    lazy var lockButton: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(handleLock), for: .touchDown)
+//        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
+//        let image = UIImage(systemName: "lock.fill", withConfiguration: config)
+//        button.setImage(image, for: .normal)
+//        button.tintColor = .defaultText
+//        button.backgroundColor = .clear
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
+    lazy var lockImage: UIImageView = {
+        let symbolConfig: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body))
+        let image: UIImage = UIImage(systemName: "lock.fill",withConfiguration: symbolConfig)!
+        let imageView: UIImageView = UIImageView(image: image)
+        imageView.tintColor = .systemOrange
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.opacity = 0.0
+        return imageView
     }()
     
     lazy var loopingLabel: UILabel = {
@@ -80,7 +111,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
     var longPress: UILongPressGestureRecognizer! =  nil
     
+    var lockGesture: UILongPressGestureRecognizer! =  nil
+
     private var toolModeObserver: NSKeyValueObservation? = nil
+
+    private var modeObserver: NSKeyValueObservation? = nil
 
     private var facingSideObserver: NSKeyValueObservation? = nil
 
@@ -103,6 +138,34 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         coordinator.showRecentMessages(cds: self.viewModel.cds)
     }
     
+    func handleLock() {
+        viewModel.sosLock = !viewModel.sosLock
+        loopingButton.isEnabled = !loopingButton.isEnabled
+        facingButton.isEnabled = loopingButton.isEnabled
+        
+        if viewModel.sosLock {
+            DispatchQueue.main.async {
+                self.lockImage.layer.opacity = 1.0
+                self.facingLabel.layer.opacity = 1.0
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.lockImage.layer.opacity = 0.4
+                self.facingLabel.layer.opacity = 0.4
+            }
+            
+        }
+       
+        mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
+        
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.setupUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
@@ -115,7 +178,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         info.tintColor = UIColor.defaultText
         navigationItem.rightBarButtonItems = [tipJar, info]
         AppStoreReviewManager.requestReviewIfAppropriate()
-        self.setupUI()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -142,11 +205,19 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.backgroundColor = UIColor.mainBackground
         view.addSubview(mainContentCollectionView)
         view.addSubview(menuBar)
-        view.addSubview(toggleButton)
+        view.addSubview(mainToggleButton)
         view.addSubview(facingButton)
         view.addSubview(facingLabel)
         view.addSubview(loopingButton)
         view.addSubview(loopingLabel)
+        view.addSubview(lockImage)
+        view.addSubview(holdToLockLabel)
+
+        holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -70).isActive = true
+        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+        
+        lockImage.bottomAnchor.constraint(equalTo: mainToggleButton.topAnchor, constant: 0).isActive = true
+        lockImage.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
         
         menuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -160,19 +231,19 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         
         viewModel.configureDataSource(collectionView: mainContentCollectionView)
         
-        toggleButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
-        toggleButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        toggleButton.contentEdgeInsets = UIEdgeInsets(top: 25.0, left: 15.0, bottom: 25.0, right: 15.0)
-        toggleButton.layer.cornerRadius = toggleButton.bounds.height / 3
+        mainToggleButton.bottomAnchor.constraint(equalTo: holdToLockLabel.topAnchor, constant: 0).isActive = true
+        mainToggleButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        mainToggleButton.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
+        mainToggleButton.layer.cornerRadius = mainToggleButton.bounds.height / 3
         
         facingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        facingButton.centerYAnchor.constraint(equalTo: toggleButton.centerYAnchor).isActive = true
+        facingButton.centerYAnchor.constraint(equalTo: mainToggleButton.centerYAnchor).isActive = true
         
         facingLabel.topAnchor.constraint(equalTo: facingButton.bottomAnchor, constant: 10).isActive = true
         facingLabel.centerXAnchor.constraint(equalTo: facingButton.centerXAnchor).isActive = true
         
         loopingButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        loopingButton.centerYAnchor.constraint(equalTo: toggleButton.centerYAnchor).isActive = true
+        loopingButton.centerYAnchor.constraint(equalTo: mainToggleButton.centerYAnchor).isActive = true
         
         loopingLabel.topAnchor.constraint(equalTo: loopingButton.bottomAnchor, constant: 10).isActive = true
         loopingLabel.centerXAnchor.constraint(equalTo: loopingButton.centerXAnchor).isActive = true
@@ -181,7 +252,26 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
         loopingLabel.alpha = loopingButton.alpha
         
+        //gestures
         longPress = createLongGestureRecognizer()
+        lockGesture = createLockGestureRecognizer()
+        
+        // handle the gesture recogniser when the tool mode is pressed
+        modeObserver = viewModel.flashlight.observe(\.observableMode, options: [.new]) { [weak self] flashlight, change in
+            guard let newValue = change.newValue else { return }
+            guard let self = self else { return }
+            let mode = MainMorseViewModel.FlashLightMode.init(rawValue: newValue)
+            
+            switch mode {
+            case .sos:
+                self.mainToggleButton.addGestureRecognizer(self.lockGesture)
+            case .tools, .messageConversion, .morseConversion:
+                self.mainToggleButton.removeGestureRecognizer(self.lockGesture)
+            case .none:
+                ()
+            }
+        }
+        
         
         // handle the gesture recogniser when the tool mode is pressed
         toolModeObserver = viewModel.flashlight.observe(\.observableToolMode, options: [.new]) { [weak self] flashlight, change in
@@ -191,14 +281,15 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             
             switch mode {
             case .hold:
-                self.toggleButton.addGestureRecognizer(self.longPress)
+                self.mainToggleButton.addGestureRecognizer(self.longPress)
             case .toggle:
-                self.toggleButton.removeGestureRecognizer(self.longPress)
+                self.mainToggleButton.removeGestureRecognizer(self.longPress)
             case .none:
                 ()
             }
         }
         
+        // switch between front and rear text for the labele
         facingSideObserver = viewModel.flashlight.observe(\.observableFacingSide, options: [.new], changeHandler: { [weak self] flashlight, change in
             guard let newValue = change.newValue else { return }
             guard let self = self else { return }
@@ -213,16 +304,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         bannerView.adUnitID = AdDelivery.UnitId
         view.addSubview(bannerView)
         
-        bannerView.topAnchor.constraint(equalTo: toggleButton.bottomAnchor).isActive = true
+        bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
         bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         bannerView.load(GADRequest())
-    }
-    
-    func handleToggleButton(state: Bool) {
-        viewModel.buttonToggleState = state
     }
     
     @objc func handleFacingSide() {
@@ -242,11 +329,15 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func scrollToItem(indexPath: IndexPath) {
-        mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: indexPath.item) {
+            viewModel.flashlight.updateMode(mode: mode)
+            mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+
     }
     
     // MARK: - Toggle Light whether it's by a short burst SOS, a Message, a switch or hold
-    func toggleSos() {
+    private func toggleSos() {
         if (stateMachine != nil) {
             shutDownStateMachine()
         } else {
@@ -307,11 +398,27 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 //        }
     }
     
+    func createLockGestureRecognizer() -> UILongPressGestureRecognizer {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLockGesture))
+        gesture.minimumPressDuration = 1.5
+        gesture.delaysTouchesBegan = true
+        return gesture
+    }
+    
+    @objc func handleLockGesture(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            print("began")
+            print("lock gesture")
+            self.handleLock()
+        }
+    }
+    
     func createLongGestureRecognizer() -> UILongPressGestureRecognizer {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         gesture.minimumPressDuration = 0.01
         return gesture
     }
+    
     
     private var longPressGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer(target: MainMorseViewController.self, action: #selector(handleLongPress))
@@ -338,12 +445,17 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
             viewModel.flashlight.updateMode(mode: mode)
             
-            if (toggleButton.isEnabled) {
+            if (mainToggleButton.isEnabled) {
                 switch mode {
                 case .sos:
-                    TelemetryManager.send(TelemetryManager.Signal.sosToggleDidFire.rawValue)
-                    ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-                    toggleSos()
+                    print("handle locked mode here with viewmodel variable to keep state")
+                    print("\(viewModel.sosLock) sosLock")
+                    if !viewModel.sosLock {
+                        TelemetryManager.send(TelemetryManager.Signal.sosToggleDidFire.rawValue)
+                        ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
+                        toggleSos()
+                    }
+                    
                 case .messageConversion:
                     TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
@@ -367,6 +479,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         viewModel.flashlight.loop = !viewModel.flashlight.loop
         loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
         loopingLabel.alpha = loopingButton.alpha
+        
+        if viewModel.flashlight.loop {
+            if viewModel.flashlight.mode == .sos {
+                mainToggleButton.addGestureRecognizer(lockGesture)
+            }
+            lockImage.layer.opacity = 0.4
+            holdToLockLabel.layer.opacity = 0.4
+        } else {
+            lockImage.layer.opacity = 0.0
+            holdToLockLabel.layer.opacity = 0.0
+            mainToggleButton.removeGestureRecognizer(lockGesture)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

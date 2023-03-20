@@ -32,6 +32,10 @@ extension TelemetryManager {
 }
 
 extension NSNotification.Name {
+    static var screenLock: Notification.Name {
+        return .init(rawValue: "screen.lock")
+    }
+    
     static var showSavedMessages: Notification.Name {
         return .init(rawValue: "message.savedMessages")
     }

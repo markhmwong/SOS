@@ -36,6 +36,18 @@ class SosView: UIView, UIContentView {
 
     private var flashlightObserver: NSKeyValueObservation?
 
+//    lazy var lockButton: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(handleLock), for: .touchDown)
+//        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
+//        let image = UIImage(systemName: "lock.fill", withConfiguration: config)
+//        button.setImage(image, for: .normal)
+//        button.tintColor = .defaultText
+//        button.backgroundColor = .clear
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+//
     init(configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
@@ -71,6 +83,11 @@ class SosView: UIView, UIContentView {
     }
     
     private func configure() {
+//        self.addSubview(lockButton)
+        
+//        lockButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        lockButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        
         guard let config = self.configuration as? SosItemConfiguration else { return }
         flashlightObserver = config.mainItem.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
             guard let light = change.newValue else { return }
@@ -93,6 +110,10 @@ class SosView: UIView, UIContentView {
                 
             }
         }
+    }
+    
+    @objc func handleLock() {
+        NotificationCenter.default.post(name: .screenLock, object: nil)
     }
     
     deinit {
