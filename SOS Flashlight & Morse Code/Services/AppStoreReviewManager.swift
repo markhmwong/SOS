@@ -8,34 +8,57 @@
 
 import StoreKit
 
+
+extension UIApplication {
+    var foregroundActiveScene: UIWindowScene? {
+        connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+    }
+}
+
 enum AppStoreReviewManager {
-    static let minimumReviewWorthyActionCount = 5
+    static let minimumReviewWorthyActionCount = 3
     
-    static func requestReviewIfAppropriate() {
+    private static func requestReview() {
+        if #available(iOS 14.0, *) {
+            if let scene = UIApplication.shared.foregroundActiveScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        } else {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
+    private static func isNewVersion() -> Bool {
         let defaults = UserDefaults.standard
         let bundle = Bundle.main
         var actionCount = defaults.integer(forKey: .reviewWorthyActionCount)
         actionCount += 1
+        #if DEBUG
+        print("\(actionCount) reviewCount")
+        #endif
         defaults.set(actionCount, forKey: .reviewWorthyActionCount)
 
         guard actionCount >= minimumReviewWorthyActionCount else {
-            return
+            return false
         }
-
+        
         let bundleVersionKey = kCFBundleVersionKey as String
         let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
         let lastVersion = defaults.string(forKey: .lastReviewRequestAppVersion)
-        
-
         guard lastVersion == nil || lastVersion != currentVersion else {
-            return
+            return false
         }
-
-        SKStoreReviewController.requestReview()
         
-
         defaults.set(0, forKey: .reviewWorthyActionCount)
         defaults.set(currentVersion, forKey: .lastReviewRequestAppVersion)
+        return true
+    }
+    
+    static func requestReviewIfAppropriate() {
+//        if isNewVersion() {
+            requestReview()
+//        }
     }
 }
 

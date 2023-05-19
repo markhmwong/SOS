@@ -138,27 +138,29 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         coordinator.showRecentMessages(cds: self.viewModel.cds)
     }
     
+    
+    
     func handleLock() {
         viewModel.sosLock = !viewModel.sosLock
         loopingButton.isEnabled = !loopingButton.isEnabled
         facingButton.isEnabled = loopingButton.isEnabled
-        
+
         if viewModel.sosLock {
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.lockImage.layer.opacity = 1.0
                 self.facingLabel.layer.opacity = 1.0
-            }
+//            }
             
         } else {
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.lockImage.layer.opacity = 0.4
                 self.facingLabel.layer.opacity = 0.4
-            }
+//            }
             
         }
-       
+
         mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
-        
+        mainContentCollectionView.isUserInteractionEnabled = loopingButton.isEnabled
     }
     
     override func loadView() {
@@ -168,6 +170,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainContentCollectionView.isDirectionalLockEnabled = false
+        mainContentCollectionView.isScrollEnabled = false
+        mainContentCollectionView.showsVerticalScrollIndicator = false
+        mainContentCollectionView.showsHorizontalScrollIndicator = false
         NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
         let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
@@ -177,13 +183,14 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let info = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(showInfo))
         info.tintColor = UIColor.defaultText
         navigationItem.rightBarButtonItems = [tipJar, info]
-        AppStoreReviewManager.requestReviewIfAppropriate()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.flashlight.toggleTorch(on: false)
+        
+        // Review must be declared here or it will not show
+        AppStoreReviewManager.requestReviewIfAppropriate()
     }
     
     @objc func showSettings() {
@@ -199,9 +206,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout().fullScreenLayoutWithHorizontalBar(itemSpace: .zero, groupSpacing: .zero, cellHeight: NSCollectionLayoutDimension.fractionalHeight(1.0), menuBar: menuBar))
         mainContentCollectionView.translatesAutoresizingMaskIntoConstraints = false
         mainContentCollectionView.backgroundColor = UIColor.mainBackground
-        mainContentCollectionView.isScrollEnabled = true
         mainContentCollectionView.delegate = self
-
+        
         view.backgroundColor = UIColor.mainBackground
         view.addSubview(mainContentCollectionView)
         view.addSubview(menuBar)
@@ -213,7 +219,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(lockImage)
         view.addSubview(holdToLockLabel)
 
-        holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -70).isActive = true
+        var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        holdToLockLabelConstraint.constant = -70
+        holdToLockLabelConstraint.isActive = true
+
         holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
         
         lockImage.bottomAnchor.constraint(equalTo: mainToggleButton.topAnchor, constant: 0).isActive = true
@@ -228,7 +237,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         mainContentCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         mainContentCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
+
         viewModel.configureDataSource(collectionView: mainContentCollectionView)
         
         mainToggleButton.bottomAnchor.constraint(equalTo: holdToLockLabel.topAnchor, constant: 0).isActive = true
@@ -298,18 +307,24 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         
         
         // setup ad banner
-        bannerView = GADBannerView(adSize: GADAdSizeBanner)
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        bannerView.rootViewController = self
-        bannerView.adUnitID = AdDelivery.UnitId
-        view.addSubview(bannerView)
-        
-        bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
-        bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        bannerView.load(GADRequest())
+        if let bool = KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) {
+            if !bool {
+                bannerView = GADBannerView(adSize: GADAdSizeBanner)
+                bannerView.translatesAutoresizingMaskIntoConstraints = false
+                bannerView.rootViewController = self
+                bannerView.adUnitID = AdDelivery.UnitId
+                view.addSubview(bannerView)
+                
+                bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
+                bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+                bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+                bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+                
+                bannerView.load(GADRequest())
+            } else {
+                holdToLockLabelConstraint.constant = -15
+            }
+        }
     }
     
     @objc func handleFacingSide() {
