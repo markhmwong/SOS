@@ -28,11 +28,21 @@ extension NSMutableAttributedString {
 	}
 	
 	func tertiaryTitleAttributes(string: String) -> NSMutableAttributedString {
-		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b4).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b5).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
 	}
+	
+	
 	
 	func primaryTextAttributes(string: String) -> NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b0).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+	}
+	
+	func secondaryTextAttributes(string: String) -> NSMutableAttributedString {
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b3).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+	}
+	
+	func flashButtonTextAttributes(string: String) -> NSMutableAttributedString {
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b0).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor.adjust(by: -100.0)!])
 	}
 	
 	func startButtonAttributes(string: String) -> NSMutableAttributedString {
@@ -45,6 +55,19 @@ extension NSMutableAttributedString {
 	}
 	
 	//MARK: - CELL
+	func primaryCellTextAttributes(string: String) -> NSMutableAttributedString {
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Bold, size: Theme.Font.FontSize.Standard(.b1).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+	}
+	
+	func secondaryCellTextAttributes(string: String) -> NSMutableAttributedString {
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b2).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+	}
+	
+	func tertiaryCellTextAttributes(string: String) -> NSMutableAttributedString {
+		return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.init(name: Theme.Font.Regular, size: Theme.Font.FontSize.Standard(.b3).value)!, NSAttributedString.Key.foregroundColor: Theme.Font.DefaultColor])
+	}
+	
+	//	quaternary
 	func cellTitleAttributes(string: String) -> NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: cellTitleProperties())
 	}
@@ -52,8 +75,6 @@ extension NSMutableAttributedString {
 	func cellTitlePlaceholderAttributes(string: String) -> NSMutableAttributedString {
 		return NSMutableAttributedString(string: string, attributes: cellTitlePlaceHolderProperties())
 	}
-	
-
 	
 	//MARK: - TIMER
 	func timeAttributes(string: String) -> NSMutableAttributedString {

@@ -12,8 +12,8 @@ import Foundation
 struct Idle: State {
 	let stateName: String = "Idle"
 	
-	func enter(_: MorseStateMachineSystem) {
-//		print("did enter idle state")
+	func enter(_: MorseCodeStateMachineSystem) {
+		
 	}
 	
 	func characterExists(exists: Bool) -> Transition? {
@@ -26,6 +26,7 @@ struct Idle: State {
 	}	
 }
 
+// Read state, put the machine into read only mode, reading the next character in the
 struct Read: State {
 	let stateName: String = "Read"
 	func character(type: MorseType) -> Transition? {
@@ -34,6 +35,7 @@ struct Read: State {
 	}
 }
 
+// A break to help determine and classify one character
 struct Break: State {
 	let stateName: String = "Break"
 
@@ -47,6 +49,7 @@ struct Break: State {
 	}
 }
 
+// A state to toggle the flash
 struct Flash: State {
 	let stateName: String = "Flash"
 
@@ -55,10 +58,13 @@ struct Flash: State {
 	}
 }
 
+// Completion State and end of timer
 struct End: State {
 	let stateName: String = "End"
-
+	func exit(_: MorseCodeStateMachineSystem) {
+		// this should be end
+	}
 	func end() {
-//		print("end")
+		// Do nothing
 	}
 }

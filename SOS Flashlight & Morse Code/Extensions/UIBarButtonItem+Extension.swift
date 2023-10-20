@@ -24,4 +24,21 @@ extension UIBarButtonItem {
         return menuBarItem
     }
 	
+	func settingsButton(target: Any?, action: Selector) -> UIBarButtonItem {
+//		let button = UIButton(type: .system)
+//		button.setImage(UIImage(systemName: "gearshape.2.fill"), for: .normal)
+//		button.addTarget(target, action: action, for: .touchUpInside)
+//		button.tintColor = Theme.Font.DefaultColor
+        return UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: nil, action: nil)
+//		return UIBarButtonItem(customView: button)
+	}
+    
+    func tipJarButton(target: Any?, action: Selector) -> UIBarButtonItem {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "gift.fill"), for: .normal)
+        button.addTarget(target, action: action, for: .touchUpInside)
+        button.tintColor = UIColor.systemOrange
+        return UIBarButtonItem(customView: button)
+    }
+	
 }

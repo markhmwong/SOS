@@ -9,6 +9,7 @@
 import Foundation
 
 // Parses the message to detect whether to flash a dot or ddash
+// Contains the message itself
 class MorseParser: NSObject {
 	
 	private let message: [Character]
@@ -40,20 +41,20 @@ class MorseParser: NSObject {
 				convertedMessage.append(MorseType.breakBetweenLetters.letter)
 			}
 		}
-		print("convertedMessage \(convertedMessage)")
 	}
 	
 	func popCharacter() {
 		convertedMessage.removeFirst()
 	}
 	
-	// to do - return morse type
+	// return the converted morse type.
 	func readNextCharacter() -> MorseType {
 		// won't need the loop once we use the timer
 		// we'll read the array every unit of time
 		return dotOrDash(character: convertedMessage.first)
 	}
 	
+	// convert letter
 	private func dotOrDash(character c: Character?) -> MorseType {
 		guard let c = c else {
 			return .none
@@ -86,8 +87,9 @@ class MorseParser: NSObject {
 	}
 	
 	// remove characters representing time for in between letters
+	// these are not letters of the english language adn are placed during coversion to notify the parser the correct unit of time
+	// by removing these, it allows the user to see the correct message in only english letters
 	func removeErroneousCharacters() -> [Character] {
-		print(convertedMessage)
 		return convertedMessage.filter { (ch) -> Bool in
 			return ch != MorseType.breakBetweenLetters.letter
 		}.filter { (ch) -> Bool in
