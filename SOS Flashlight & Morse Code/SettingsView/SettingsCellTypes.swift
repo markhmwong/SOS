@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import RevenueCat
 
 protocol SettingsRowHashable {
 	var name: String { get set }
@@ -24,18 +25,29 @@ struct SettingsTip: Hashable, SettingsRowHashable {
 
 struct SettingsMain: Hashable, SettingsRowHashable {
 	var name: String
-	var detail: String?
+	var detail: String? = nil
 	var section: SettingsSection
+    //var package: Package? = nil
+}
+
+// currently used for ads
+struct SettingsIAP: Hashable, SettingsRowHashable {
+    var name: String
+    var detail: String?
+    var section: SettingsSection
+    var package: Package? = nil
 }
 
 enum SettingsSection: Int, CaseIterable {
-
+    case noAds
 	case main
-	
+    
 	var cellId: String {
 		switch self {
-			case .main:
-				return "mainCell"
+        case .main:
+            return "mainCell"
+        case .noAds:
+            return "iapCell"
 		}
 	}
 }
@@ -137,9 +149,41 @@ class SettingsTipCell: UITableViewCell {
 }
 
 //MARK: Main Cell
-class SettingsMainCell: UITableViewCell {
+class SettingsMainCell: UITableViewCell, SettingsMainCellIAP {
+
+    func activityIndicatorEnable() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    func activityIndicatorDisable() {
+        activityIndicatorView.stopAnimating()
+    }
+    
+    func initialiseActivityView() {
+        activityIndicatorView = UIActivityIndicatorView(style: .medium)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(activityIndicatorView)
+        self.activityIndicatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        self.activityIndicatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        
+        self.contentView.addSubview(priceLabel)
+        self.priceLabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor).isActive = true
+        self.priceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+    
+    internal var activityIndicatorView: UIActivityIndicatorView! = nil
+    
+    internal lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: .body).with(weight: .bold)
+        return label
+    }()
+    
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        
 	}
 	
 	required init?(coder: NSCoder) {
@@ -147,4 +191,20 @@ class SettingsMainCell: UITableViewCell {
 	}
 }
 
+protocol SettingsMainCellIAP {
+    var activityIndicatorView: UIActivityIndicatorView! { get }
+    var priceLabel: UILabel { get }
+    func initialiseActivityView()
+    func activityIndicatorEnable()
+    func activityIndicatorDisable()
+}
 
+extension SettingsMainCellIAP {
+    private var cellPriceLabel: UILabel! {
+        return nil
+    }
+
+    var priceLabel: UILabel! {
+        return cellPriceLabel
+    }
+}

@@ -9,6 +9,7 @@ import UIKit
 import StoreKit
 import TelemetryClient
 
+
 class TipJarViewController: UICollectionViewController {
     
     private var viewModel: TipJarViewModel
@@ -39,7 +40,7 @@ class TipJarViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem = right
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Theme.Font.DefaultColor]
-        
+
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleFailedTransaction), name: .IAPHelperPurchaseCancelledNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleSuccessfulTransaction), name: .IAPHelperPurchaseCompleteNotification, object: nil)
         self.grabTipsProducts()

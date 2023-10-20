@@ -37,22 +37,24 @@ class ThankYouViewController: UIViewController {
 	
 	lazy var reviewButton: UIButton = {
 		let button = UIButton()
-		button.setAttributedTitle(NSMutableAttributedString().primaryTextAttributes(string: "Review"), for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.backgroundColor = Theme.Dark.tertiary
-		button.layer.cornerRadius = 8.0
-		button.clipsToBounds = true
+        var config = UIButton.Configuration.filled()
+        config.baseForegroundColor = Theme.Dark.tertiary
+        config.baseBackgroundColor = Theme.Dark.primary
+        config.cornerStyle = .capsule
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = config
 		button.addTarget(self, action: #selector(handleReview), for: .touchDown)
 		return button
 	}()
 	
 	lazy var dismissButton: UIButton = {
 		let button = UIButton()
-		button.setAttributedTitle(NSMutableAttributedString().primaryTextAttributes(string: "Close"), for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.backgroundColor = .clear
-		button.layer.cornerRadius = 8.0
-		button.clipsToBounds = true
+        var config = UIButton.Configuration.filled()
+        config.baseForegroundColor = Theme.Dark.tertiary
+        config.baseBackgroundColor = Theme.Dark.primary
+        config.cornerStyle = .capsule
+        button.configuration = config
+        button.translatesAutoresizingMaskIntoConstraints = false
 		button.addTarget(self, action: #selector(handleDismiss), for: .touchDown)
 		return button
 	}()
@@ -77,6 +79,11 @@ class ThankYouViewController: UIViewController {
 		
 		emojiBeer.anchorView(top: nil, bottom: thankyouMessage.topAnchor, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: .zero, size: .zero)
 		thankyouMessage.anchorView(top: nil, bottom: view.centerYAnchor, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: .zero, size: .zero)
+        
+        detailedMessage.topAnchor.constraint(equalTo: thankyouMessage.bottomAnchor).isActive = true
+        detailedMessage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
 		detailedMessage.anchorView(top: thankyouMessage.bottomAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0), size: .zero)
 		reviewButton.anchorView(top: detailedMessage.bottomAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0), size: CGSize(width: UIScreen.main.bounds.width * 0.33, height: 0.0))
 		dismissButton.anchorView(top: reviewButton.bottomAnchor, bottom: nil, leading: nil, trailing: nil, centerY: nil, centerX: view.centerXAnchor, padding: UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0), size: CGSize(width: UIScreen.main.bounds.width * 0.33, height: 0.0))

@@ -27,6 +27,11 @@
 		43423FDE28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43423FDC28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift */; };
 		43423FE028B16C7C00ADFB89 /* WarningBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43423FDF28B16C7B00ADFB89 /* WarningBox.swift */; };
 		434B56E1294C3EDE00F4A3D7 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B56E0294C3EDE00F4A3D7 /* AdService.swift */; };
+		4389395F29CF9014003B6B7C /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 4389395E29CF9014003B6B7C /* ReceiptParser */; };
+		4389396129CF9014003B6B7C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 4389396029CF9014003B6B7C /* RevenueCat */; };
+		4389396329CF9A66003B6B7C /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389396229CF9A66003B6B7C /* SubscriptionService.swift */; };
+		4389396629CF9AA8003B6B7C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4389396529CF9AA8003B6B7C /* KeychainSwift */; };
+		4389396829CF9B55003B6B7C /* RevenueCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389396729CF9B55003B6B7C /* RevenueCat.swift */; };
 		43901E2728AFAC7F003A3345 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43901E2628AFAC7F003A3345 /* CoreDataStack.swift */; };
 		43CA52882869C71300DFD40F /* InfoViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA52872869C71300DFD40F /* InfoViewControllers.swift */; };
 		43FF12A8285E968D0021686B /* MenuBarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FF12A7285E968D0021686B /* MenuBarDataSource.swift */; };
@@ -132,6 +137,8 @@
 		43423FDC28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedMessage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43423FDF28B16C7B00ADFB89 /* WarningBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningBox.swift; sourceTree = "<group>"; };
 		434B56E0294C3EDE00F4A3D7 /* AdService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
+		4389396229CF9A66003B6B7C /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		4389396729CF9B55003B6B7C /* RevenueCat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCat.swift; sourceTree = "<group>"; };
 		43901E2428AFAC00003A3345 /* MorseCode.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MorseCode.xcdatamodel; sourceTree = "<group>"; };
 		43901E2628AFAC7F003A3345 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		43CA52872869C71300DFD40F /* InfoViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewControllers.swift; sourceTree = "<group>"; };
@@ -214,8 +221,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4389396629CF9AA8003B6B7C /* KeychainSwift in Frameworks */,
 				4341038C28AA7DF0002374CC /* GoogleMobileAds in Frameworks */,
 				4D05F39224873F0800FA71D2 /* StoreKit.framework in Frameworks */,
+				4389396129CF9014003B6B7C /* RevenueCat in Frameworks */,
+				4389395F29CF9014003B6B7C /* ReceiptParser in Frameworks */,
 				4341038428A983A6002374CC /* TelemetryClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +275,7 @@
 		43423FE228B16C8C00ADFB89 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4389396229CF9A66003B6B7C /* SubscriptionService.swift */,
 				434B56E0294C3EDE00F4A3D7 /* AdService.swift */,
 				43423FE128B16C8000ADFB89 /* Alert */,
 				4341038728AA6F9E002374CC /* Ad */,
@@ -310,6 +321,7 @@
 				43FF12B1285F58C80021686B /* Cell */,
 				43FF12B0285F58C80021686B /* TipJarViewController.swift */,
 				43FF12B4285F58C80021686B /* TipJarViewModel.swift */,
+				4389396729CF9B55003B6B7C /* RevenueCat.swift */,
 			);
 			path = "Tip Jar";
 			sourceTree = "<group>";
@@ -563,6 +575,9 @@
 			packageProductDependencies = (
 				4341038328A983A6002374CC /* TelemetryClient */,
 				4341038B28AA7DF0002374CC /* GoogleMobileAds */,
+				4389395E29CF9014003B6B7C /* ReceiptParser */,
+				4389396029CF9014003B6B7C /* RevenueCat */,
+				4389396529CF9AA8003B6B7C /* KeychainSwift */,
 			);
 			productName = "SOS Flightlight & Morse Code";
 			productReference = 4DFC0D302461AE460033634E /* SOS Flashlight & Morse Code.app */;
@@ -639,6 +654,8 @@
 			packageReferences = (
 				4341038228A983A6002374CC /* XCRemoteSwiftPackageReference "SwiftClient" */,
 				4341038A28AA7DF0002374CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				4389395D29CF9014003B6B7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				4389396429CF9AA8003B6B7C /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 4DFC0D312461AE460033634E /* Products */;
 			projectDirPath = "";
@@ -697,6 +714,7 @@
 				4D05F3902487259400FA71D2 /* TipButton.swift in Sources */,
 				4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */,
 				43423FD228AFD07200ADFB89 /* Fetcher.swift in Sources */,
+				4389396829CF9B55003B6B7C /* RevenueCat.swift in Sources */,
 				43423FD628AFD1E800ADFB89 /* Recent+CoreDataProperties.swift in Sources */,
 				4D6B8BBF24693D4F00C6AD60 /* UIImage+Extension.swift in Sources */,
 				43423FE028B16C7C00ADFB89 /* WarningBox.swift in Sources */,
@@ -723,6 +741,7 @@
 				4DEF0EF32463232F007B7382 /* MorseCodeStateMachineSystem.swift in Sources */,
 				4DC69EB324797EAD009AC9FC /* KeychainItemAccessibility.swift in Sources */,
 				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
+				4389396329CF9A66003B6B7C /* SubscriptionService.swift in Sources */,
 				43FF12BC285F6E310021686B /* SectionTitleSupplementaryView.swift in Sources */,
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
 				43FF12AC285E96BC0021686B /* MenuBar.swift in Sources */,
@@ -941,10 +960,14 @@
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 29;
 =======
 				CURRENT_PROJECT_VERSION = 18;
 >>>>>>> subscription
+=======
+				CURRENT_PROJECT_VERSION = 34;
+>>>>>>> lockFix
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -953,7 +976,11 @@
 					"@executable_path/Frameworks",
 				);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MARKETING_VERSION = 2.1.24;
+=======
+				MARKETING_VERSION = 2.1.27;
+>>>>>>> lockFix
 				OTHER_LDFLAGS = "-ObjC";
 =======
 				MARKETING_VERSION = 3.0;
@@ -973,10 +1000,14 @@
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 29;
 =======
 				CURRENT_PROJECT_VERSION = 18;
 >>>>>>> subscription
+=======
+				CURRENT_PROJECT_VERSION = 34;
+>>>>>>> lockFix
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -985,7 +1016,11 @@
 					"@executable_path/Frameworks",
 				);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				MARKETING_VERSION = 2.1.24;
+=======
+				MARKETING_VERSION = 2.1.27;
+>>>>>>> lockFix
 				OTHER_LDFLAGS = "-ObjC";
 =======
 				MARKETING_VERSION = 3.0;
@@ -1140,6 +1175,22 @@
 				kind = branch;
 			};
 		};
+		4389395D29CF9014003B6B7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		4389396429CF9AA8003B6B7C /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1152,6 +1203,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4341038A28AA7DF0002374CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		4389395E29CF9014003B6B7C /* ReceiptParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4389395D29CF9014003B6B7C /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = ReceiptParser;
+		};
+		4389396029CF9014003B6B7C /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4389395D29CF9014003B6B7C /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+		4389396529CF9AA8003B6B7C /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4389396429CF9AA8003B6B7C /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

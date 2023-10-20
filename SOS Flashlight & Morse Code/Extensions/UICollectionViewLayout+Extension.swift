@@ -63,6 +63,7 @@ extension UICollectionViewLayout {
           }
         }
         let layout = UICollectionViewCompositionalLayout(section: section, configuration: config)
+        
         return layout
     }
     

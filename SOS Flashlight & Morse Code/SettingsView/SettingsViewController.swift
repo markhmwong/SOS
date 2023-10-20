@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import StoreKit
 import TelemetryClient
+import RevenueCat
 
 struct AppMetaData {
     static let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
@@ -51,7 +52,6 @@ class SettingsViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         TelemetryManager.send(TelemetryManager.Signal.tipDidShow.rawValue)
-
 	}
 	
 	
@@ -100,16 +100,20 @@ class SettingsViewController: UITableViewController {
 		if let section = SettingsSection.init(rawValue: indexPath.section) {
 			
 			switch section {
-				case .main:
-					if (indexPath.row == 3) {
-						coordinator.showAboutPage()
-					} else if (indexPath.row == 0) {
-						coordinator.showMorseCodeSheet()
-					} else if (indexPath.row == 1) {
-						emailFeedback()
-					} else if (indexPath.row == 2) {
-						writeReview()
-				}
+            case .main:
+                if (indexPath.row == 3) {
+                    coordinator.showAboutPage()
+                } else if (indexPath.row == 0) {
+                    coordinator.showMorseCodeSheet()
+                } else if (indexPath.row == 1) {
+                    emailFeedback()
+                } else if (indexPath.row == 2) {
+                    writeReview()
+            }
+            case .noAds:
+                let cell = tableView.cellForRow(at: indexPath) as! SettingsMainCellIAP
+                cell.activityIndicatorEnable()
+                viewModel?.purchase(cell, vc: self)
 			}
 		}
 	}

@@ -65,15 +65,15 @@ class SosView: UIView, UIContentView {
     }
     
     func updateIndicator() {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.frontCircleIndicator.fillColor = UIColor.orange.cgColor //change size - rear small, front full screen
-        }
+//        }
     }
     
     func updateFrontIndicator(_ color: CGColor) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.frontCircleIndicator.fillColor = color
-        }
+//        }
     }
     
     override func layoutSubviews() {
