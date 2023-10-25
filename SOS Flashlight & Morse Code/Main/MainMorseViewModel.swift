@@ -9,18 +9,16 @@
 import UIKit
 
 class MainMorseViewModel: NSObject {
-    
-    
-    
+
     enum Section {
         case main
     }
     
     enum FlashLightMode: Int, CaseIterable {
-        case sos = 0
-        case messageConversion
-        case morseConversion
-        case tools
+        case sos = 0 
+        case messageConversion // english to morse conversion
+        case morseConversion // morse to english conversion
+        case tools // quick tools
         
         var name: String {
             switch self {
@@ -66,6 +64,7 @@ class MainMorseViewModel: NSObject {
     
     var buttonToggleState: Bool = true {
         didSet {
+			
             mainMorseViewController.mainToggleButton.isEnabled = buttonToggleState
             mainMorseViewController.mainToggleButton.alpha = mainMorseViewController.mainToggleButton.isEnabled ? 1.0 : 0.1
         }

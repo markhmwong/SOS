@@ -108,6 +108,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         label.textColor = UIColor.defaultText
         return label
     }()
+	
+	private var liveViewController: LiveViewController
     
     var longPress: UILongPressGestureRecognizer! =  nil
     
@@ -122,8 +124,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     init(viewModel: MainMorseViewModel, coordinator: MainCoordinator) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-        
+		self.liveViewController = LiveViewController(viewModel: viewModel)
+		super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -166,16 +168,20 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     override func loadView() {
         super.loadView()
         self.setupUI()
+		self.setupUIV3()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
         mainContentCollectionView.isDirectionalLockEnabled = false
         mainContentCollectionView.isScrollEnabled = false
         mainContentCollectionView.showsVerticalScrollIndicator = false
         mainContentCollectionView.showsHorizontalScrollIndicator = false
+		
         NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
+		
         let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
         settings.tintColor = UIColor.defaultText
         navigationItem.leftBarButtonItem = settings
@@ -188,7 +194,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.flashlight.toggleTorch(on: false)
-        
         // Review must be declared here or it will not show
         AppStoreReviewManager.requestReviewIfAppropriate()
     }
@@ -201,6 +206,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         coordinator.showTipJar()
     }
     
+	func setupUIV3() {
+		self.addChild(self.liveViewController)
+		self.view.addSubview(self.liveViewController.view)
+	}
+	
     func setupUI() {
         menuBar = MenuBar(vc: self, flashlight: viewModel.flashlight)
         mainContentCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout().fullScreenLayoutWithHorizontalBar(itemSpace: .zero, groupSpacing: .zero, cellHeight: NSCollectionLayoutDimension.fractionalHeight(1.0), menuBar: menuBar))
