@@ -28,7 +28,9 @@ class MorseCodeStateMachineSystem {
 	
 	private var expires: Date?
 	
-	private var c: MorseType // characterType
+	private var c: MorseTypeTiming // characterType
+	
+	private var currentEnglishCharacter: Character
 	
 	// Public variable
 	var loopState: Bool = false
@@ -36,6 +38,7 @@ class MorseCodeStateMachineSystem {
 	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate) {
 		self.morseParser = morseParser
 		self.delegate = delegate
+		self.currentEnglishCharacter = " "
 		c = .none
 		state = Idle()
     }
@@ -43,7 +46,7 @@ class MorseCodeStateMachineSystem {
 	// begin
 	func startSystemAtIdle() {
 		delegate.start()
-		c = morseParser.readNextCharacter()
+		c = morseParser.readAndConvertNextCharacter()
 		reviseTime(time: c.unitTime)
 		// nil timer
 		self.timer = Timer.scheduledTimer(timeInterval: unitTime, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
@@ -115,7 +118,8 @@ class MorseCodeStateMachineSystem {
 			} else {
 				morseParser.popCharacter()
 				characterExists()
-				c = morseParser.readNextCharacter()
+				c = morseParser.readAndConvertNextCharacter()
+				currentEnglishCharacter = morseParser.readCurrentCharacter()
 				reviseTime(time: c.unitTime)
 			}
 		}

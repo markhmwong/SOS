@@ -207,8 +207,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
 	func setupUIV3() {
-		self.addChild(self.liveViewController)
-		self.view.addSubview(self.liveViewController.view)
+//		self.addChild(self.liveViewController)
+//		self.view.addSubview(self.liveViewController.view)
 	}
 	
     func setupUI() {
@@ -535,18 +535,22 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     }
     
     // Right before the device will cast the flash
-    func willFlash(type: MorseType) {
+    func willFlash(type: MorseTypeTiming) {
         
         switch type {
-            case .breakBetweenLetters, .breakBetweenWords, .breakBetweenPartsOfLetter, .none:
-//                viewModel.kLightState = false
+			case .breakBetweenLetters:
+				if (viewModel.flashFacingSideState == .front) {
+					updateFrontScreenFlash(state: false)
+				} else {
+					viewModel.flashlight.toggleTorch(on: false)
+				}
+			case .breakBetweenWords, .breakBetweenPartsOfLetter, .none:
                 if (viewModel.flashFacingSideState == .front) {
                     updateFrontScreenFlash(state: false)
                 } else {
                     viewModel.flashlight.toggleTorch(on: false)
                 }
             case .dash, .dot:
-//                viewModel.kLightState = true
                 if (viewModel.flashFacingSideState == .front) {
                     updateFrontScreenFlash(state: true)
                 } else {
@@ -560,7 +564,7 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
         print("update here")
     }
     
-    func didFlash(type: MorseType) {
+    func didFlash(type: MorseTypeTiming) {
         
     }
     
@@ -575,6 +579,7 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     }
 }
 
+// Loads only one time per update
 final class Once {
     private var version: String = KeychainWrapper.standard.string(forKey: "com.whizbang.sos.appversion") ?? "1.0"
     

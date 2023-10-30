@@ -100,7 +100,7 @@
 		4DFC0D4E2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D4D2461AE4B0033634E /* SOS_Flightlight___Morse_CodeTests.swift */; };
 		4DFC0D592461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */; };
 		4DFC0D692461CC800033634E /* Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D682461CC800033634E /* Flashlight.swift */; };
-		4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D6A2461CC9A0033634E /* MorseType.swift */; };
+		4DFC0D6B2461CC9A0033634E /* MorseTypeTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC0D6A2461CC9A0033634E /* MorseTypeTiming.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,7 +217,7 @@
 		4DFC0D582461AE4B0033634E /* SOS_Flightlight___Morse_CodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SOS_Flightlight___Morse_CodeUITests.swift"; sourceTree = "<group>"; };
 		4DFC0D5A2461AE4B0033634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DFC0D682461CC800033634E /* Flashlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashlight.swift; sourceTree = "<group>"; };
-		4DFC0D6A2461CC9A0033634E /* MorseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseType.swift; sourceTree = "<group>"; };
+		4DFC0D6A2461CC9A0033634E /* MorseTypeTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTypeTiming.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +362,7 @@
 		4D01FA922480C86B00F105B9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4D34270B2AE9742F00C522FD /* LiveText */,
 				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
 				43FF12C1286096E10021686B /* MainMorseViewModel.swift */,
 				43CA52862869C6FF00DFD40F /* InformationScreens */,
@@ -371,7 +372,6 @@
 				43FF12BB285F6E310021686B /* SectionTitleSupplementaryView.swift */,
 				4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */,
 				4D3427072AE385E900C522FD /* MainControlsDrawerViewController.swift */,
-				4D3427092AE3EB3A00C522FD /* LiveViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -389,6 +389,14 @@
 				4D05F3982487ABEE00FA71D2 /* ThankYouViewController.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		4D34270B2AE9742F00C522FD /* LiveText */ = {
+			isa = PBXGroup;
+			children = (
+				4D3427092AE3EB3A00C522FD /* LiveViewController.swift */,
+			);
+			path = LiveText;
 			sourceTree = "<group>";
 		};
 		4D6B8BA924693D4F00C6AD60 /* Extensions */ = {
@@ -539,7 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				4DED82D7246524CE0027F385 /* StateMachine */,
-				4DFC0D6A2461CC9A0033634E /* MorseType.swift */,
+				4DFC0D6A2461CC9A0033634E /* MorseTypeTiming.swift */,
 				4DED82D5246504870027F385 /* MorseParser.swift */,
 				4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */,
 			);
@@ -753,7 +761,7 @@
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
 				43FF12AC285E96BC0021686B /* MenuBar.swift in Sources */,
 				43FF12AE285F0D9D0021686B /* MainMorseCell.swift in Sources */,
-				4DFC0D6B2461CC9A0033634E /* MorseType.swift in Sources */,
+				4DFC0D6B2461CC9A0033634E /* MorseTypeTiming.swift in Sources */,
 				4319980D285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift in Sources */,
 				4D19106A24757E9D00202FA0 /* MorseCodeSheetViewController.swift in Sources */,
 				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,

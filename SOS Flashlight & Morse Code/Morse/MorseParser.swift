@@ -12,12 +12,24 @@ import Foundation
 // Contains the message itself
 class MorseParser: NSObject {
 	
+	// Initial Method
+	// Converts the english characters to morse code and fills in with symbols for
+	// spaces, between letters, words
+	// Removes the first character from the converted message
 	private let message: [Character]
 	
 	var convertedMessage: [Character] = []
 	
+	// Tracks the character that is being read by the state machine
+	
+	// Removed characters, this should be inverse of the convertedMessage
+	// i need the inversed message of removed characters in english without timing symbols
+	private var removedCharacters: [Character] = []
+	private var currentCharacter: Character
+	
 	init(message: String) {
 		self.message = Array(message)
+		self.currentCharacter = self.message.first ?? " "
 		super.init()
 		convertCharacters()
 	}
@@ -32,46 +44,53 @@ class MorseParser: NSObject {
 			guard let value = InternationalMorseCode[c] else { return }
 			
 			if value == " " {
-				convertedMessage.append(MorseType.breakBetweenWords.letter)
+				convertedMessage.append(MorseTypeTiming.breakBetweenWords.symbol)
 			} else {
 				for morseCode in value {
 					convertedMessage.append(morseCode)
-					convertedMessage.append(MorseType.breakBetweenPartsOfLetter.letter) // æ denotes a break
+					convertedMessage.append(MorseTypeTiming.breakBetweenPartsOfLetter.symbol) // æ denotes a break
 				}
-				convertedMessage.append(MorseType.breakBetweenLetters.letter)
+				convertedMessage.append(MorseTypeTiming.breakBetweenLetters.symbol)
 			}
 		}
+		print("converted message \(convertedMessage)")
 	}
 	
 	func popCharacter() {
 		convertedMessage.removeFirst()
 	}
 	
-	// return the converted morse type.
-	func readNextCharacter() -> MorseType {
+	func readCurrentCharacter() -> Character {
+		guard let c = convertedMessage.first else { return " " }
+		currentCharacter = c
+		return currentCharacter
+	}
+	
+	// return the converted morse type to get the timing.
+	func readAndConvertNextCharacter() -> MorseTypeTiming {
 		// won't need the loop once we use the timer
 		// we'll read the array every unit of time
 		return dotOrDash(character: convertedMessage.first)
 	}
 	
 	// convert letter
-	private func dotOrDash(character c: Character?) -> MorseType {
+	private func dotOrDash(character c: Character?) -> MorseTypeTiming {
 		guard let c = c else {
 			return .none
 		}
 		
 		switch c {
-			case MorseType.dot.letter:
+			case MorseTypeTiming.dot.symbol:
 				return .dot
-			case MorseType.dash.letter:
+			case MorseTypeTiming.dash.symbol:
 				return .dash
-			case MorseType.breakBetweenPartsOfLetter.letter:
+			case MorseTypeTiming.breakBetweenPartsOfLetter.symbol:
 				return .breakBetweenPartsOfLetter
-			case MorseType.breakBetweenLetters.letter:
+			case MorseTypeTiming.breakBetweenLetters.symbol:
 				return .breakBetweenLetters
-			case MorseType.breakBetweenWords.letter:
+			case MorseTypeTiming.breakBetweenWords.symbol:
 				return .breakBetweenWords
-			case MorseType.none.letter:
+			case MorseTypeTiming.none.symbol:
 				return .none
 			default:
 				return .none
@@ -87,15 +106,15 @@ class MorseParser: NSObject {
 	}
 	
 	// remove characters representing time for in between letters
-	// these are not letters of the english language adn are placed during coversion to notify the parser the correct unit of time
-	// by removing these, it allows the user to see the correct message in only english letters
+	// these are not letters of the english language and are placed during coversion to notify the parser the correct unit of time
+	// by removing these, it allows the user to see the correct message in morse code
 	func removeErroneousCharacters() -> [Character] {
 		return convertedMessage.filter { (ch) -> Bool in
-			return ch != MorseType.breakBetweenLetters.letter
+			return ch != MorseTypeTiming.breakBetweenLetters.symbol
 		}.filter { (ch) -> Bool in
-			return ch != MorseType.breakBetweenPartsOfLetter.letter
+			return ch != MorseTypeTiming.breakBetweenPartsOfLetter.symbol
 		}.map { (ch) -> Character in
-			ch == MorseType.breakBetweenWords.letter ? " " : ch
+			ch == MorseTypeTiming.breakBetweenWords.symbol ? " " : ch
 		}
 	}
 }

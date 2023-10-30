@@ -15,7 +15,7 @@ class MainMorseViewModel: NSObject {
     }
     
     enum FlashLightMode: Int, CaseIterable {
-        case sos = 0 
+        case sos = 0
         case messageConversion // english to morse conversion
         case morseConversion // morse to english conversion
         case tools // quick tools

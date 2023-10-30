@@ -1,7 +1,7 @@
 //___FILEHEADER___
 
 import XCTest
-@testable import ___VARIABLE_productName:identifier___
+
 
 class ___FILEBASENAMEASIDENTIFIER___: XCTestCase {
 
