@@ -167,8 +167,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
     override func loadView() {
         super.loadView()
-        self.setupUI()
 		self.setupUIV3()
+        self.setupUI()
+		
     }
     
     override func viewDidLoad() {
@@ -207,8 +208,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
 	func setupUIV3() {
-//		self.addChild(self.liveViewController)
-//		self.view.addSubview(self.liveViewController.view)
+
 	}
 	
     func setupUI() {
@@ -220,6 +220,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         
         view.backgroundColor = UIColor.mainBackground
         view.addSubview(mainContentCollectionView)
+		
+		// move back to setupUIV3 once initial testing is complete
+		self.addChild(self.liveViewController)
+		self.view.addSubview(self.liveViewController.view)
+		
         view.addSubview(menuBar)
         view.addSubview(mainToggleButton)
         view.addSubview(facingButton)
@@ -368,9 +373,13 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         } else {
             let parser = MorseParser(message: "SOS")
             stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
-            guard let stateMachine = stateMachine else { return }
+			
+			liveViewController.stateMachine = self.stateMachine
+
+			guard let stateMachine = stateMachine else { return }
             stateMachine.loopState = viewModel.flashlight.loop
             stateMachine.startSystemAtIdle()
+			
         }
     }
     
@@ -379,8 +388,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         if (stateMachine != nil) {
             shutDownStateMachine()
         } else {
-            if viewModel.messageToFlashlight != "" {
-                let parser = MorseParser(message: viewModel.messageToFlashlight)
+            if viewModel.messageToBeFlashed != "" {
+                let parser = MorseParser(message: viewModel.messageToBeFlashed)
                 stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
                 guard let stateMachine = stateMachine else { return }
                 stateMachine.loopState = viewModel.flashlight.loop
@@ -394,7 +403,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         guard let moc = viewModel.cds.moc else { return }
         let r = Recent(context: moc)
         // id and date are default values in the function argument array
-        r.newRecentObj(value: viewModel.messageToFlashlight)
+        r.newRecentObj(value: viewModel.messageToBeFlashed)
         viewModel.cds.saveContext()
     }
     

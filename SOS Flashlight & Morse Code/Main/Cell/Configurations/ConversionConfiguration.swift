@@ -149,7 +149,7 @@ class ConversionView: UIView, UIContentView, UITextViewDelegate {
     
     @objc func handleDone() {
         topTextView.resignFirstResponder()
-        nc.post(name: Notification.Name(NotificationCenter.MESSAGE_TO_TEXT), object: nil)
+		nc.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_TEXT), object: nil)
         let parser = MorseParser(message: topTextView.text)
         bottomTextView.text = String(parser.removeErroneousCharacters())
     }

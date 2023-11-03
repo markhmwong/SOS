@@ -187,7 +187,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     @objc func handleDone() {
         disableFirstResponder()
         // assign viewmodel.messagetoflash
-        nc.post(name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		nc.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
     }
     
     @objc func handleSave() {
@@ -197,7 +197,6 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     @objc func handleClear() {
         messageField.text = ""
         // assign viewmodel.messagetoflash
-        
     }
     
     
@@ -207,7 +206,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        nc.post(name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		nc.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

@@ -52,25 +52,17 @@ class MainMorseViewModel: NSObject {
     var sosLock: Bool = false
     
     // used for custom morse message to delivery via the flash light
-    var messageToFlashlight: String = ""
-    
-//    var kFrontLightState: Bool = false
+    var messageToBeFlashed: String = ""
 
-    var loopState: Bool = false {
-        didSet {
-//            mainMorseViewController.loopButton.alpha = loopState ? 1.0 : 0.5
-        }
-    }
+    var loopState: Bool = false
     
     var buttonToggleState: Bool = true {
         didSet {
-			
             mainMorseViewController.mainToggleButton.isEnabled = buttonToggleState
             mainMorseViewController.mainToggleButton.alpha = mainMorseViewController.mainToggleButton.isEnabled ? 1.0 : 0.1
         }
     }
-    
-//    var currState: MorseCodeMode
+
 
     private var currIndex: Int
     
@@ -81,22 +73,20 @@ class MainMorseViewModel: NSObject {
     init(cds: CoreDataStack) {
         self.cds = cds
         self.currIndex = 0
-//        self.currState = MorseCodeMode.init(rawValue: currIndex) ?? MorseCodeMode.kMessage
 
         super.init()
-        nc.addObserver(self, selector: #selector(updateMessageToFlash), name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil)
+		nc.addObserver(self, selector: #selector(updateMessageToFlash), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
     }
     
     @objc func updateMessageToFlash(_ sender: NSNotification) {
 
-        assert(sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] != nil, "Message is nil")
-        assert(sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
+		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] != nil, "Message is nil")
+		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
         
-        guard let message = sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] as? String else { return }
-        messageToFlashlight = message
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
+        messageToBeFlashed = message
     }
 
-    
     private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, MainItem> {
         let cellConfig = UICollectionView.CellRegistration<MainCell, MainItem> { (cell, indexPath, item) in
             cell.item = item
@@ -131,4 +121,8 @@ class MainMorseViewModel: NSObject {
         }
         return items
     }
+	
+	deinit {
+		self.nc.removeObserver(self, name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+	}
 }

@@ -10,9 +10,13 @@ import Foundation
 
 extension NotificationCenter {
     
-    static var MESSAGE_TO_FLASH: String = "MessageToFlash"
-    
-    static var MESSAGE_TO_TEXT: String = "MessageToText"
+	struct NCKeys {
+		static var MESSAGE_TO_FLASH: String = "MessageToFlash"
+		
+		static var MESSAGE_TO_TEXT: String = "MessageToText"
+		
+		static var TRACKED_CHARACTERS: String = "TrackedCharactersLiveText"
+	}
+	
 
-    
 }

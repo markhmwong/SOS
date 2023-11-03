@@ -18,20 +18,36 @@ class MorseParser: NSObject {
 	// Removes the first character from the converted message
 	private let message: [Character]
 	
-	var convertedMessage: [Character] = []
+	private(set) var messageStr: String
+	
+	// message but in morse code
+	var convertedMessage: [Character]
 	
 	// Tracks the character that is being read by the state machine
-	
 	// Removed characters, this should be inverse of the convertedMessage
-	// i need the inversed message of removed characters in english without timing symbols
-	private var removedCharacters: [Character] = []
-	private var currentCharacter: Character
+	// This should be in english characters with the symbol in between letters
+	private var trackedCharacters: String {
+		didSet {
+			NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil, userInfo: ["updatedText" : self.trackedCharacters])
+		}
+	}
+	
+	private var trackedIndex: Int {
+		didSet {
+			let substring = self.messageStr.index(self.messageStr.startIndex, offsetBy: trackedIndex)
+			self.trackedCharacters = String(self.messageStr[..<substring])
+		}
+	}
 	
 	init(message: String) {
+		self.messageStr = message
 		self.message = Array(message)
-		self.currentCharacter = self.message.first ?? " "
+		self.trackedIndex = 0
+		self.trackedCharacters = ""
+		self.convertedMessage = []
 		super.init()
 		convertCharacters()
+
 	}
 	
 	func reinstateMessage() {
@@ -49,6 +65,7 @@ class MorseParser: NSObject {
 				for morseCode in value {
 					convertedMessage.append(morseCode)
 					convertedMessage.append(MorseTypeTiming.breakBetweenPartsOfLetter.symbol) // æ denotes a break
+					
 				}
 				convertedMessage.append(MorseTypeTiming.breakBetweenLetters.symbol)
 			}
@@ -58,12 +75,6 @@ class MorseParser: NSObject {
 	
 	func popCharacter() {
 		convertedMessage.removeFirst()
-	}
-	
-	func readCurrentCharacter() -> Character {
-		guard let c = convertedMessage.first else { return " " }
-		currentCharacter = c
-		return currentCharacter
 	}
 	
 	// return the converted morse type to get the timing.
@@ -87,6 +98,10 @@ class MorseParser: NSObject {
 			case MorseTypeTiming.breakBetweenPartsOfLetter.symbol:
 				return .breakBetweenPartsOfLetter
 			case MorseTypeTiming.breakBetweenLetters.symbol:
+				if self.trackedIndex < message.count {
+					self.trackedIndex = self.trackedIndex + 1
+				}
+				// add to inverse characters list
 				return .breakBetweenLetters
 			case MorseTypeTiming.breakBetweenWords.symbol:
 				return .breakBetweenWords

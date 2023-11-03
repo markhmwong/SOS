@@ -22,24 +22,28 @@ class MorseCodeStateMachineSystem {
 	// State Machine variables
 	private var state: State
 	
-	private var morseParser: MorseParser
+	private(set) var morseParser: MorseParser
 	
 	private var delegate: MorseStateMachineSystemDelegate
+	
+	// expose it
+	var viewDelegate: MorseStateMachineSystemViewDelegate? = nil
 	
 	private var expires: Date?
 	
 	private var c: MorseTypeTiming // characterType
 	
-	private var currentEnglishCharacter: Character
+	private var parsedCharacters: String
 	
 	// Public variable
 	var loopState: Bool = false
 	
-	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate) {
+	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate, viewDelegate: MorseStateMachineSystemViewDelegate? = nil) {
 		self.morseParser = morseParser
 		self.delegate = delegate
-		self.currentEnglishCharacter = " "
+		self.viewDelegate = viewDelegate
 		c = .none
+		parsedCharacters = ""
 		state = Idle()
     }
 	
@@ -71,6 +75,7 @@ class MorseCodeStateMachineSystem {
 		process(transition: state.end())
 		// end timer
 		endTimer()
+		print("End Timer")
 	}
 	
 	// flush timer
@@ -119,7 +124,6 @@ class MorseCodeStateMachineSystem {
 				morseParser.popCharacter()
 				characterExists()
 				c = morseParser.readAndConvertNextCharacter()
-				currentEnglishCharacter = morseParser.readCurrentCharacter()
 				reviseTime(time: c.unitTime)
 			}
 		}
