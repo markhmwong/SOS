@@ -75,6 +75,7 @@ class MorseCodeStateMachineSystem {
 		process(transition: state.end())
 		// end timer
 		endTimer()
+		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
 		print("End Timer")
 	}
 	

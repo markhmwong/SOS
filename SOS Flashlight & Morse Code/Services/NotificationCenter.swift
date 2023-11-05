@@ -16,6 +16,8 @@ extension NotificationCenter {
 		static var MESSAGE_TO_TEXT: String = "MessageToText"
 		
 		static var TRACKED_CHARACTERS: String = "TrackedCharactersLiveText"
+		
+		static var END_STATE: String = "EndState"
 	}
 	
 

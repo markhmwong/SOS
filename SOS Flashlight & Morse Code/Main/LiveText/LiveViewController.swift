@@ -10,7 +10,7 @@ import UIKit
 
 extension LiveViewController: MorseStateMachineSystemViewDelegate {
 	func forwardStringTohighlight(string: String) {
-		liveText.animate(searchText: string, superview: self.view)
+		liveText.animate(searchText: string, viewController: self)
 		print("animate")
 	}
 }
@@ -56,8 +56,11 @@ class LiveViewController: UIViewController {
 	
 	var viewModel: MainMorseViewModel
 	
+	var highlightViews: [UIView]
+	
 	init(viewModel: MainMorseViewModel) {
 		self.viewModel = viewModel
+		self.highlightViews = []
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -88,50 +91,60 @@ class LiveViewController: UIViewController {
 		])
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(updateLabel), name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(removeHighlightedViews), name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
 	}
 	
 	@objc func updateLabel(_ notification: Notification) {
 		if let text = notification.userInfo?["updatedText"] as? String {
 			print("received \(text)")
-			liveText.animate(searchText: text, superview: self.view)
+			liveText.animate(searchText: text, viewController: self)
 		}
 	}
 	
+	@objc func removeHighlightedViews(_ notification: Notification) {
+		for view in self.highlightViews {
+			view.removeFromSuperview()
+		}
+		self.highlightViews.removeAll()
+	}
+	
 	deinit {
+		self.highlightViews = []
 		NotificationCenter.default.removeObserver(self, name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
 	}
 }
 
 extension UITextView {
 	
-	func animate(searchText: String, superview: UIView) {
+	func animate(searchText: String, viewController: LiveViewController) {
 		let beginning = beginningOfDocument
 		
 		guard
 			let string = text,
 			let range = string.range(of: searchText),
-			let start = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.lowerBound)),
+			let start = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.upperBound) - 1),
 			let end = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.upperBound)),
 			let textRange = textRange(from: start, to: end)
 		else {
 			return
 		}
+		
 		print("\(selectionRects(for: textRange).count)")
+		
 		selectionRects(for: textRange).forEach { selectionRect in
 			guard let snapshotView = resizableSnapshotView(from: selectionRect.rect, afterScreenUpdates: false, withCapInsets: .zero) else { return }
 			
-			snapshotView.frame = superview.convert(selectionRect.rect, from: self)
+			snapshotView.frame = viewController.view.convert(selectionRect.rect, from: self)
 			snapshotView.alpha = 0.0
 			snapshotView.backgroundColor = .blue
-			superview.addSubview(snapshotView)
-			self.layoutIfNeeded()
-			UIView.animate(withDuration: 0.8, delay: 1, options: .autoreverse, animations: {
-//				snapshotView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			viewController.view.addSubview(snapshotView)
+			viewController.highlightViews.append(snapshotView)
+
+			UIView.animate(withDuration: 0.4, delay: 1, options: [.curveEaseInOut, .allowAnimatedContent], animations: {
+
 				snapshotView.alpha = 1.0
-				self.layoutIfNeeded()
-			}, completion: { _ in
-//				snapshotView.removeFromSuperview()
-			})
+
+			}, completion: { _ in			})
 		}
 		
 		
