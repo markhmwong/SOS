@@ -88,12 +88,14 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.returnKeyType = .continue
 		textField.enablesReturnKeyAutomatically = false
 		textField.text = "Let's send a signal"
-//		textField.delegate = self
+		textField.delegate = self
 		textField.autocapitalizationType = .none
 		textField.autocorrectionType = .no
 		textField.isEditable = true
 		textField.textAlignment = .left
 		textField.isScrollEnabled = false
+		textField.layer.cornerRadius = 12.0
+		textField.layer.masksToBounds = true
 		textField.backgroundColor = UIColor.defaultText.inverted
 		return textField
 	}()
@@ -668,6 +670,26 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     }
 	
 
+}
+
+extension MainMorseViewController: UITextViewDelegate {
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		// Get the current text and calculate the new text if the replacement is allowed
+		let currentText = textView.text ?? ""
+		let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
+		
+		// Set your character limit here (e.g., 100 characters)
+		let characterLimit = 100
+		
+		// Check if the new text exceeds the character limit
+		if newText.count <= characterLimit {
+			return true // Allow the text change
+		} else {
+			// Display an alert or provide some feedback to the user
+			// You can also prevent further text input by returning false
+			return false
+		}
+	}
 }
 
 // Loads only one time per update
