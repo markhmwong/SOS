@@ -77,6 +77,26 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+	
+	lazy var messageField: UITextView = {
+		let textField = UITextView()
+		textField.tintColor = UIColor.defaultText
+		textField.font = UIFont.preferredFont(forTextStyle: .title2)
+		textField.layer.cornerRadius = 0
+		textField.translatesAutoresizingMaskIntoConstraints = false
+		textField.keyboardType = .alphabet
+		textField.returnKeyType = .continue
+		textField.enablesReturnKeyAutomatically = false
+		textField.text = "Let's send a signal"
+//		textField.delegate = self
+		textField.autocapitalizationType = .none
+		textField.autocorrectionType = .no
+		textField.isEditable = true
+		textField.textAlignment = .left
+		textField.isScrollEnabled = false
+		textField.backgroundColor = UIColor.defaultText.inverted
+		return textField
+	}()
     
 //    lazy var lockButton: UIButton = {
 //        let button = UIButton()
@@ -109,8 +129,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         return label
     }()
 	
-	private var liveViewController: LiveViewController
+	private var liveViewController: LiveTextViewController
     
+	
     var longPress: UILongPressGestureRecognizer! =  nil
     
     var lockGesture: UILongPressGestureRecognizer! =  nil
@@ -121,10 +142,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
     private var facingSideObserver: NSKeyValueObservation? = nil
 
+	private weak var bottomConstraint: NSLayoutConstraint!
+	
     init(viewModel: MainMorseViewModel, coordinator: MainCoordinator) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-		self.liveViewController = LiveViewController(viewModel: viewModel)
+		self.liveViewController = LiveTextViewController(viewModel: viewModel)
 		super.init(nibName: nil, bundle: nil)
     }
     
@@ -139,26 +162,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     @objc func handleRecentMessages() {
         coordinator.showRecentMessages(cds: self.viewModel.cds)
     }
-    
-    
-    
+
     func handleLock() {
         viewModel.sosLock = !viewModel.sosLock
         loopingButton.isEnabled = !loopingButton.isEnabled
         facingButton.isEnabled = loopingButton.isEnabled
 
         if viewModel.sosLock {
-//            DispatchQueue.main.async {
                 self.lockImage.layer.opacity = 1.0
                 self.facingLabel.layer.opacity = 1.0
-//            }
-            
         } else {
-//            DispatchQueue.main.async {
                 self.lockImage.layer.opacity = 0.4
                 self.facingLabel.layer.opacity = 0.4
-//            }
-            
         }
 
         mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
@@ -167,7 +182,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
     override func loadView() {
         super.loadView()
-		self.setupUIV3()
         self.setupUI()
 		
     }
@@ -198,6 +212,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         // Review must be declared here or it will not show
         AppStoreReviewManager.requestReviewIfAppropriate()
     }
+	
+	/* Navigation Related */
     
     @objc func showSettings() {
         coordinator.showSettings()
@@ -206,10 +222,31 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     @objc func showTipJar() {
         coordinator.showTipJar()
     }
-    
-	func setupUIV3() {
-
+	
+	/* Keyboard stuff */
+	
+	func keyboardWillShow(_ notification: Notification) {
+				
+		guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+		let keyboardOriginY = value.cgRectValue.origin.y
+		let adjustment = -(self.messageField.frame.origin.y + self.messageField.frame.height) + keyboardOriginY
+		// Here you could have more complex rules, like checking if the textField currently selected is actually covered by the keyboard, but that's out of this scope.
+		self.bottomConstraint.constant = adjustment
+		print("\(self.messageField.frame.origin.y)")
+		UIView.animate(withDuration: 0.1, animations: { () -> Void in
+			self.view.layoutIfNeeded()
+		})
 	}
+	
+	
+	func keyboardWillHide(_ notification: Notification) {
+		self.bottomConstraint.constant = 0
+		
+		UIView.animate(withDuration: 0.1, animations: { () -> Void in
+			self.view.layoutIfNeeded()
+		})
+	}
+
 	
     func setupUI() {
         menuBar = MenuBar(vc: self, flashlight: viewModel.flashlight)
@@ -224,16 +261,32 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		// move back to setupUIV3 once initial testing is complete
 		self.addChild(self.liveViewController)
 		self.view.addSubview(self.liveViewController.view)
-		
-        view.addSubview(menuBar)
-        view.addSubview(mainToggleButton)
-        view.addSubview(facingButton)
-        view.addSubview(facingLabel)
-        view.addSubview(loopingButton)
-        view.addSubview(loopingLabel)
-        view.addSubview(lockImage)
-        view.addSubview(holdToLockLabel)
 
+
+		self.view.addSubview(menuBar)
+		self.view.addSubview(mainToggleButton)
+		self.view.addSubview(facingButton)
+		self.view.addSubview(facingLabel)
+		self.view.addSubview(loopingButton)
+		self.view.addSubview(loopingLabel)
+		self.view.addSubview(lockImage)
+		self.view.addSubview(holdToLockLabel)
+
+		self.view.addSubview(messageField)
+		
+//		self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
+		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor).isActive = true
+		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor).isActive = true
+		
+		self.liveViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+		self.liveViewController.view.bottomAnchor.constraint(equalTo: self.menuBar.topAnchor).isActive = true
+		self.liveViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+		self.liveViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+
+		self.bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
+		self.bottomConstraint.isActive = true
+		startObservingKeyboardChanges()
+		
         var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         holdToLockLabelConstraint.constant = -70
         holdToLockLabelConstraint.isActive = true
@@ -243,7 +296,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         lockImage.bottomAnchor.constraint(equalTo: mainToggleButton.topAnchor, constant: 0).isActive = true
         lockImage.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
         
-        menuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        menuBar.bottomAnchor.constraint(equalTo: self.mainToggleButton.topAnchor).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 12.5).isActive = true
@@ -341,6 +394,29 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
+	
+	/* Observing keyboard */
+	func startObservingKeyboardChanges() {
+		
+		// NotificationCenter observers
+		NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] notification in
+			self?.keyboardWillShow(notification)
+		}
+		
+		// Deal with rotations
+//		NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: nil) { [weak self] notification in
+//			self?.keyboardWillShow(notification)
+//		}
+		
+		// Deal with keyboard change (emoji, numerical, etc.)
+		NotificationCenter.default.addObserver(forName: UITextInputMode.currentInputModeDidChangeNotification, object: nil, queue: nil) { [weak self] notification in
+			self?.keyboardWillShow(notification)
+		}
+		
+		NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] notification in
+			self?.keyboardWillHide(notification)
+		}
+	}
     
     @objc func handleFacingSide() {
         switch viewModel.flashlight.facingSide {
@@ -530,6 +606,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         shutDownStateMachine()
     }
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self)
+	}
 }
 
 extension MainMorseViewController: MorseStateMachineSystemDelegate {
@@ -586,6 +666,8 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     func start() {
         stateMachine?.endTimer()
     }
+	
+
 }
 
 // Loads only one time per update

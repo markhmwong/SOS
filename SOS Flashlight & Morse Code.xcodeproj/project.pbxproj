@@ -55,7 +55,7 @@
 		4D19106E24757EAF00202FA0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D19106D24757EAF00202FA0 /* AboutViewController.swift */; };
 		4D1910712476381900202FA0 /* SettingsCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1910702476381900202FA0 /* SettingsCellTypes.swift */; };
 		4D3427082AE385E900C522FD /* MainControlsDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3427072AE385E900C522FD /* MainControlsDrawerViewController.swift */; };
-		4D34270A2AE3EB3A00C522FD /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3427092AE3EB3A00C522FD /* LiveViewController.swift */; };
+		4D34270A2AE3EB3A00C522FD /* LiveTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3427092AE3EB3A00C522FD /* LiveTextViewController.swift */; };
 		4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */; };
 		4D6B8BBA24693D4F00C6AD60 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */; };
 		4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */; };
@@ -167,7 +167,7 @@
 		4D19106D24757EAF00202FA0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		4D1910702476381900202FA0 /* SettingsCellTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellTypes.swift; sourceTree = "<group>"; };
 		4D3427072AE385E900C522FD /* MainControlsDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControlsDrawerViewController.swift; sourceTree = "<group>"; };
-		4D3427092AE3EB3A00C522FD /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		4D3427092AE3EB3A00C522FD /* LiveTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextViewController.swift; sourceTree = "<group>"; };
 		4D6B8BAA24693D4F00C6AD60 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		4D6B8BAB24693D4F00C6AD60 /* Calendar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
 		4D6B8BAC24693D4F00C6AD60 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -399,7 +399,7 @@
 		4D34270B2AE9742F00C522FD /* LiveText */ = {
 			isa = PBXGroup;
 			children = (
-				4D3427092AE3EB3A00C522FD /* LiveViewController.swift */,
+				4D3427092AE3EB3A00C522FD /* LiveTextViewController.swift */,
 			);
 			path = LiveText;
 			sourceTree = "<group>";
@@ -788,7 +788,7 @@
 				43CA52882869C71300DFD40F /* InfoViewControllers.swift in Sources */,
 				43FF12C628649E950021686B /* ToolConfiguration.swift in Sources */,
 				4D6B8BD0246BB93F00C6AD60 /* ImpactFeedbackService.swift in Sources */,
-				4D34270A2AE3EB3A00C522FD /* LiveViewController.swift in Sources */,
+				4D34270A2AE3EB3A00C522FD /* LiveTextViewController.swift in Sources */,
 				4DCE3EBD2AF340BC006A09CF /* MorseStateMachineSystemViewDelegate.swift in Sources */,
 				4D6B8BC224693D4F00C6AD60 /* CAShapelayerExtension.swift in Sources */,
 				43FF12C4286311E00021686B /* MessageConversionConfiguration.swift in Sources */,
