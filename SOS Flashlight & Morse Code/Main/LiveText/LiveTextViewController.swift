@@ -101,102 +101,10 @@ class LiveTextViewController: UIViewController {
 	}
 	
 	@objc func tidyUpHighlightViews(_ notification: Notification) {
-		// fade out views
-//		for (index, view) in self.highlightViews.enumerated() {
-//			UIView.animate(withDuration: 2.0) {
-//				view.layer.opacity = 0
-//			} completion: { state in
-//
-//			}
-//			
-//			// delay the removed views
-//			if self.highlightViews.count == index {
-//				// remove views
-//				
-//				for view in self.highlightViews {
-//					view.removeFromSuperview()
-//				}
-//				self.highlightViews.removeAll()
-//			}
-//		}
-		
 		liveText.animateFullTextWithColour(searchText: staticLiveText.text, colour: UIColor.defaultBlack)
-
 	}
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self, name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
-	}
-}
-
-extension UITextView {
-	
-	func animateFullTextWithColour(searchText: String, colour: UIColor = UIColor.systemOrange) {
-		let beginning = beginningOfDocument
-		
-		guard
-			let string = text,
-			let range = string.range(of: searchText),
-			let start = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.lowerBound)),
-			let end = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.upperBound)),
-			let textRange = textRange(from: start, to: end)
-		else {
-			return
-		}
-		let location = offset(from: beginningOfDocument, to: textRange.start)
-		let length = offset(from: textRange.start, to: textRange.end)
-		let nsRange = NSRange(location: location, length: length)
-		
-		// get the string from the label attributedText
-		let stringCopy: NSMutableAttributedString = self.attributedText.mutableCopy() as! NSMutableAttributedString
-		stringCopy.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
-		
-		UIView.transition(with: self, duration: 0.25, options: .transitionCrossDissolve, animations: {
-			self.attributedText = stringCopy
-		}, completion: { _ in
-			stringCopy.addAttribute(.foregroundColor, value: colour, range: nsRange)
-			UIView.transition(with: self, duration: 0.25, options: .transitionCrossDissolve, animations: {
-				self.attributedText = stringCopy
-			})
-		})
-	}
-	
-	func animateNextLetterWithColour(searchText: String, colour: UIColor = UIColor.systemOrange) {
-		let beginning = beginningOfDocument
-		
-		guard
-			let string = text,
-			let range = string.range(of: searchText),
-			let start = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.upperBound) - 1),
-			let end = position(from: beginning, offset: string.distance(from: string.startIndex, to: range.upperBound)),
-			let textRange = textRange(from: start, to: end)
-		else {
-			return
-		}
-		let location = offset(from: beginningOfDocument, to: textRange.start)
-		let length = offset(from: textRange.start, to: textRange.end)
-		let nsRange = NSRange(location: location, length: length)
-
-		
-		let stringCopy = self.attributedText.mutableCopy() as! NSMutableAttributedString
-		stringCopy.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
-		
-		UIView.transition(with: self, duration: 0.25, options: .transitionCrossDissolve, animations: {
-			self.attributedText = stringCopy
-		}, completion: { _ in
-			stringCopy.addAttribute(.foregroundColor, value: colour, range: nsRange)
-			UIView.transition(with: self, duration: 0.25, options: .transitionCrossDissolve, animations: {
-				self.attributedText = stringCopy
-			})
-		})
-	}
-}
-
-extension UITextInput {
-	var selectedRange: NSRange? {
-		guard let range = selectedTextRange else { return nil }
-		let location = offset(from: beginningOfDocument, to: range.start)
-		let length = offset(from: range.start, to: range.end)
-		return NSRange(location: location, length: length)
 	}
 }

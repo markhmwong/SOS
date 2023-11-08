@@ -76,6 +76,8 @@
 		4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */; };
 		4D828C112AFAFA8E006592D1 /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C102AFAFA8E006592D1 /* Once.swift */; };
 		4D828C132AFB0A9D006592D1 /* MainMorseViewController+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */; };
+		4D828C152AFB1204006592D1 /* MainMorseViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */; };
+		4D828C172AFB1304006592D1 /* UITextView+Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C162AFB1304006592D1 /* UITextView+Animate.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
 		4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */; };
@@ -191,6 +193,8 @@
 		4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		4D828C102AFAFA8E006592D1 /* Once.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
 		4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMorseViewController+TextView.swift"; sourceTree = "<group>"; };
+		4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMorseViewController+Animation.swift"; sourceTree = "<group>"; };
+		4D828C162AFB1304006592D1 /* UITextView+Animate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Animate.swift"; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
 		4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
 				43FF12C1286096E10021686B /* MainMorseViewModel.swift */,
 				4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */,
+				4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */,
 				43CA52862869C6FF00DFD40F /* InformationScreens */,
 				43423FCE28AFC5F400ADFB89 /* Messages */,
 				43FF12AA285E96A50021686B /* MenuBar */,
@@ -431,6 +436,7 @@
 				4D6B8BB824693D4F00C6AD60 /* UITableView+Extension.swift */,
 				4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */,
 				4319980C285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift */,
+				4D828C162AFB1304006592D1 /* UITextView+Animate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				43199813285E21EB00AA897A /* UIFont+Extension.swift in Sources */,
 				4DED82D9246524E20027F385 /* States.swift in Sources */,
 				4DF00D5F2474381C008FD867 /* SettingsViewController.swift in Sources */,
+				4D828C172AFB1304006592D1 /* UITextView+Animate.swift in Sources */,
 				4DCE3EBF2AF3F1DE006A09CF /* FooterView.swift in Sources */,
 				43FF12B7285F58C80021686B /* TipJarFiatCell.swift in Sources */,
 				4DF00D5D24743800008FD867 /* MainCoordinator.swift in Sources */,
@@ -800,6 +807,7 @@
 				4DCE3EBD2AF340BC006A09CF /* MorseStateMachineSystemViewDelegate.swift in Sources */,
 				4D6B8BC224693D4F00C6AD60 /* CAShapelayerExtension.swift in Sources */,
 				43FF12C4286311E00021686B /* MessageConversionConfiguration.swift in Sources */,
+				4D828C152AFB1204006592D1 /* MainMorseViewController+Animation.swift in Sources */,
 				4D6B8BCE246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift in Sources */,
 				4DFC0D362461AE460033634E /* SceneDelegate.swift in Sources */,
 				4DC69EB224797EAD009AC9FC /* KeychainWrapper.swift in Sources */,
