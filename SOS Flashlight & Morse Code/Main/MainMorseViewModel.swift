@@ -14,7 +14,7 @@ class MainMorseViewModel: NSObject {
         case main
     }
     
-    enum FlashLightMode: Int, CaseIterable {
+    enum SOSMode: Int, CaseIterable {
         case sos = 0
         case messageConversion // english to morse conversion
         case morseConversion // morse to english conversion
@@ -37,7 +37,7 @@ class MainMorseViewModel: NSObject {
     struct MainItem: Hashable {
         let name: String
         let section: Section
-        let item: FlashLightMode
+        let item: SOSMode
         let flashlight: Flashlight
     }
     
@@ -116,7 +116,7 @@ class MainMorseViewModel: NSObject {
     private func createItems() -> [MainItem] {
         
         var items: [MainItem] = []
-        for i in FlashLightMode.allCases {
+        for i in SOSMode.allCases {
             items.append(MainItem(name: i.name, section: .main, item: i, flashlight: flashlight))
         }
         return items

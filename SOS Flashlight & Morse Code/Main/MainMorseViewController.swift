@@ -314,6 +314,13 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
         loopingLabel.alpha = loopingButton.alpha
         
+		
+		if viewModel.flashlight.mode != .messageConversion {
+			messageField.alpha = 0.0
+			messageField.isEditable = false
+		}
+		
+		
         //gestures
         longPress = createLongGestureRecognizer()
         lockGesture = createLockGestureRecognizer()
@@ -322,7 +329,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         modeObserver = viewModel.flashlight.observe(\.observableMode, options: [.new]) { [weak self] flashlight, change in
             guard let newValue = change.newValue else { return }
             guard let self = self else { return }
-            let mode = MainMorseViewModel.FlashLightMode.init(rawValue: newValue)
+            let mode = MainMorseViewModel.SOSMode.init(rawValue: newValue)
             
             switch mode {
             case .sos:
@@ -350,6 +357,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                 ()
             }
         }
+		
         
         // switch between front and rear text for the labele
         facingSideObserver = viewModel.flashlight.observe(\.observableFacingSide, options: [.new], changeHandler: { [weak self] flashlight, change in
@@ -413,23 +421,45 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
     @objc func showInfo() {
-        if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
+        if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
             viewModel.flashlight.updateMode(mode: mode)
             coordinator.showInfo(mode: viewModel.flashlight.mode)
         }
     }
     
+	// change tool mode between sos, message, conversion, tools
     func scrollToItem(indexPath: IndexPath) {
-        if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: indexPath.item) {
-            viewModel.flashlight.updateMode(mode: mode)
-            mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
+		guard let mode = MainMorseViewModel.SOSMode.init(rawValue: indexPath.item) else {
+			return
+		}
 
+		viewModel.flashlight.updateMode(mode: mode)
+		
+		switch mode {
+			case .messageConversion:
+				showMessageField(alpha: 1.0)
+				
+			case .sos:
+				showMessageField(alpha: 0)
+			case .morseConversion:
+				showMessageField(alpha: 0)
+			case .tools:
+				showMessageField(alpha: 0)
+		}
+
+		mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
+	
+	private func showMessageField(alpha: CGFloat) {
+		UIView.animate(withDuration: 0.15) {
+			self.messageField.alpha = alpha
+		}
+	}
     
     // MARK: - Toggle Light whether it's by a short burst SOS, a Message, a switch or hold
     private func toggleSos() {
         if (stateMachine != nil) {
+			// shut down the state machine in the scenario the user switches between modes
             shutDownStateMachine()
         } else {
             let parser = MorseParser(message: "SOS")
@@ -537,7 +567,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     }
     
     @objc func handleToggle() {
-        if let mode = MainMorseViewModel.FlashLightMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
+        if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
             viewModel.flashlight.updateMode(mode: mode)
             
             if (mainToggleButton.isEnabled) {
