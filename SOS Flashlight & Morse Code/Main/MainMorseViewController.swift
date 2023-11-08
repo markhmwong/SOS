@@ -87,7 +87,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.keyboardType = .alphabet
 		textField.returnKeyType = .done
 		textField.enablesReturnKeyAutomatically = false
-		textField.text = "Let's send a signal"
+		textField.text = "Send a signal"
 		textField.delegate = self
 		textField.autocapitalizationType = .none
 		textField.autocorrectionType = .no

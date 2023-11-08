@@ -11,27 +11,36 @@ import UIKit
 extension MainMorseViewController: UITextViewDelegate {
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		// Get the current text and calculate the new text if the replacement is allowed
-		if(text == "\n") {
-			textView.resignFirstResponder()
-			return false
-		}
-		
-		let currentText = textView.text ?? ""
-		let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
-		
-		// Set your character limit here (e.g., 100 characters)
+		// Define your character limit
 		let characterLimit = 100
 		
-		// Check if the new text exceeds the character limit
-		if newText.count <= characterLimit {
-			return true // Allow the text change
-		} else {
-			// Display an alert or provide some feedback to the user
-			// You can also prevent further text input by returning false
-			print("provide alert box")
+		// Get the current text
+		guard let currentText = textView.text else {
+			return true
+		}
+		
+		// Calculate the new text if the replacement is allowed
+		let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
+		
+		// Ensure the text length doesn't exceed the character limit
+		if newText.count > characterLimit {
 			return false
 		}
+		
+		// Define a regular expression pattern for English letters only
+		let pattern = "^[a-zA-Z ]*$"
+		
+		// Check if the replacement text matches the pattern (only English letters)
+		if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
+			let range = NSRange(location: 0, length: newText.utf16.count)
+			if regex.firstMatch(in: newText, options: [], range: range) == nil {
+				return false
+			}
+		} else {
+			return false
+		}
+		
+		return true
 	}
 }
 
