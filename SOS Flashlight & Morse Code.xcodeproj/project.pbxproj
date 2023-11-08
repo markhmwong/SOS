@@ -74,6 +74,8 @@
 		4D6B8BCE246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BCD246B8B9900C6AD60 /* NSMutableAttributedString+Extension.swift */; };
 		4D6B8BD0246BB93F00C6AD60 /* ImpactFeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */; };
 		4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */; };
+		4D828C112AFAFA8E006592D1 /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C102AFAFA8E006592D1 /* Once.swift */; };
+		4D828C132AFB0A9D006592D1 /* MainMorseViewController+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
 		4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */; };
@@ -187,6 +189,8 @@
 		4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedbackService.swift; sourceTree = "<group>"; };
 		4D6B8BD6246C3DC100C6AD60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D6B8BD9246D7CE400C6AD60 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		4D828C102AFAFA8E006592D1 /* Once.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
+		4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMorseViewController+TextView.swift"; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
 		4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -366,9 +370,11 @@
 		4D01FA922480C86B00F105B9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4D828C102AFAFA8E006592D1 /* Once.swift */,
 				4D34270B2AE9742F00C522FD /* LiveText */,
 				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
 				43FF12C1286096E10021686B /* MainMorseViewModel.swift */,
+				4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */,
 				43CA52862869C6FF00DFD40F /* InformationScreens */,
 				43423FCE28AFC5F400ADFB89 /* Messages */,
 				43FF12AA285E96A50021686B /* MenuBar */,
@@ -763,6 +769,7 @@
 				4DC69EB324797EAD009AC9FC /* KeychainItemAccessibility.swift in Sources */,
 				4D6B8BC324693D4F00C6AD60 /* String+Extension.swift in Sources */,
 				4389396329CF9A66003B6B7C /* SubscriptionService.swift in Sources */,
+				4D828C112AFAFA8E006592D1 /* Once.swift in Sources */,
 				43FF12BC285F6E310021686B /* SectionTitleSupplementaryView.swift in Sources */,
 				4D6B8BBB24693D4F00C6AD60 /* UIColor+Extension.swift in Sources */,
 				43FF12AC285E96BC0021686B /* MenuBar.swift in Sources */,
@@ -770,6 +777,7 @@
 				4DFC0D6B2461CC9A0033634E /* MorseTypeTiming.swift in Sources */,
 				4319980D285DE3EB00AA897A /* UICollectionViewLayout+Extension.swift in Sources */,
 				4D19106A24757E9D00202FA0 /* MorseCodeSheetViewController.swift in Sources */,
+				4D828C132AFB0A9D006592D1 /* MainMorseViewController+TextView.swift in Sources */,
 				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,
 				4D05F3992487ABEE00FA71D2 /* ThankYouViewController.swift in Sources */,
 				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,

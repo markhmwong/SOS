@@ -85,7 +85,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.layer.cornerRadius = 0
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		textField.keyboardType = .alphabet
-		textField.returnKeyType = .continue
+		textField.returnKeyType = .done
 		textField.enablesReturnKeyAutomatically = false
 		textField.text = "Let's send a signal"
 		textField.delegate = self
@@ -97,6 +97,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.layer.cornerRadius = 12.0
 		textField.layer.masksToBounds = true
 		textField.backgroundColor = UIColor.defaultText.inverted
+		textField.target(forAction: #selector(handleDone), withSender: nil)
 		return textField
 	}()
     
@@ -181,6 +182,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
         mainContentCollectionView.isUserInteractionEnabled = loopingButton.isEnabled
     }
+	
+	@objc func handleDone() {
+		print("test")
+	}
     
     override func loadView() {
         super.loadView()
@@ -225,29 +230,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         coordinator.showTipJar()
     }
 	
-	/* Keyboard stuff */
-	
-	func keyboardWillShow(_ notification: Notification) {
-				
-		guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-		let keyboardOriginY = value.cgRectValue.origin.y
-		let adjustment = -(self.messageField.frame.origin.y + self.messageField.frame.height) + keyboardOriginY
-		// Here you could have more complex rules, like checking if the textField currently selected is actually covered by the keyboard, but that's out of this scope.
-		self.bottomConstraint.constant = adjustment
-		print("\(self.messageField.frame.origin.y)")
-		UIView.animate(withDuration: 0.1, animations: { () -> Void in
-			self.view.layoutIfNeeded()
-		})
-	}
-	
-	
-	func keyboardWillHide(_ notification: Notification) {
-		self.bottomConstraint.constant = 0
-		
-		UIView.animate(withDuration: 0.1, animations: { () -> Void in
-			self.view.layoutIfNeeded()
-		})
-	}
+
 
 	
     func setupUI() {
@@ -277,8 +260,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		self.view.addSubview(messageField)
 		
 //		self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
-		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor).isActive = true
-		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor).isActive = true
+		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 10).isActive = true
+		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -10).isActive = true
 		
 		self.liveViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
 		self.liveViewController.view.bottomAnchor.constraint(equalTo: self.menuBar.topAnchor).isActive = true
@@ -672,38 +655,36 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
 
 }
 
-extension MainMorseViewController: UITextViewDelegate {
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		// Get the current text and calculate the new text if the replacement is allowed
-		let currentText = textView.text ?? ""
-		let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
+
+
+extension MainMorseViewController {
+	/* Keyboard stuff */
+	
+	func keyboardWillShow(_ notification: Notification) {
 		
-		// Set your character limit here (e.g., 100 characters)
-		let characterLimit = 100
+		guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+		let keyboardOriginY = value.cgRectValue.origin.y
+		let padding: CGFloat = 10
+		let adjustment = -(self.messageField.frame.origin.y + self.messageField.frame.height) + keyboardOriginY
+		// Here you could have more complex rules, like checking if the textField currently selected is actually covered by the keyboard, but that's out of this scope.
+		self.bottomConstraint.constant = adjustment - padding
+		print("\(self.messageField.frame.origin.y)")
+		UIView.animate(withDuration: 0.1, animations: { () -> Void in
+			self.view.layoutIfNeeded()
+		})
+	}
+	
+	
+	func keyboardWillHide(_ notification: Notification) {
+		self.bottomConstraint.constant = 0
 		
-		// Check if the new text exceeds the character limit
-		if newText.count <= characterLimit {
-			return true // Allow the text change
-		} else {
-			// Display an alert or provide some feedback to the user
-			// You can also prevent further text input by returning false
-			return false
-		}
+		UIView.animate(withDuration: 0.1, animations: { () -> Void in
+			self.view.layoutIfNeeded()
+		})
 	}
 }
 
-// Loads only one time per update
-final class Once {
-    private var version: String = KeychainWrapper.standard.string(forKey: "com.whizbang.sos.appversion") ?? "1.0"
-    
-    func run(action: () -> Void) {
-        // handle new version
-        if (version != Whizbang.appVersion ?? "1.0") {
-            action()
-            KeychainWrapper.standard.set(Whizbang.appVersion ?? "1.0", forKey: "com.whizbang.sos.appversion")
-        }
-    }
-}
+
 
 enum TextFieldError: Error {
     case empty

@@ -52,13 +52,13 @@ class LiveTextViewController: UIViewController {
 		return label
 	}()
 	
-	var viewModel: MainMorseViewModel
+	private var viewModel: MainMorseViewModel
 	
-	var highlightViews: [UIView]
+
 	
 	init(viewModel: MainMorseViewModel) {
 		self.viewModel = viewModel
-		self.highlightViews = []
+
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -125,7 +125,6 @@ class LiveTextViewController: UIViewController {
 	}
 	
 	deinit {
-		self.highlightViews = []
 		NotificationCenter.default.removeObserver(self, name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
 	}
 }
