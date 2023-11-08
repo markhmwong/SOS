@@ -91,6 +91,14 @@ class LiveTextViewController: UIViewController {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(updateLabel), name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(tidyUpHighlightViews), name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(updateText), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+	}
+	
+	@objc func updateText(_ sender: Notification) {
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
+		liveText.text = message
+		staticLiveText.text = message
 	}
 	
 	@objc func updateLabel(_ notification: Notification) {

@@ -15,7 +15,7 @@ extension MainMorseViewController: UITextViewDelegate {
 	}
 	
 	// button above keyboard
-	@objc func handleEndEditing() {
+	@objc func handleSendSignal() {
 		messageField.resignFirstResponder()
 		// assign viewmodel.messagetoflash
 		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
@@ -35,7 +35,7 @@ extension MainMorseViewController: UITextViewDelegate {
 		let clearButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .done, target: self, action: #selector(handleClear))
 		clearButton.tintColor = UIColor.defaultText
 		
-		let doneButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(handleEndEditing))
+		let doneButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(handleSendSignal))
 		doneButton.tintColor = UIColor.defaultText
 		
 		// do save button later just keep recents
