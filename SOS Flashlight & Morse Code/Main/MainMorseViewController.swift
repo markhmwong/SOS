@@ -203,6 +203,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		
         NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateMessageField), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+
 		
         let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
         settings.tintColor = UIColor.defaultText
@@ -259,18 +261,21 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
 		self.view.addSubview(messageField)
 		
-//		self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
-		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 10).isActive = true
-		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -10).isActive = true
+		self.messageToolbar()
+		startObservingKeyboardChanges()
+		
+		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 20).isActive = true
+		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -20).isActive = true
+		self.bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
+		self.bottomConstraint.isActive = true
+		
 		
 		self.liveViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
 		self.liveViewController.view.bottomAnchor.constraint(equalTo: self.menuBar.topAnchor).isActive = true
 		self.liveViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
 		self.liveViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
 
-		self.bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
-		self.bottomConstraint.isActive = true
-		startObservingKeyboardChanges()
+
 		
         var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         holdToLockLabelConstraint.constant = -70
@@ -410,6 +415,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 			self?.keyboardWillHide(notification)
 		}
 	}
+	
+	@objc func updateMessageField(_ sender: Notification) {
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
+
+		self.messageField.text = message
+	}
     
     @objc func handleFacingSide() {
         switch viewModel.flashlight.facingSide {
@@ -438,13 +449,16 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		switch mode {
 			case .messageConversion:
 				showMessageField(alpha: 1.0)
-				
+				messageField.isEditable = true
 			case .sos:
 				showMessageField(alpha: 0)
+				messageField.isEditable = false
 			case .morseConversion:
 				showMessageField(alpha: 0)
+				messageField.isEditable = false
 			case .tools:
 				showMessageField(alpha: 0)
+				messageField.isEditable = false
 		}
 
 		mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)

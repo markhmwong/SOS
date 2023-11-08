@@ -132,6 +132,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         addSubview(savedMessagesButton)
         
         guard let config = self.configuration as? MessageConversionConfiguration else { return }
+		
         flashlightObserver = config.mainItem.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
             guard let light = change.newValue else { return }
             if flashlight.flashlightMode() == .messageConversion {
@@ -172,7 +173,6 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         ]
         keyboardToolbar.barStyle = .default
         messageField.inputAccessoryView = keyboardToolbar
-
     }
     
     func enableFirstResponder() {

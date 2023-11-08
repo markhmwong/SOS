@@ -44,8 +44,6 @@ class RecentMessagesViewModel: NSObject {
                 print("Already exists")
                 #endif
             }
-            
-            
         } else {
             fatalError("Recent does not exist")
         }
@@ -55,7 +53,7 @@ class RecentMessagesViewModel: NSObject {
         let cell = UICollectionView.CellRegistration<RecentMessageCell, Recent> { (cell, indexPath, item) in
             var content = UIListContentConfiguration.subtitleCell()
             content.text = item.value
-            content.textProperties.color = .white
+			content.textProperties.color = .defaultText
             cell.contentConfiguration = content
             cell.item = item
         }
@@ -147,7 +145,12 @@ class RecentMessagesViewController: UIViewController, NSFetchedResultsController
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+		let cell = collectionView.cellForItem(at: indexPath) as! RecentMessageCell
+		guard let message = cell.item?.value else {
+			return
+		}
+		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : message])
+		self.coordinator.dismiss()
     }
     
     
