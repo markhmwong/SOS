@@ -133,7 +133,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         return label
     }()
 	
-	private var liveViewController: LiveTextViewController
+	private var liveTextViewController: LiveTextViewController
     
 	
     var longPress: UILongPressGestureRecognizer! =  nil
@@ -151,7 +151,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     init(viewModel: MainMorseViewModel, coordinator: MainCoordinator) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-		self.liveViewController = LiveTextViewController(viewModel: viewModel)
+		self.liveTextViewController = LiveTextViewController(viewModel: viewModel)
 		super.init(nibName: nil, bundle: nil)
     }
     
@@ -243,8 +243,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(mainContentCollectionView)
 		
 		// move back to setupUIV3 once initial testing is complete
-		addChild(liveViewController)
-		view.addSubview(liveViewController.view)
+		addChild(liveTextViewController)
+		view.addSubview(liveTextViewController.view)
 
 
 		view.addSubview(menuBar)
@@ -269,10 +269,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		bottomConstraint.isActive = true
 		
 		
-		liveViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		liveViewController.view.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
-		liveViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-		liveViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+		liveTextViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+		liveTextViewController.view.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
+		liveTextViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		liveTextViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
 
 		
@@ -450,9 +450,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		// message field configurations
 		switch mode {
 			case .messageConversion:
+				liveTextViewController.updateTextFields(message: "Send a Signal")
 				showMessageField(alpha: 1.0)
 				messageField.isEditable = true
 			case .sos:
+				liveTextViewController.updateTextFields(message: "SOS")
 				showMessageField(alpha: 0)
 				messageField.isEditable = false
 			case .morseConversion:
@@ -482,7 +484,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             let parser = MorseParser(message: "SOS")
             stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
 			
-			liveViewController.stateMachine = self.stateMachine
+			liveTextViewController.stateMachine = self.stateMachine
 
 			guard let stateMachine = stateMachine else { return }
             stateMachine.loopState = viewModel.flashlight.loop
@@ -495,7 +497,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         // save message to core data in the recent object
         if (stateMachine != nil) {
 			// clear live text
-			liveViewController.tidyUpHighlightViews()
+			liveTextViewController.tidyUpHighlightViews()
 			// reset state machine
             shutDownStateMachine()
         } else {

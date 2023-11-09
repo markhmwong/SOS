@@ -89,7 +89,7 @@ class LiveTextViewController: UIViewController {
 			staticLiveText.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 0)
 		])
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(updateLabel), name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(animateCharacters), name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(tidyUpHighlightViews), name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(updateText), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
@@ -97,11 +97,15 @@ class LiveTextViewController: UIViewController {
 	
 	@objc func updateText(_ sender: Notification) {
 		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
+		updateTextFields(message: message)
+	}
+	
+	func updateTextFields(message: String) {
 		liveText.text = message
 		staticLiveText.text = message
 	}
 	
-	@objc func updateLabel(_ notification: Notification) {
+	@objc func animateCharacters(_ notification: Notification) {
 		if let text = notification.userInfo?["updatedText"] as? String {
 			print("received \(text)")
 			liveText.animateNextLetterWithColour(searchText: text)
