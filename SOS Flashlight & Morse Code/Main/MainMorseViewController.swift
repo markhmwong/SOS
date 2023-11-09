@@ -542,9 +542,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
     @objc func handleLockGesture(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            print("began")
-            print("lock gesture")
-            self.handleLock()
+            handleLock()
+			ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
         }
     }
     
