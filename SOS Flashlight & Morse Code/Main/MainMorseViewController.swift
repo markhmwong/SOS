@@ -445,6 +445,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
 		viewModel.flashlight.updateMode(mode: mode)
 		
+		shutDownStateMachine()
+		
+		// message field configurations
 		switch mode {
 			case .messageConversion:
 				showMessageField(alpha: 1.0)
@@ -459,7 +462,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				showMessageField(alpha: 0)
 				messageField.isEditable = false
 		}
-
+			
+		// update collection view
 		mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 	
