@@ -52,7 +52,7 @@ class MainMorseViewModel: NSObject {
     var sosLock: Bool = false
     
     // used for custom morse message to delivery via the flash light
-    var messageToBeFlashed: String = ""
+    var messageToBeSignalled: String = ""
 
     var loopState: Bool = false
     
@@ -75,16 +75,16 @@ class MainMorseViewModel: NSObject {
         self.currIndex = 0
 
         super.init()
-		nc.addObserver(self, selector: #selector(updateMessageToFlash), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+		nc.addObserver(self, selector: #selector(updateMessageToSignal), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
     }
     
-    @objc func updateMessageToFlash(_ sender: NSNotification) {
+    @objc func updateMessageToSignal(_ sender: NSNotification) {
 
 		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] != nil, "Message is nil")
 		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
         
 		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
-        messageToBeFlashed = message
+        messageToBeSignalled = message
     }
 
     private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, MainItem> {

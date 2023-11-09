@@ -493,8 +493,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         if (stateMachine != nil) {
             shutDownStateMachine()
         } else {
-            if viewModel.messageToBeFlashed != "" {
-                let parser = MorseParser(message: viewModel.messageToBeFlashed)
+            if viewModel.messageToBeSignalled != "" {
+                let parser = MorseParser(message: viewModel.messageToBeSignalled)
                 stateMachine = MorseCodeStateMachineSystem(morseParser: parser, delegate: self)
                 guard let stateMachine = stateMachine else { return }
                 stateMachine.loopState = viewModel.flashlight.loop
@@ -508,7 +508,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         guard let moc = viewModel.cds.moc else { return }
         let r = Recent(context: moc)
         // id and date are default values in the function argument array
-        r.newRecentObj(value: viewModel.messageToBeFlashed)
+        r.newRecentObj(value: viewModel.messageToBeSignalled)
         viewModel.cds.saveContext()
     }
     

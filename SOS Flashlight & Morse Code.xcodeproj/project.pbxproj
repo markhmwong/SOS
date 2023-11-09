@@ -78,6 +78,8 @@
 		4D828C132AFB0A9D006592D1 /* MainMorseViewController+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */; };
 		4D828C152AFB1204006592D1 /* MainMorseViewController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */; };
 		4D828C172AFB1304006592D1 /* UITextView+Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C162AFB1304006592D1 /* UITextView+Animate.swift */; };
+		4D828C1A2AFC6B7F006592D1 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */; };
+		4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
 		4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */; };
@@ -195,6 +197,8 @@
 		4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMorseViewController+TextView.swift"; sourceTree = "<group>"; };
 		4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMorseViewController+Animation.swift"; sourceTree = "<group>"; };
 		4D828C162AFB1304006592D1 /* UITextView+Animate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Animate.swift"; sourceTree = "<group>"; };
+		4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
+		4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewModel.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
 		4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -274,7 +278,7 @@
 		43423FCE28AFC5F400ADFB89 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				43423FCF28AFC60800ADFB89 /* RecentMessagesViewController.swift */,
+				4D828C182AFC6B72006592D1 /* Recent */,
 				43423FD928B0EA3000ADFB89 /* SavedMessagesViewController.swift */,
 			);
 			path = Messages;
@@ -458,6 +462,16 @@
 				4DF00D5C24743800008FD867 /* MainCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		4D828C182AFC6B72006592D1 /* Recent */ = {
+			isa = PBXGroup;
+			children = (
+				43423FCF28AFC60800ADFB89 /* RecentMessagesViewController.swift */,
+				4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */,
+				4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */,
+			);
+			path = Recent;
 			sourceTree = "<group>";
 		};
 		4DC69EAA24797E6D009AC9FC /* IAP */ = {
@@ -752,6 +766,7 @@
 				4D6B8BBF24693D4F00C6AD60 /* UIImage+Extension.swift in Sources */,
 				43423FE028B16C7C00ADFB89 /* WarningBox.swift in Sources */,
 				43FF12B6285F58C80021686B /* TipJarCryptoCell.swift in Sources */,
+				4D828C1A2AFC6B7F006592D1 /* RecentMessageCell.swift in Sources */,
 				430634872867F69E0097E238 /* NotificationCenter.swift in Sources */,
 				4DFC0D692461CC800033634E /* Flashlight.swift in Sources */,
 				4319980B285DE31E00AA897A /* MainMorseViewController.swift in Sources */,
@@ -787,6 +802,7 @@
 				4D6B8BC524693D4F00C6AD60 /* UIBarButtonItem+Extension.swift in Sources */,
 				4D05F3992487ABEE00FA71D2 /* ThankYouViewController.swift in Sources */,
 				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,
+				4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */,
 				43423FDA28B0EA3000ADFB89 /* SavedMessagesViewController.swift in Sources */,
 				43199811285E1FAD00AA897A /* MenuBarCell.swift in Sources */,
 				43199813285E21EB00AA897A /* UIFont+Extension.swift in Sources */,

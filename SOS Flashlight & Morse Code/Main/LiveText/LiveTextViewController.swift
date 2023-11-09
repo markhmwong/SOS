@@ -76,16 +76,16 @@ class LiveTextViewController: UIViewController {
 		view.addSubview(staticLiveText)
 		view.addSubview(liveText)
 		
-		
-		liveText.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-		liveText.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-		liveText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:0).isActive = true
+		let padding = 20.0
+		liveText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding).isActive = true
+		liveText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding).isActive = true
+		liveText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:padding).isActive = true
 		liveText.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 		
 		NSLayoutConstraint.activate([
-			staticLiveText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-			staticLiveText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-			staticLiveText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+			staticLiveText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+			staticLiveText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+			staticLiveText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
 			staticLiveText.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 0)
 		])
 		

@@ -62,14 +62,20 @@ extension MainMorseViewController: UITextViewDelegate {
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
-		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-//		textMessage = textView.text
+		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
+
 	}
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		if text.contains("\n") {
+			// Ignore newline characters
+			return false
+		}
+		
 		// Define your character limit
 		let characterLimit = 100
 		
