@@ -37,6 +37,7 @@ class LiveTextViewController: UIViewController {
 		label.backgroundColor = .clear
 		label.layer.opacity = 1.0 // initial opacity to show it has not been converted by the parser
 		label.textAlignment = .center
+		label.isEditable = false
 		return label
 	}()
 	
@@ -45,10 +46,11 @@ class LiveTextViewController: UIViewController {
 		label.font = UIFont.preferredFont(forTextStyle: .largeTitle).with(weight: .bold)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
-		label.textColor = .black
+		label.textColor = UIColor.defaultText
 		label.backgroundColor = .clear
 		label.layer.opacity = 1.0 // initial opacity to show it has not been converted by the parser
 		label.textAlignment = .center
+		label.isEditable = false
 		return label
 	}()
 	
@@ -113,7 +115,7 @@ class LiveTextViewController: UIViewController {
 	}
 	
 	@objc func tidyUpHighlightViews() {
-		liveText.animateFullTextWithColour(searchText: staticLiveText.text, colour: UIColor.defaultBlack)
+		liveText.animateFullTextWithColour(searchText: staticLiveText.text, colour: UIColor.defaultText)
 	}
 	
 	deinit {

@@ -63,8 +63,10 @@ class RecentMessagesViewController: UIViewController, NSFetchedResultsController
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         vm.configureDataSource(collectionView: collectionView, fetcher: mainFetcher)
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleDismissViewController))
     }
-    
+	
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let cell = collectionView.cellForItem(at: indexPath) as! RecentMessageCell
 		guard let message = cell.item?.value else {
@@ -73,7 +75,10 @@ class RecentMessagesViewController: UIViewController, NSFetchedResultsController
 		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : message])
 		self.coordinator.dismiss()
     }
-    
+	
+	@objc private func handleDismissViewController() {
+		self.coordinator.dismiss()
+	}
     
     deinit {
         mainFetcher = nil

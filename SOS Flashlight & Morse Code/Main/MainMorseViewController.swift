@@ -102,18 +102,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		return textField
 	}()
     
-//    lazy var lockButton: UIButton = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(handleLock), for: .touchDown)
-//        let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
-//        let image = UIImage(systemName: "lock.fill", withConfiguration: config)
-//        button.setImage(image, for: .normal)
-//        button.tintColor = .defaultText
-//        button.backgroundColor = .clear
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
-    
     lazy var lockImage: UIImageView = {
         let symbolConfig: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body))
         let image: UIImage = UIImage(systemName: "lock.fill",withConfiguration: symbolConfig)!

@@ -325,14 +325,14 @@
 			path = InformationScreens;
 			sourceTree = "<group>";
 		};
-		43FF12AA285E96A50021686B /* MenuBar */ = {
+		43FF12AA285E96A50021686B /* ModeMenuBar */ = {
 			isa = PBXGroup;
 			children = (
 				43199810285E1FAD00AA897A /* MenuBarCell.swift */,
 				43FF12A7285E968D0021686B /* MenuBarDataSource.swift */,
 				43FF12AB285E96BC0021686B /* MenuBar.swift */,
 			);
-			path = MenuBar;
+			path = ModeMenuBar;
 			sourceTree = "<group>";
 		};
 		43FF12AF285F58C80021686B /* Tip Jar */ = {
@@ -386,7 +386,7 @@
 				4D828C142AFB1204006592D1 /* MainMorseViewController+Animation.swift */,
 				43CA52862869C6FF00DFD40F /* InformationScreens */,
 				43423FCE28AFC5F400ADFB89 /* Messages */,
-				43FF12AA285E96A50021686B /* MenuBar */,
+				43FF12AA285E96A50021686B /* ModeMenuBar */,
 				43FF12BD286089280021686B /* Cell */,
 				43FF12BB285F6E310021686B /* SectionTitleSupplementaryView.swift */,
 				4DE7EFAB247D35530017958E /* SeizureWarningViewController.swift */,
