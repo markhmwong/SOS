@@ -490,6 +490,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     func toggleMessage() {
         // save message to core data in the recent object
         if (stateMachine != nil) {
+			// clear live text
+			liveViewController.tidyUpHighlightViews()
+			// reset state machine
             shutDownStateMachine()
         } else {
             if viewModel.messageToBeSignalled != "" {
@@ -598,7 +601,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                     TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
                     toggleMessage()
-                    viewModel.cds.limitRecentMessages()
+                    viewModel.cds.cleanupRecentMessages()
                 case .tools:
                     TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
                     ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)

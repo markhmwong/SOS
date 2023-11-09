@@ -108,7 +108,7 @@ class LiveTextViewController: UIViewController {
 		}
 	}
 	
-	@objc func tidyUpHighlightViews(_ notification: Notification) {
+	@objc func tidyUpHighlightViews() {
 		liveText.animateFullTextWithColour(searchText: staticLiveText.text, colour: UIColor.defaultBlack)
 	}
 	
