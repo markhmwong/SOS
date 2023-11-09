@@ -86,6 +86,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         self.configuration = configuration
         super.init(frame: .zero)
         self.configure()
+		self.disableViews()
     }
     
     required init?(coder: NSCoder) {
@@ -97,6 +98,17 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         frontCircleIndicator = CAShapeLayer().circularShapeLayer(path: path.cgPath, color: UIColor.clear.cgColor, fillColor: UIColor.Indicator.dim.cgColor, strokeEnd: 1, lineWidth: 5)
         layer.addSublayer(frontCircleIndicator)
     }
+	
+	private func disableViews() {
+		messageField.isHidden = true
+		messageField.alpha = 0
+		
+		recentMessagesButton.alpha = 0
+		recentMessagesButton.isHidden = true
+		
+		savedMessagesButton.alpha = 0
+		savedMessagesButton.isHidden = true
+	}
     
     func updateIndicator() {
         DispatchQueue.main.async {

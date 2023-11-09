@@ -95,11 +95,23 @@ class ConversionView: UIView, UIContentView, UITextViewDelegate {
         self.configuration = configuration
         super.init(frame: .zero)
         self.configure()
+		self.disableViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	private func disableViews() {
+		topTextView.alpha = 0
+		topTextView.isHidden = true
+		
+		bottomTextView.alpha = 0
+		bottomTextView.isHidden = true
+		
+		bottomBorder.alpha = 0
+		bottomBorder.isHidden = true
+	}
     
     private func configure() {
         guard let config = self.configuration as? ConversionConfiguration else { return }

@@ -30,6 +30,29 @@ extension MainMorseViewController: UITextViewDelegate {
 		// assign viewmodel.messagetoflash
 	}
 	
+	//kvo to observe lightswitch flash front and rear
+	func flashlightFacade() {
+		flashlightObserver = viewModel.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
+			guard let light = change.newValue else { return }
+			if flashlight.flashlightMode() == .messageConversion {
+				// front facing
+				if flashlight.facingSide == .rear {
+//					light ? self.updateFrontIndicator(UIColor.Indicator.flashing.cgColor) : self.updateFrontIndicator(UIColor.Indicator.dim.cgColor)
+				} else {
+					if light {
+						UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+//							self.backgroundColor = UIColor.mainBackground.inverted
+						}
+					} else {
+						UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+//							self.backgroundColor = UIColor.mainBackground
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	func messageToolbar() {
 		let keyboardToolbar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 44.0)))
 		let clearButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .done, target: self, action: #selector(handleClear))
@@ -61,18 +84,15 @@ extension MainMorseViewController: UITextViewDelegate {
 		messageField.inputAccessoryView = keyboardToolbar
 	}
 	
-	func textViewDidChange(_ textView: UITextView) {
-		
-	}
-	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
-
 	}
+	
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 		if text.contains("\n") {
 			// Ignore newline characters
+			textView.endEditing(true)
 			return false
 		}
 		

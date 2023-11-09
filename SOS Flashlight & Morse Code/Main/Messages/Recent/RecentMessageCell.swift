@@ -41,7 +41,7 @@ class RecentMessageCell: UICollectionViewCell {
 	}
 	
 	private func configure() {
-		contentView.backgroundColor = .gray
+		contentView.backgroundColor = .clear
 		addSubview(self.addButton)
 		
 		addButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true

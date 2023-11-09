@@ -12,7 +12,7 @@ import GoogleMobileAds
 
 class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
-    private var viewModel: MainMorseViewModel
+    var viewModel: MainMorseViewModel
   
     var mainContentCollectionView: UICollectionView! = nil
     
@@ -23,6 +23,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     private var stateMachine: MorseCodeStateMachineSystem? = nil
 
     private var  bannerView: GADBannerView!
+	
+	var flashlightObserver: NSKeyValueObservation?
     
     lazy var mainToggleButton: UIButton = {
         let button = UIButton()
@@ -97,7 +99,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.layer.cornerRadius = 12.0
 		textField.layer.masksToBounds = true
 		textField.backgroundColor = UIColor.defaultText.inverted
-		textField.target(forAction: #selector(handleDone), withSender: nil)
 		return textField
 	}()
     
@@ -182,10 +183,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
         mainContentCollectionView.isUserInteractionEnabled = loopingButton.isEnabled
     }
-	
-	@objc func handleDone() {
-		print("test")
-	}
     
     override func loadView() {
         super.loadView()
@@ -246,38 +243,40 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(mainContentCollectionView)
 		
 		// move back to setupUIV3 once initial testing is complete
-		self.addChild(self.liveViewController)
-		self.view.addSubview(self.liveViewController.view)
+		addChild(liveViewController)
+		view.addSubview(liveViewController.view)
 
 
-		self.view.addSubview(menuBar)
-		self.view.addSubview(mainToggleButton)
-		self.view.addSubview(facingButton)
-		self.view.addSubview(facingLabel)
-		self.view.addSubview(loopingButton)
-		self.view.addSubview(loopingLabel)
-		self.view.addSubview(lockImage)
-		self.view.addSubview(holdToLockLabel)
+		view.addSubview(menuBar)
+		view.addSubview(mainToggleButton)
+		view.addSubview(facingButton)
+		view.addSubview(facingLabel)
+		view.addSubview(loopingButton)
+		view.addSubview(loopingLabel)
+		view.addSubview(lockImage)
+		view.addSubview(holdToLockLabel)
 
-		self.view.addSubview(messageField)
+		view.addSubview(messageField)
 		
-		self.messageToolbar()
+		// message to signal methods
+		messageToolbar()
+		flashlightFacade()
 		startObservingKeyboardChanges()
 		
-		self.messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 20).isActive = true
-		self.messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -20).isActive = true
-		self.bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
-		self.bottomConstraint.isActive = true
+		messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 20).isActive = true
+		messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -20).isActive = true
+		bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
+		bottomConstraint.isActive = true
 		
 		
-		self.liveViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-		self.liveViewController.view.bottomAnchor.constraint(equalTo: self.menuBar.topAnchor).isActive = true
-		self.liveViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-		self.liveViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+		liveViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+		liveViewController.view.bottomAnchor.constraint(equalTo: menuBar.topAnchor).isActive = true
+		liveViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		liveViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
 
 		
-        var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         holdToLockLabelConstraint.constant = -70
         holdToLockLabelConstraint.isActive = true
 
