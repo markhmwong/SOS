@@ -55,12 +55,12 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 		return label
 	}()
 	
-	lazy var copyButton: UIButton = {
+	private lazy var copyButton: UIButton = {
 		let button = UIButton()
-		let image = UIImage(systemName: "list.clipboard.fill")
+		let image = UIImage(systemName: "list.clipboard.fill")?.withRenderingMode(.alwaysTemplate)
+		button.tintColor = .defaultText
 		button.setImage(image, for: .normal)
 		button.addTarget(self, action: #selector(handleCopy), for: .touchUpInside)
-		
 		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()

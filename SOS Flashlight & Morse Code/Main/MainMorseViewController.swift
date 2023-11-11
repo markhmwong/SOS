@@ -93,6 +93,16 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		return button
 	}()
 	
+	lazy var holdLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.text = "Hold" // front or rear
+		label.alpha = 0
+		label.font = UIFont.preferredFont(forTextStyle: .caption1)
+		label.textColor = UIColor.defaultText
+		return label
+	}()
+	
 	lazy var messageField: UITextView = {
 		let textField = UITextView()
 		textField.tintColor = UIColor.defaultText
@@ -261,6 +271,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		view.addSubview(holdToLockLabel)
 
 		view.addSubview(messageField)
+		view.addSubview(holdLabel)
 		
 		// message to signal methods
 		messageToolbar()
@@ -280,6 +291,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
 		holdButton.leadingAnchor.constraint(equalTo: loopingButton.trailingAnchor, constant: 30).isActive = true
 		holdButton.centerYAnchor.constraint(equalTo: loopingButton.centerYAnchor).isActive = true
+		
+		holdLabel.topAnchor.constraint(equalTo: holdButton.bottomAnchor, constant: 10).isActive = true
+		holdLabel.centerXAnchor.constraint(equalTo: holdButton.centerXAnchor).isActive = true
 		
         var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         holdToLockLabelConstraint.constant = -70
@@ -462,6 +476,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				UIView.animate(withDuration: 0.1) {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
+					self.holdLabel.alpha = 0.0
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -474,6 +489,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				UIView.animate(withDuration: 0.1) {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
+					self.holdLabel.alpha = 0.0
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -487,6 +503,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				UIView.animate(withDuration: 0.1) {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
+					self.holdLabel.alpha = 0.0
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -499,6 +516,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				UIView.animate(withDuration: 0.1) {
 					self.liveTextViewController.view.alpha = 0
 					self.holdButton.alpha = 1.0
+					self.holdLabel.alpha = 1.0
 					self.loopingButton.alpha = 0.0
 					self.loopingLabel.alpha = 0.0
 				}
