@@ -171,6 +171,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	/* MARK: - Button selector methods */
     
     @objc func handleSavedMessages() {
         coordinator.showSavedMessages(cds: self.viewModel.cds)
@@ -197,15 +199,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView.isUserInteractionEnabled = loopingButton.isEnabled
     }
     
-    override func loadView() {
-        super.loadView()
-        self.setupUI()
-		
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+		self.setupUI()
         mainContentCollectionView.isDirectionalLockEnabled = false
         mainContentCollectionView.isScrollEnabled = false
         mainContentCollectionView.showsVerticalScrollIndicator = false
@@ -232,7 +228,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         AppStoreReviewManager.requestReviewIfAppropriate()
     }
 	
-	/* Navigation Related */
+	/* MARK: - Navigation Related */
     
     @objc func showSettings() {
         coordinator.showSettings()
@@ -242,7 +238,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         coordinator.showTipJar()
     }
 	
+	@objc func showInfo() {
+		if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
+			viewModel.flashlight.updateMode(mode: mode)
+			coordinator.showInfo(mode: viewModel.flashlight.mode)
+		}
+	}
 
+	private func showMessageField(alpha: CGFloat) {
+		UIView.animate(withDuration: 0.15) {
+			self.messageField.alpha = alpha
+		}
+	}
 
 	
     func setupUI() {
@@ -449,18 +456,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    @objc func showInfo() {
-        if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
-            viewModel.flashlight.updateMode(mode: mode)
-            coordinator.showInfo(mode: viewModel.flashlight.mode)
-        }
-    }
+
     
 	// change tool mode between sos, message, conversion, tools
-    func scrollToItem(indexPath: IndexPath) {
-		guard let mode = MainMorseViewModel.SOSMode.init(rawValue: indexPath.item) else {
-			return
-		}
+	func scrollToModeWith(mode: MainMorseViewModel.SOSMode) {
 
 		viewModel.flashlight.updateMode(mode: mode)
 		
@@ -524,16 +523,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				loopingButton.isEnabled = false
 				
 		}
-			
-		// update collection view
-		mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 	
-	private func showMessageField(alpha: CGFloat) {
-		UIView.animate(withDuration: 0.15) {
-			self.messageField.alpha = alpha
-		}
-	}
+
     
     // MARK: - Toggle Light whether it's by a short burst SOS, a Message, a switch or hold
     private func toggleSos() {
@@ -604,28 +596,28 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 //                mainView.bottomContainer.updateButtonColor(state: viewModel.kLightState)
 //        }
     }
-    
-    func createLockGestureRecognizer() -> UILongPressGestureRecognizer {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLockGesture))
-        gesture.minimumPressDuration = 1.5
-        gesture.delaysTouchesBegan = true
-        return gesture
-    }
-    
-    @objc func handleLockGesture(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
-            handleLock()
+
+//     MARK: - Touch Gestures
+	func createLockGestureRecognizer() -> UILongPressGestureRecognizer {
+		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLockGesture))
+		gesture.minimumPressDuration = 1.5
+		gesture.delaysTouchesBegan = true
+		return gesture
+	}
+	
+	@objc func handleLockGesture(gesture: UILongPressGestureRecognizer) {
+		if gesture.state == .began {
+			handleLock()
 			ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-        }
-    }
-    
-    func createLongGestureRecognizer() -> UILongPressGestureRecognizer {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        gesture.minimumPressDuration = 0.01
-        return gesture
-    }
-    
-    
+		}
+	}
+	
+	func createLongGestureRecognizer() -> UILongPressGestureRecognizer {
+		let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+		gesture.minimumPressDuration = 0.01
+		return gesture
+	}
+	
     private var longPressGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer(target: MainMorseViewController.self, action: #selector(handleLongPress))
         return gesture
@@ -728,6 +720,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 	}
 }
 
+// MARK: - Delegate methods for state machine
 extension MainMorseViewController: MorseStateMachineSystemDelegate {
     // Right before the state machine begins to loop.
     func willLoop() {
