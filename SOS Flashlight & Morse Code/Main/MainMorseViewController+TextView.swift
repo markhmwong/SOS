@@ -18,7 +18,15 @@ extension MainMorseViewController: UITextViewDelegate {
 	@objc func handleSendSignal() {
 		messageField.resignFirstResponder()
 		// assign viewmodel.messagetoflash
-		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		switch viewModel.flashlight.mode {
+			case .messageConversion:
+				NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
+			case .morseConversion:
+				NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_TEXT), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_TEXT : messageField.text ?? ""])
+			case .tools, .sos:
+				() // can safely do nothing. the textbox won't appear for sos and tools mode
+		}
+		
 	}
 	
 	@objc func handleSave() {
@@ -58,14 +66,14 @@ extension MainMorseViewController: UITextViewDelegate {
 		let clearButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .done, target: self, action: #selector(handleClear))
 		clearButton.tintColor = UIColor.defaultText
 		
-		let doneButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(handleSendSignal))
-		doneButton.tintColor = UIColor.defaultText
+		let sendButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(handleSendSignal))
+		sendButton.tintColor = UIColor.defaultText
 		
 		// do save button later just keep recents
 //		let saveButton =  UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down.fill"), style: .done, target: self, action: #selector(handleSave))
 //		saveButton.tintColor = UIColor.defaultText
 		
-		let recentButton =  UIBarButtonItem(image: UIImage(systemName: "clock.arrow.circlepath"), style: .done, target: self, action: #selector(handleRecentButton))
+		recentButton =  UIBarButtonItem(image: UIImage(systemName: "clock.arrow.circlepath"), style: .done, target: self, action: #selector(handleRecentButton))
 		recentButton.tintColor = UIColor.defaultText
 		
 		let fixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
@@ -78,7 +86,7 @@ extension MainMorseViewController: UITextViewDelegate {
 			fixedSpaceItem,
 			//saveButton,
 			//fixedSpaceItem,
-			doneButton
+			sendButton
 		]
 		keyboardToolbar.barStyle = .default
 		messageField.inputAccessoryView = keyboardToolbar

@@ -30,7 +30,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleToggle), for: .touchDown)
         let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 27, weight: .bold, scale: .large)
-        let image = UIImage(systemName: "bolt.circle.fill", withConfiguration: config)
+        let image = UIImage(systemName: "togglepower", withConfiguration: config)
         button.setImage(image, for: .normal)
         button.tintColor = .defaultText
         button.backgroundColor = .clear
@@ -80,16 +80,29 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         return button
     }()
 	
+	lazy var holdButton: UIButton = {
+		let button = UIButton()
+		button.addTarget(self, action: #selector(handleHold), for: .touchDown)
+		let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 60, weight: .bold, scale: .large)
+		let image = UIImage(systemName: "pause.fill", withConfiguration: config)
+		button.setImage(image, for: .normal)
+		button.tintColor = .defaultText
+		button.backgroundColor = .clear
+		button.translatesAutoresizingMaskIntoConstraints = false
+		button.alpha = 0
+		return button
+	}()
+	
 	lazy var messageField: UITextView = {
 		let textField = UITextView()
 		textField.tintColor = UIColor.defaultText
-		textField.font = UIFont.preferredFont(forTextStyle: .title2)
+		textField.font = UIFont.preferredFont(forTextStyle: .body)
 		textField.layer.cornerRadius = 0
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		textField.keyboardType = .alphabet
 		textField.returnKeyType = .done
 		textField.enablesReturnKeyAutomatically = false
-		textField.text = "Send a signal"
+		textField.text = "Type a message.."
 		textField.delegate = self
 		textField.autocapitalizationType = .none
 		textField.autocorrectionType = .no
@@ -135,6 +148,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     private var facingSideObserver: NSKeyValueObservation? = nil
 
 	private weak var bottomConstraint: NSLayoutConstraint!
+	
+	var recentButton: UIBarButtonItem! = nil
 	
     init(viewModel: MainMorseViewModel, coordinator: MainCoordinator) {
         self.coordinator = coordinator
@@ -240,6 +255,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		view.addSubview(facingButton)
 		view.addSubview(facingLabel)
 		view.addSubview(loopingButton)
+		view.addSubview(holdButton)
 		view.addSubview(loopingLabel)
 		view.addSubview(lockImage)
 		view.addSubview(holdToLockLabel)
@@ -262,7 +278,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		liveTextViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 		liveTextViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
-
+		holdButton.leadingAnchor.constraint(equalTo: loopingButton.trailingAnchor, constant: 30).isActive = true
+		holdButton.centerYAnchor.constraint(equalTo: loopingButton.centerYAnchor).isActive = true
 		
         var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         holdToLockLabelConstraint.constant = -70
@@ -438,19 +455,56 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		// message field configurations
 		switch mode {
 			case .messageConversion:
-				liveTextViewController.updateTextFields(message: "Send a Signal")
+				liveTextViewController.updateTextFields(message: "Send a signal")
 				showMessageField(alpha: 1.0)
 				messageField.isEditable = true
+				recentButton.isEnabled = true
+				UIView.animate(withDuration: 0.1) {
+					self.liveTextViewController.view.alpha = 1.0
+					self.holdButton.alpha = 0.0
+					self.loopingButton.alpha = 1.0
+					self.loopingLabel.alpha = 1.0
+				}
+				holdButton.isEnabled = false
+				loopingButton.isEnabled = true
 			case .sos:
 				liveTextViewController.updateTextFields(message: "SOS")
 				showMessageField(alpha: 0)
 				messageField.isEditable = false
+				UIView.animate(withDuration: 0.1) {
+					self.liveTextViewController.view.alpha = 1.0
+					self.holdButton.alpha = 0.0
+					self.loopingButton.alpha = 1.0
+					self.loopingLabel.alpha = 1.0
+				}
+				holdButton.isEnabled = false
+				loopingButton.isEnabled = true
 			case .morseConversion:
-				showMessageField(alpha: 0)
-				messageField.isEditable = false
+				liveTextViewController.updateTextFields(message: "Convert a message")
+				showMessageField(alpha: 1.0)
+				messageField.isEditable = true
+				recentButton.isEnabled = false
+				UIView.animate(withDuration: 0.1) {
+					self.liveTextViewController.view.alpha = 1.0
+					self.holdButton.alpha = 0.0
+					self.loopingButton.alpha = 1.0
+					self.loopingLabel.alpha = 1.0
+				}
+				holdButton.isEnabled = false
+				loopingButton.isEnabled = true
+				
 			case .tools:
 				showMessageField(alpha: 0)
 				messageField.isEditable = false
+				UIView.animate(withDuration: 0.1) {
+					self.liveTextViewController.view.alpha = 0
+					self.holdButton.alpha = 1.0
+					self.loopingButton.alpha = 0.0
+					self.loopingLabel.alpha = 0.0
+				}
+				holdButton.isEnabled = true
+				loopingButton.isEnabled = false
+				
 		}
 			
 		// update collection view
@@ -626,6 +680,26 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             mainToggleButton.removeGestureRecognizer(lockGesture)
         }
     }
+	
+	@objc func handleHold() {
+		// when switch between modes, reset the light
+		viewModel.flashlight.toggleTorch(on: false)
+		
+		// switch between hold mode and toggle
+		switch viewModel.flashlight.toolMode {
+			case .hold:
+				viewModel.flashlight.updateToolMode(mode: .toggle)
+				UIView.animate(withDuration: 0.1) {
+					self.holdButton.alpha = 1.0
+				}
+			case .toggle:
+				viewModel.flashlight.updateToolMode(mode: .hold)
+				UIView.animate(withDuration: 0.1) {
+					self.holdButton.alpha = 0.4
+				}
+				
+		}
+	}
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         shutDownStateMachine()
