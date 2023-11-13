@@ -12,7 +12,7 @@ class MenuBar: UIView, UICollectionViewDelegate {
     private lazy var collectionView: UICollectionView = {
         let vc = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout().horizontalMenuLayout(itemSpace: .zero, groupSpacing: .zero, cellHeight: NSCollectionLayoutDimension.fractionalHeight(1.0)))
         vc.translatesAutoresizingMaskIntoConstraints = false
-        vc.backgroundColor = UIColor.mainBackground
+		vc.backgroundColor = .clear
         vc.delegate = self
         vc.isScrollEnabled = false
         return vc
@@ -84,6 +84,9 @@ class MenuBar: UIView, UICollectionViewDelegate {
 		guard let mode = MainMorseViewModel.SOSMode.init(rawValue: indexPath.item) else {
 			return
 		}
-		self.parentViewController.scrollToModeWith(mode: mode)
+		self.parentViewController.scrollToMode(mode)
+		
+		// update collection view
+		self.parentViewController.mainContentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 }

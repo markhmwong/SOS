@@ -44,8 +44,7 @@ class MainMorseViewModel: NSObject {
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MainItem>! = nil
 
     var mainMorseViewController: MainMorseViewController! = nil
-    
-    var flashFacingSideState: FlashFacingSide = .rear
+
     
     let flashlight = Flashlight()
     
@@ -73,7 +72,6 @@ class MainMorseViewModel: NSObject {
     init(cds: CoreDataStack) {
         self.cds = cds
         self.currIndex = 0
-
         super.init()
 		nc.addObserver(self, selector: #selector(updateMessageToSignal), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
     }

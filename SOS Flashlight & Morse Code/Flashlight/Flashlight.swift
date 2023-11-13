@@ -38,7 +38,7 @@ enum ToolLightMode: Int, CaseIterable {
 }
 
 enum FlashFacingSide: Int {
-    case rear // LED
+    case rear // REAR LED
     case front // SCREEN
     
     var name: String {

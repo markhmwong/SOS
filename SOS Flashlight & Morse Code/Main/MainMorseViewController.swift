@@ -146,6 +146,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 	
 	private var liveTextViewController: LiveTextViewController
     
+	private var frontFacingLightViewController: FrontFacingLcdViewController
 	
     var longPress: UILongPressGestureRecognizer! =  nil
     
@@ -165,6 +166,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         self.coordinator = coordinator
         self.viewModel = viewModel
 		self.liveTextViewController = LiveTextViewController(viewModel: viewModel)
+		self.frontFacingLightViewController = FrontFacingLcdViewController(nibName: nil, bundle: nil)
 		super.init(nibName: nil, bundle: nil)
     }
     
@@ -202,6 +204,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.setupUI()
+
         mainContentCollectionView.isDirectionalLockEnabled = false
         mainContentCollectionView.isScrollEnabled = false
         mainContentCollectionView.showsVerticalScrollIndicator = false
@@ -226,7 +229,33 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         viewModel.flashlight.toggleTorch(on: false)
         // Review must be declared here or it will not show
         AppStoreReviewManager.requestReviewIfAppropriate()
+		observers()
     }
+	
+	private func observers() {
+		flashlightObserver = viewModel.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
+			guard let light = change.newValue else { return }
+			if flashlight.flashlightMode() == .sos {
+				
+				// front facing
+				if flashlight.facingSide == .rear {
+					// update circle
+//					light ? self.updateFrontIndicator(UIColor.Indicator.flashing.cgColor) : self.updateFrontIndicator(UIColor.Indicator.dim.cgColor)
+				} else {
+					if light {
+						UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+							self.frontFacingLightViewController.view.backgroundColor = UIColor.mainBackground.inverted
+						}
+					} else {
+						UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+							self.frontFacingLightViewController.view.backgroundColor = UIColor.mainBackground
+						}
+					}
+				}
+				
+			}
+		}
+	}
 	
 	/* MARK: - Navigation Related */
     
@@ -263,9 +292,11 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(mainContentCollectionView)
 		
 		// move back to setupUIV3 once initial testing is complete
+		addChild(frontFacingLightViewController)
 		addChild(liveTextViewController)
+		view.addSubview(frontFacingLightViewController.view)
 		view.addSubview(liveTextViewController.view)
-
+		
 
 		view.addSubview(menuBar)
 		view.addSubview(mainToggleButton)
@@ -355,7 +386,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         longPress = createLongGestureRecognizer()
         lockGesture = createLockGestureRecognizer()
         
-        // handle the gesture recogniser when the tool mode is pressed
+        // handle the gesture recogniser when the tool mode is pressed to lock the signal button
         modeObserver = viewModel.flashlight.observe(\.observableMode, options: [.new]) { [weak self] flashlight, change in
             guard let newValue = change.newValue else { return }
             guard let self = self else { return }
@@ -459,7 +490,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
     
 	// change tool mode between sos, message, conversion, tools
-	func scrollToModeWith(mode: MainMorseViewModel.SOSMode) {
+	func scrollToMode(_ mode: MainMorseViewModel.SOSMode) {
 
 		viewModel.flashlight.updateMode(mode: mode)
 		
@@ -737,20 +768,20 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
         
         switch type {
 			case .breakBetweenLetters:
-				if (viewModel.flashFacingSideState == .front) {
+				if (viewModel.flashlight.facingSide == .front) {
 					updateFrontScreenFlash(state: false)
 				} else {
 					viewModel.flashlight.toggleTorch(on: false)
 				}
 			case .breakBetweenWords, .breakBetweenPartsOfLetter, .none:
-                if (viewModel.flashFacingSideState == .front) {
+                if (viewModel.flashlight.facingSide == .front) {
                     updateFrontScreenFlash(state: false)
                 } else {
                     viewModel.flashlight.toggleTorch(on: false)
                 }
             case .dash, .dot:
-                if (viewModel.flashFacingSideState == .front) {
-                    updateFrontScreenFlash(state: true)
+                if (viewModel.flashlight.facingSide == .front) {
+					updateFrontScreenFlash(state: true)
                 } else {
                     viewModel.flashlight.toggleTorch(on: true)
                 }
@@ -758,8 +789,16 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
     }
     
     func updateFrontScreenFlash(state: Bool) {
-//        viewModel.kFrontLightState = state
-        print("update here")
+		if state {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				self.frontFacingLightViewController.on()
+			}
+		} else {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				self.frontFacingLightViewController.off()
+			}
+		}
+
     }
     
     func didFlash(type: MorseTypeTiming) {

@@ -22,9 +22,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	var stateMachine: MorseCodeStateMachineSystem? = nil {
 		didSet {
 			stateMachine?.viewDelegate = self
-//			staticLiveText.layer.opacity = 0.7
 			liveText.layer.opacity = 1.0
-//			staticLiveText.text = stateMachine?.morseParser.messageStr
 		}
 	}
 	

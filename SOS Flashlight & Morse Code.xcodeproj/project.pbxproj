@@ -81,6 +81,8 @@
 		4D828C1A2AFC6B7F006592D1 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */; };
 		4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
+		4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */; };
+		4DBE741A2B0184660042EA2F /* LightIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
 		4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */; };
 		4DC69EAE24797E6D009AC9FC /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */; };
@@ -200,6 +202,8 @@
 		4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
 		4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewModel.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
+		4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontFacingLcdViewControoller.swift; sourceTree = "<group>"; };
+		4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightIndicatorViewController.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
 		4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				4D828C102AFAFA8E006592D1 /* Once.swift */,
+				4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */,
+				4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */,
 				4D34270B2AE9742F00C522FD /* LiveText */,
 				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
 				43FF12C1286096E10021686B /* MainMorseViewModel.swift */,
@@ -804,6 +810,7 @@
 				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,
 				4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */,
 				43423FDA28B0EA3000ADFB89 /* SavedMessagesViewController.swift in Sources */,
+				4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */,
 				43199811285E1FAD00AA897A /* MenuBarCell.swift in Sources */,
 				43199813285E21EB00AA897A /* UIFont+Extension.swift in Sources */,
 				4DED82D9246524E20027F385 /* States.swift in Sources */,
@@ -831,6 +838,7 @@
 				43FF12A8285E968D0021686B /* MenuBarDataSource.swift in Sources */,
 				430634852866E8980097E238 /* ConversionConfiguration.swift in Sources */,
 				43FF12C0286089470021686B /* SosConfiguration.swift in Sources */,
+				4DBE741A2B0184660042EA2F /* LightIndicatorViewController.swift in Sources */,
 				4DED82D6246504870027F385 /* MorseParser.swift in Sources */,
 				4D6B8BC024693D4F00C6AD60 /* Bundle+Extension.swift in Sources */,
 				4D1910712476381900202FA0 /* SettingsCellTypes.swift in Sources */,
