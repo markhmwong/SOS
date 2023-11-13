@@ -84,6 +84,18 @@ class MainMorseViewModel: NSObject {
 		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
         messageToBeSignalled = message
     }
+	
+	func updateFrontScreenFlash(state: Bool, vc: FrontFacingLcdViewController) {
+		if state {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				vc.on()
+			}
+		} else {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				vc.off()
+			}
+		}
+	}
 
     private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, MainItem> {
         let cellConfig = UICollectionView.CellRegistration<MainCell, MainItem> { (cell, indexPath, item) in

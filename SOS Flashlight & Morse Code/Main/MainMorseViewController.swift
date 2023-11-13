@@ -769,36 +769,23 @@ extension MainMorseViewController: MorseStateMachineSystemDelegate {
         switch type {
 			case .breakBetweenLetters:
 				if (viewModel.flashlight.facingSide == .front) {
-					updateFrontScreenFlash(state: false)
+					viewModel.updateFrontScreenFlash(state: false, vc: frontFacingLightViewController)
 				} else {
 					viewModel.flashlight.toggleTorch(on: false)
 				}
 			case .breakBetweenWords, .breakBetweenPartsOfLetter, .none:
                 if (viewModel.flashlight.facingSide == .front) {
-                    updateFrontScreenFlash(state: false)
+					viewModel.updateFrontScreenFlash(state: false, vc: frontFacingLightViewController)
                 } else {
                     viewModel.flashlight.toggleTorch(on: false)
                 }
             case .dash, .dot:
                 if (viewModel.flashlight.facingSide == .front) {
-					updateFrontScreenFlash(state: true)
+					viewModel.updateFrontScreenFlash(state: true, vc: frontFacingLightViewController)
                 } else {
                     viewModel.flashlight.toggleTorch(on: true)
                 }
         }
-    }
-    
-    func updateFrontScreenFlash(state: Bool) {
-		if state {
-			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
-				self.frontFacingLightViewController.on()
-			}
-		} else {
-			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
-				self.frontFacingLightViewController.off()
-			}
-		}
-
     }
     
     func didFlash(type: MorseTypeTiming) {
