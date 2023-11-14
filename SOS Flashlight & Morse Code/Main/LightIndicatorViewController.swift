@@ -30,7 +30,7 @@ class LightIndicatorViewController: UIViewController {
 		view.layer.addSublayer(frontCircleIndicator)
 		frontCircleIndicator.fillColor = UIColor.orange.cgColor
 		indicatorState(on: false)
-	}    
+	}
 	
 	func indicatorState(on: Bool) {
 		if on {
