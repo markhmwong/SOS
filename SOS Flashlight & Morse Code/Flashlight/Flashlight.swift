@@ -57,7 +57,6 @@ class Flashlight: NSObject {
     
     var mode: MainMorseViewModel.SOSMode = .sos {
         didSet {
-            print(mode)
             observableMode = mode.rawValue
         }
     }
@@ -111,7 +110,7 @@ class Flashlight: NSObject {
 	}
     
     func updateMode(mode: MainMorseViewModel.SOSMode) {
-        self.mode = mode
+		self.mode = mode
     }
     
     func flashlightMode() -> MainMorseViewModel.SOSMode {

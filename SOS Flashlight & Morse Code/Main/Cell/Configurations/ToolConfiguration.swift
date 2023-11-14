@@ -103,11 +103,11 @@ class ToolView: UIView, UIContentView, UITextViewDelegate {
                 } else {
                     if light {
                         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
-                            self.backgroundColor = UIColor.mainBackground.inverted
+                            //self.backgroundColor = UIColor.mainBackground.inverted
                         }
                     } else {
                         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
-                            self.backgroundColor = UIColor.mainBackground
+                            //self.backgroundColor = UIColor.mainBackground
                         }
                     }
                 }

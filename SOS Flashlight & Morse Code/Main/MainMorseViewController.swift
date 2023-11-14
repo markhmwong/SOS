@@ -148,6 +148,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     
 	private var frontFacingLightViewController: FrontFacingLcdViewController
 	
+	private var lightIndicatorViewController: LightIndicatorViewController
+	
     var longPress: UILongPressGestureRecognizer! =  nil
     
     var lockGesture: UILongPressGestureRecognizer! =  nil
@@ -167,12 +169,44 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         self.viewModel = viewModel
 		self.liveTextViewController = LiveTextViewController(viewModel: viewModel)
 		self.frontFacingLightViewController = FrontFacingLcdViewController(nibName: nil, bundle: nil)
+		self.lightIndicatorViewController = LightIndicatorViewController(nibName: nil, bundle: nil)
 		super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.setupUI()
+		
+		mainContentCollectionView.isDirectionalLockEnabled = false
+		mainContentCollectionView.isScrollEnabled = false
+		mainContentCollectionView.showsVerticalScrollIndicator = false
+		mainContentCollectionView.showsHorizontalScrollIndicator = false
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateMessageField), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+		
+		
+		let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
+		settings.tintColor = UIColor.defaultText
+		navigationItem.leftBarButtonItem = settings
+		let tipJar = UIBarButtonItem().tipJarButton(target: self, action: #selector(showTipJar))
+		let info = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(showInfo))
+		info.tintColor = UIColor.defaultText
+		navigationItem.rightBarButtonItems = [tipJar, info]
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		viewModel.flashlight.toggleTorch(on: false)
+		// Review must be declared here or it will not show
+		AppStoreReviewManager.requestReviewIfAppropriate()
+		observers()
+	}
 	
 	/* MARK: - Button selector methods */
     
@@ -200,37 +234,89 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         mainContentCollectionView.isScrollEnabled = loopingButton.isEnabled
         mainContentCollectionView.isUserInteractionEnabled = loopingButton.isEnabled
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		self.setupUI()
-
-        mainContentCollectionView.isDirectionalLockEnabled = false
-        mainContentCollectionView.isScrollEnabled = false
-        mainContentCollectionView.showsVerticalScrollIndicator = false
-        mainContentCollectionView.showsHorizontalScrollIndicator = false
+	
+	@objc func handleFacingSide() {
+		switch viewModel.flashlight.facingSide {
+			case .rear:
+				viewModel.flashlight.facingSide = .front
+			case .front:
+				viewModel.flashlight.facingSide = .rear
+		}
+	}
+	
+	@objc func handleToggle() {
+		if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
+			viewModel.flashlight.updateMode(mode: mode)
+			
+			if (mainToggleButton.isEnabled) {
+				switch mode {
+					case .sos:
+						print("handle locked mode here with viewmodel variable to keep state")
+						print("\(viewModel.sosLock) sosLock")
+						if !viewModel.sosLock {
+							TelemetryManager.send(TelemetryManager.Signal.sosToggleDidFire.rawValue)
+							ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
+							toggleSos()
+						}
+						
+					case .messageConversion:
+						TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
+						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
+						toggleMessage()
+						viewModel.cds.cleanupRecentMessages()
+					case .tools:
+						TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
+						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
+						toggleTools()
+					case .morseConversion:
+						TelemetryManager.send(TelemetryManager.Signal.sosMorseConversionDidFire.rawValue)
+						
+						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
+						// message passed via notification center. Look up MESSAGE_TO_TEXT
+				}
+			}
+		}
+	}
+	
+	@objc func handleLooping() {
+		viewModel.flashlight.loop = !viewModel.flashlight.loop
+		loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
+		loopingLabel.alpha = loopingButton.alpha
 		
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSavedMessages), name: .showSavedMessages, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleRecentMessages), name: .showRecentMessages, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(updateMessageField), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
-
+		if viewModel.flashlight.loop {
+			if viewModel.flashlight.mode == .sos {
+				mainToggleButton.addGestureRecognizer(lockGesture)
+			}
+			lockImage.layer.opacity = 0.4
+			holdToLockLabel.layer.opacity = 0.4
+		} else {
+			lockImage.layer.opacity = 0.0
+			holdToLockLabel.layer.opacity = 0.0
+			mainToggleButton.removeGestureRecognizer(lockGesture)
+		}
+	}
+	
+	@objc func handleHold() {
+		// when switch between modes, reset the light
+		viewModel.flashlight.toggleTorch(on: false)
 		
-        let settings = UIBarButtonItem(image: UIImage(systemName: "gearshape.2.fill"), style: .plain, target: self, action: #selector(showSettings))
-        settings.tintColor = UIColor.defaultText
-        navigationItem.leftBarButtonItem = settings
-        let tipJar = UIBarButtonItem().tipJarButton(target: self, action: #selector(showTipJar))
-        let info = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(showInfo))
-        info.tintColor = UIColor.defaultText
-        navigationItem.rightBarButtonItems = [tipJar, info]
-    }
+		// switch between hold mode and toggle
+		switch viewModel.flashlight.toolMode {
+			case .hold:
+				viewModel.flashlight.updateToolMode(mode: .toggle)
+				UIView.animate(withDuration: 0.1) {
+					self.holdButton.alpha = 1.0
+				}
+			case .toggle:
+				viewModel.flashlight.updateToolMode(mode: .hold)
+				UIView.animate(withDuration: 0.1) {
+					self.holdButton.alpha = 0.4
+				}
+				
+		}
+	}
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.flashlight.toggleTorch(on: false)
-        // Review must be declared here or it will not show
-        AppStoreReviewManager.requestReviewIfAppropriate()
-		observers()
-    }
+
 	
 	private func observers() {
 		flashlightObserver = viewModel.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
@@ -240,6 +326,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				// front facing
 				if flashlight.facingSide == .rear {
 					// update circle
+					
 //					light ? self.updateFrontIndicator(UIColor.Indicator.flashing.cgColor) : self.updateFrontIndicator(UIColor.Indicator.dim.cgColor)
 				} else {
 					if light {
@@ -294,9 +381,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		// move back to setupUIV3 once initial testing is complete
 		addChild(frontFacingLightViewController)
 		addChild(liveTextViewController)
+		addChild(lightIndicatorViewController)
 		view.addSubview(frontFacingLightViewController.view)
 		view.addSubview(liveTextViewController.view)
-		
+		view.addSubview(lightIndicatorViewController.view)
 
 		view.addSubview(menuBar)
 		view.addSubview(mainToggleButton)
@@ -478,14 +566,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		self.messageField.text = message
 	}
     
-    @objc func handleFacingSide() {
-        switch viewModel.flashlight.facingSide {
-        case .rear:
-            viewModel.flashlight.facingSide = .front
-        case .front:
-            viewModel.flashlight.facingSide = .rear
-        }
-    }
+
     
 
     
@@ -500,6 +581,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		switch mode {
 			case .messageConversion:
 				liveTextViewController.updateTextFields(message: "Send a signal")
+				lightIndicatorViewController.view.alpha = 0
 				showMessageField(alpha: 1.0)
 				messageField.isEditable = true
 				recentButton.isEnabled = true
@@ -513,6 +595,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				holdButton.isEnabled = false
 				loopingButton.isEnabled = true
 			case .sos:
+				lightIndicatorViewController.view.alpha = 0
 				liveTextViewController.updateTextFields(message: "SOS")
 				showMessageField(alpha: 0)
 				messageField.isEditable = false
@@ -526,6 +609,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				holdButton.isEnabled = false
 				loopingButton.isEnabled = true
 			case .morseConversion:
+				lightIndicatorViewController.view.alpha = 0
 				liveTextViewController.updateTextFields(message: "Convert a message")
 				showMessageField(alpha: 1.0)
 				messageField.isEditable = true
@@ -549,6 +633,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 					self.holdLabel.alpha = 1.0
 					self.loopingButton.alpha = 0.0
 					self.loopingLabel.alpha = 0.0
+					self.lightIndicatorViewController.view.alpha = 1.0
 				}
 				holdButton.isEnabled = true
 				loopingButton.isEnabled = false
@@ -607,25 +692,17 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     func toggleTools() {
         switch viewModel.flashlight.toolMode {
             case .toggle:
-            switch viewModel.flashlight.facingSide {
-            case .front:
-                viewModel.flashlight.toggleTorch(on: !viewModel.flashlight.lightSwitch, side: viewModel.flashlight.facingSide)
-            case .rear:
-                viewModel.flashlight.toggleTorch(on: !viewModel.flashlight.lightSwitch)
-            }
+				switch viewModel.flashlight.facingSide {
+					case .front:
+						viewModel.flashlight.lightSwitch = !viewModel.flashlight.lightSwitch
+						viewModel.updateFrontScreenFlash(state: !viewModel.flashlight.lightSwitch, vc: self.frontFacingLightViewController)
+					case .rear:
+						viewModel.updateIndicator(on: !viewModel.flashlight.lightSwitch, vc: lightIndicatorViewController)
+						viewModel.flashlight.toggleTorch(on: !viewModel.flashlight.lightSwitch)
+				}
             case .hold:
-            // toggled by handleLongPress under the gesture recogniser
-            ()
+				()
         }
-        
-//        viewModel.kLightState = !viewModel.kLightState
-//        switch viewModel.flashFacingSideState {
-//            case .rear:
-//                light.toggleTorch(on: viewModel.kLightState)
-//            case .front:
-//                updateFrontScreenFlash(state: viewModel.kLightState)
-//                mainView.bottomContainer.updateButtonColor(state: viewModel.kLightState)
-//        }
     }
 
 //     MARK: - Touch Gestures
@@ -670,77 +747,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         self.stateMachine = nil
     }
     
-    @objc func handleToggle() {
-        if let mode = MainMorseViewModel.SOSMode.init(rawValue: mainContentCollectionView.indexPathsForVisibleItems.first?.item ?? .zero) {
-            viewModel.flashlight.updateMode(mode: mode)
-            
-            if (mainToggleButton.isEnabled) {
-                switch mode {
-                case .sos:
-                    print("handle locked mode here with viewmodel variable to keep state")
-                    print("\(viewModel.sosLock) sosLock")
-                    if !viewModel.sosLock {
-                        TelemetryManager.send(TelemetryManager.Signal.sosToggleDidFire.rawValue)
-                        ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-                        toggleSos()
-                    }
-                    
-                case .messageConversion:
-                    TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
-                    ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-                    toggleMessage()
-                    viewModel.cds.cleanupRecentMessages()
-                case .tools:
-                    TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
-                    ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-                    toggleTools()
-                case .morseConversion:
-                    TelemetryManager.send(TelemetryManager.Signal.sosMorseConversionDidFire.rawValue)
 
-                    ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
-                    // message passed via notification center. Look up MESSAGE_TO_TEXT
-                }
-            }
-        }
-    }
-    
-    @objc func handleLooping() {
-        viewModel.flashlight.loop = !viewModel.flashlight.loop
-        loopingButton.alpha = viewModel.flashlight.loop ? 1.0 : 0.5
-        loopingLabel.alpha = loopingButton.alpha
-        
-        if viewModel.flashlight.loop {
-            if viewModel.flashlight.mode == .sos {
-                mainToggleButton.addGestureRecognizer(lockGesture)
-            }
-            lockImage.layer.opacity = 0.4
-            holdToLockLabel.layer.opacity = 0.4
-        } else {
-            lockImage.layer.opacity = 0.0
-            holdToLockLabel.layer.opacity = 0.0
-            mainToggleButton.removeGestureRecognizer(lockGesture)
-        }
-    }
-	
-	@objc func handleHold() {
-		// when switch between modes, reset the light
-		viewModel.flashlight.toggleTorch(on: false)
-		
-		// switch between hold mode and toggle
-		switch viewModel.flashlight.toolMode {
-			case .hold:
-				viewModel.flashlight.updateToolMode(mode: .toggle)
-				UIView.animate(withDuration: 0.1) {
-					self.holdButton.alpha = 1.0
-				}
-			case .toggle:
-				viewModel.flashlight.updateToolMode(mode: .hold)
-				UIView.animate(withDuration: 0.1) {
-					self.holdButton.alpha = 0.4
-				}
-				
-		}
-	}
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         shutDownStateMachine()

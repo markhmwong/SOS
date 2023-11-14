@@ -44,7 +44,6 @@ class MainMorseViewModel: NSObject {
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MainItem>! = nil
 
     var mainMorseViewController: MainMorseViewController! = nil
-
     
     let flashlight = Flashlight()
     
@@ -75,6 +74,10 @@ class MainMorseViewModel: NSObject {
         super.init()
 		nc.addObserver(self, selector: #selector(updateMessageToSignal), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
     }
+	
+	func updateIndicator(on: Bool, vc: LightIndicatorViewController) {
+		vc.indicatorState(on: on)
+	}
     
     @objc func updateMessageToSignal(_ sender: NSNotification) {
 
