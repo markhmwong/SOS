@@ -26,10 +26,10 @@ struct Idle: State {
 	}	
 }
 
-// Read state, put the machine into read only mode, reading the next character in the
+// Read state, put the machine into read only mode, reading the next character in the string
 struct Read: State {
 	let stateName: String = "Read"
-	func character(type: MorseType) -> Transition? {
+	func character(type: MorseTypeTiming) -> Transition? {
 		//duration
 		return Transition(targetState: Flash())
 	}
@@ -53,7 +53,7 @@ struct Break: State {
 struct Flash: State {
 	let stateName: String = "Flash"
 
-	func flashWithMorse(type: MorseType) -> Transition? {
+	func flashWithMorse(type: MorseTypeTiming) -> Transition? {
 		return Transition(targetState: Break())
 	}
 }

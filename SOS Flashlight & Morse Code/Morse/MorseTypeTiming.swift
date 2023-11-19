@@ -8,15 +8,17 @@
 
 import Foundation
 
-enum MorseType {
+enum MorseTypeTiming {
+	// these represents the timing between letter. Please see the unitTime property underneath to see actual timings
 	case dot
 	case dash
 	case none
+	
 	case breakBetweenPartsOfLetter
 	case breakBetweenLetters
 	case breakBetweenWords
 	
-	var letter: Character {
+	var symbol: Character {
 		switch self {
 			case .dash:
 				return "-"
@@ -24,10 +26,13 @@ enum MorseType {
 				return "."
 			case .none:
 				return " "
+				// .<break>.<break>. -<break>-<break>-
 			case .breakBetweenPartsOfLetter:
 				return "æ"
+				// ...<break>...
 			case .breakBetweenLetters:
 				return "ç"
+				// ...---...<break>
 			case .breakBetweenWords:
 				return "α"
 		}
@@ -40,17 +45,17 @@ enum MorseType {
 	var unitTime: TimeInterval {
 		switch self {
 			case .dot:
-				return MorseType.oneUnit
+				return MorseTypeTiming.oneUnit
 			case .dash:
-				return MorseType.oneUnit * 3
+				return MorseTypeTiming.oneUnit * 3
 			case .none:
-				return MorseType.oneUnit
+				return MorseTypeTiming.oneUnit
 			case .breakBetweenPartsOfLetter:
-				return MorseType.oneUnit
+				return MorseTypeTiming.oneUnit
 			case .breakBetweenLetters:
-				return MorseType.oneUnit * 3
+				return MorseTypeTiming.oneUnit * 3
 			case .breakBetweenWords:
-				return MorseType.oneUnit * 7
+				return MorseTypeTiming.oneUnit * 7
 		}
 	}
 }

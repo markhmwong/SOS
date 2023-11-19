@@ -9,6 +9,7 @@
 import Foundation
 
 /*
+ 
 Conditions and Requirements of Morse Code
 The length of a dot is one unit
 A dash is three units

@@ -22,28 +22,35 @@ class MorseCodeStateMachineSystem {
 	// State Machine variables
 	private var state: State
 	
-	private var morseParser: MorseParser
+	private(set) var morseParser: MorseParser
 	
 	private var delegate: MorseStateMachineSystemDelegate
 	
+	// expose it
+	var viewDelegate: MorseStateMachineSystemViewDelegate? = nil
+	
 	private var expires: Date?
 	
-	private var c: MorseType // characterType
+	private var c: MorseTypeTiming // characterType
+	
+	private var parsedCharacters: String
 	
 	// Public variable
 	var loopState: Bool = false
 	
-	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate) {
+	init(morseParser: MorseParser, delegate: MorseStateMachineSystemDelegate, viewDelegate: MorseStateMachineSystemViewDelegate? = nil) {
 		self.morseParser = morseParser
 		self.delegate = delegate
+		self.viewDelegate = viewDelegate
 		c = .none
+		parsedCharacters = ""
 		state = Idle()
     }
 	
 	// begin
 	func startSystemAtIdle() {
 		delegate.start()
-		c = morseParser.readNextCharacter()
+		c = morseParser.readAndConvertNextCharacter()
 		reviseTime(time: c.unitTime)
 		// nil timer
 		self.timer = Timer.scheduledTimer(timeInterval: unitTime, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
@@ -68,6 +75,8 @@ class MorseCodeStateMachineSystem {
 		process(transition: state.end())
 		// end timer
 		endTimer()
+		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
+		print("End Timer")
 	}
 	
 	// flush timer
@@ -115,7 +124,7 @@ class MorseCodeStateMachineSystem {
 			} else {
 				morseParser.popCharacter()
 				characterExists()
-				c = morseParser.readNextCharacter()
+				c = morseParser.readAndConvertNextCharacter()
 				reviseTime(time: c.unitTime)
 			}
 		}

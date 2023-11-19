@@ -9,18 +9,16 @@
 import UIKit
 
 class MainMorseViewModel: NSObject {
-    
-    
-    
+
     enum Section {
         case main
     }
     
-    enum FlashLightMode: Int, CaseIterable {
+    enum SOSMode: Int, CaseIterable {
         case sos = 0
-        case messageConversion
-        case morseConversion
-        case tools
+        case messageConversion // english to morse conversion
+        case morseConversion // morse to english conversion
+        case tools // quick tools
         
         var name: String {
             switch self {
@@ -39,7 +37,7 @@ class MainMorseViewModel: NSObject {
     struct MainItem: Hashable {
         let name: String
         let section: Section
-        let item: FlashLightMode
+        let item: SOSMode
         let flashlight: Flashlight
     }
     
@@ -47,22 +45,14 @@ class MainMorseViewModel: NSObject {
 
     var mainMorseViewController: MainMorseViewController! = nil
     
-    var flashFacingSideState: FlashFacingSide = .rear
-    
     let flashlight = Flashlight()
     
     var sosLock: Bool = false
     
     // used for custom morse message to delivery via the flash light
-    var messageToFlashlight: String = ""
-    
-//    var kFrontLightState: Bool = false
+    var messageToBeSignalled: String = ""
 
-    var loopState: Bool = false {
-        didSet {
-//            mainMorseViewController.loopButton.alpha = loopState ? 1.0 : 0.5
-        }
-    }
+    var loopState: Bool = false
     
     var buttonToggleState: Bool = true {
         didSet {
@@ -70,8 +60,7 @@ class MainMorseViewModel: NSObject {
             mainMorseViewController.mainToggleButton.alpha = mainMorseViewController.mainToggleButton.isEnabled ? 1.0 : 0.1
         }
     }
-    
-//    var currState: MorseCodeMode
+
 
     private var currIndex: Int
     
@@ -82,22 +71,35 @@ class MainMorseViewModel: NSObject {
     init(cds: CoreDataStack) {
         self.cds = cds
         self.currIndex = 0
-//        self.currState = MorseCodeMode.init(rawValue: currIndex) ?? MorseCodeMode.kMessage
-
         super.init()
-        nc.addObserver(self, selector: #selector(updateMessageToFlash), name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil)
+		nc.addObserver(self, selector: #selector(updateMessageToSignal), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
     }
+	
+	func updateIndicator(on: Bool, vc: LightIndicatorViewController) {
+		vc.indicatorState(on: on)
+	}
     
-    @objc func updateMessageToFlash(_ sender: NSNotification) {
+    @objc func updateMessageToSignal(_ sender: NSNotification) {
 
-        assert(sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] != nil, "Message is nil")
-        assert(sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
+		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] != nil, "Message is nil")
+		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
         
-        guard let message = sender.userInfo?[NotificationCenter.MESSAGE_TO_FLASH] as? String else { return }
-        messageToFlashlight = message
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
+        messageToBeSignalled = message
     }
+	
+	func updateFrontScreenFlash(state: Bool, vc: FrontFacingLcdViewController) {
+		if state {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				vc.on()
+			}
+		} else {
+			UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseInOut]) {
+				vc.off()
+			}
+		}
+	}
 
-    
     private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, MainItem> {
         let cellConfig = UICollectionView.CellRegistration<MainCell, MainItem> { (cell, indexPath, item) in
             cell.item = item
@@ -127,9 +129,13 @@ class MainMorseViewModel: NSObject {
     private func createItems() -> [MainItem] {
         
         var items: [MainItem] = []
-        for i in FlashLightMode.allCases {
+        for i in SOSMode.allCases {
             items.append(MainItem(name: i.name, section: .main, item: i, flashlight: flashlight))
         }
         return items
     }
+	
+	deinit {
+		self.nc.removeObserver(self, name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
+	}
 }
