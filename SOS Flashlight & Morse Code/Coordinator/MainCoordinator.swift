@@ -53,7 +53,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         childCoordinators.append(coordinator)
     }
     
-    func showInfo(mode: MainMorseViewModel.FlashLightMode) {
+    func showInfo(mode: MainMorseViewModel.SOSMode) {
         
         var title = ""
         var descriptionLabel = ""

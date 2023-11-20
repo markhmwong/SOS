@@ -38,7 +38,7 @@ enum ToolLightMode: Int, CaseIterable {
 }
 
 enum FlashFacingSide: Int {
-    case rear // LED
+    case rear // REAR LED
     case front // SCREEN
     
     var name: String {
@@ -55,9 +55,8 @@ class Flashlight: NSObject {
 
     var loop: Bool = false
     
-    var mode: MainMorseViewModel.FlashLightMode = .sos {
+    var mode: MainMorseViewModel.SOSMode = .sos {
         didSet {
-            print(mode)
             observableMode = mode.rawValue
         }
     }
@@ -110,11 +109,11 @@ class Flashlight: NSObject {
         }
 	}
     
-    func updateMode(mode: MainMorseViewModel.FlashLightMode) {
-        self.mode = mode
+    func updateMode(mode: MainMorseViewModel.SOSMode) {
+		self.mode = mode
     }
     
-    func flashlightMode() -> MainMorseViewModel.FlashLightMode {
+    func flashlightMode() -> MainMorseViewModel.SOSMode {
         return self.mode
     }
     

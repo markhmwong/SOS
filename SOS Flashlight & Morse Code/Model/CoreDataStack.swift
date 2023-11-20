@@ -81,7 +81,8 @@ final class CoreDataStack: NSObject {
         }
     }
     
-    func limitRecentMessages() {
+	// clean up and only show last 20 messages
+    func cleanupRecentMessages() {
         if let c = self.moc {
             let request: NSFetchRequest<Recent> = Recent.fetchRequest()
             request.returnsObjectsAsFaults = false

@@ -86,6 +86,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         self.configuration = configuration
         super.init(frame: .zero)
         self.configure()
+		self.disableViews()
     }
     
     required init?(coder: NSCoder) {
@@ -97,6 +98,17 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         frontCircleIndicator = CAShapeLayer().circularShapeLayer(path: path.cgPath, color: UIColor.clear.cgColor, fillColor: UIColor.Indicator.dim.cgColor, strokeEnd: 1, lineWidth: 5)
         layer.addSublayer(frontCircleIndicator)
     }
+	
+	private func disableViews() {
+		messageField.isHidden = true
+		messageField.alpha = 0
+		
+		recentMessagesButton.alpha = 0
+		recentMessagesButton.isHidden = true
+		
+		savedMessagesButton.alpha = 0
+		savedMessagesButton.isHidden = true
+	}
     
     func updateIndicator() {
         DispatchQueue.main.async {
@@ -132,6 +144,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         addSubview(savedMessagesButton)
         
         guard let config = self.configuration as? MessageConversionConfiguration else { return }
+		
         flashlightObserver = config.mainItem.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
             guard let light = change.newValue else { return }
             if flashlight.flashlightMode() == .messageConversion {
@@ -172,7 +185,6 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
         ]
         keyboardToolbar.barStyle = .default
         messageField.inputAccessoryView = keyboardToolbar
-
     }
     
     func enableFirstResponder() {
@@ -187,7 +199,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     @objc func handleDone() {
         disableFirstResponder()
         // assign viewmodel.messagetoflash
-        nc.post(name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		nc.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
     }
     
     @objc func handleSave() {
@@ -197,7 +209,6 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     @objc func handleClear() {
         messageField.text = ""
         // assign viewmodel.messagetoflash
-        
     }
     
     
@@ -207,7 +218,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        nc.post(name: Notification.Name(NotificationCenter.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.MESSAGE_TO_FLASH : messageField.text ?? ""])
+		nc.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
