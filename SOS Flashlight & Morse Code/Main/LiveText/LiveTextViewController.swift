@@ -28,7 +28,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var staticLiveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.preferredFont(forTextStyle: .largeTitle).with(weight: .bold)
+		label.font = UIFont.preferredFont(forTextStyle: .title1).with(weight: .bold)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = .orange
@@ -41,7 +41,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var liveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.preferredFont(forTextStyle: .largeTitle).with(weight: .bold)
+		label.font = UIFont.preferredFont(forTextStyle: .title1).with(weight: .bold)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = UIColor.defaultText
