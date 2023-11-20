@@ -112,7 +112,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.keyboardType = .alphabet
 		textField.returnKeyType = .done
 		textField.enablesReturnKeyAutomatically = false
-		textField.text = "Type a message.."
+		textField.text = "Type a message"
 		textField.delegate = self
 		textField.autocapitalizationType = .none
 		textField.autocorrectionType = .no
@@ -515,24 +515,26 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
         
-        
+		let appStoreMediaMode: Bool = true
+
         // setup ad banner
         if let bool = KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) {
-            if !bool {
-                bannerView = GADBannerView(adSize: GADAdSizeBanner)
-                bannerView.translatesAutoresizingMaskIntoConstraints = false
-                bannerView.rootViewController = self
-                bannerView.adUnitID = AdDelivery.UnitId
-                view.addSubview(bannerView)
-                
-                bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
-                bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-                bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-                bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-                
-                bannerView.load(GADRequest())
+            if bool || appStoreMediaMode {
+				// user has purchased no ads
+				holdToLockLabelConstraint.constant = -15
             } else {
-                holdToLockLabelConstraint.constant = -15
+				bannerView = GADBannerView(adSize: GADAdSizeBanner)
+				bannerView.translatesAutoresizingMaskIntoConstraints = false
+				bannerView.rootViewController = self
+				bannerView.adUnitID = AdDelivery.UnitId
+				view.addSubview(bannerView)
+				
+				bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
+				bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+				bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+				bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+				
+				bannerView.load(GADRequest())
             }
         }
     }
