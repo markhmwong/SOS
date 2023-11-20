@@ -514,12 +514,10 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             guard let self = self else { return }
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
-        
-		let appStoreMediaMode: Bool = true
 
         // setup ad banner
         if let bool = KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) {
-            if bool || appStoreMediaMode {
+            if bool {
 				// user has purchased no ads
 				holdToLockLabelConstraint.constant = -15
             } else {
