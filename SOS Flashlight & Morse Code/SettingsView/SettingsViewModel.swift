@@ -205,7 +205,7 @@ class SettingsViewModel {
             if error != nil {
                 cell.activityIndicatorDisable()
                 // show error
-                WarningBox.showCustomAlertBox(title: "\(error?.localizedDescription ?? "Unknown")", message: "\(error?.localizedFailureReason ?? "Some reason")", vc: vc)
+                WarningBox.showCustomAlertBox(title: "\(error?.localizedDescription ?? "Unknown")", message: "\(error?.localizedFailureReason ?? "Oops, something went wrong!")", vc: vc)
             } else {
                 // successfully purchased
                 WarningBox.showCustomAlertBox(title: "A big thanks!", message: "Purchase complete", vc: vc)
