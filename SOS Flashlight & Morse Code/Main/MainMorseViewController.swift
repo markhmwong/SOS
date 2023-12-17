@@ -17,7 +17,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     var mainContentCollectionView: UICollectionView! = nil
     
     var menuBar: MenuBar! = nil
-    
+    	
     private var coordinator: MainCoordinator
 
     private var stateMachine: MorseCodeStateMachineSystem? = nil

@@ -120,7 +120,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(animateCharacters), name: Notification.Name(NotificationCenter.NCKeys.TRACKED_CHARACTERS), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(tidyUpHighlightViews), name: Notification.Name(NotificationCenter.NCKeys.END_STATE), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(updateTextConversion), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_TEXT), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateTextConversion), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_CONVERT), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(updateText), name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil)
 	}
 	
@@ -148,18 +148,21 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	// english to morse corse mode
 	@objc func updateTextConversion(_ sender: Notification) {
-		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_TEXT] as? String else { return }
-		let parser = MorseParser(message: message)
-		let convertedMessage = String(parser.removeErroneousCharacters())
-		updateTextFields(message: convertedMessage)
+		print(sender.userInfo)
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_CONVERT] as? String else { return }
+		let morseCodeTree = MorseCodeTree()
+		let englishString = morseCodeTree.translateMorseToEnglish(morse: message)
+		updateTextFields(message: englishString)
 		resizeTextViewIfNecessary()
 	}
 	
 	// english to signal mode
 	@objc func updateText(_ sender: Notification) {
-		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
-		updateTextFields(message: message)
+		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else {
+			return
+		}
 		
+		updateTextFields(message: message)
 		resizeTextViewIfNecessary()
 	}
 	
