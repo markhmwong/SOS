@@ -102,6 +102,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		label.textColor = UIColor.defaultText
 		return label
 	}()
+    
+    lazy var conversionInfoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Please delimit each english letter with a space when writing morse code" // front or rear
+        label.alpha = 0
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textColor = UIColor.defaultText
+        return label
+    }()
 	
 	lazy var messageField: UITextView = {
 		let textField = UITextView()
@@ -395,7 +407,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		view.addSubview(loopingLabel)
 		view.addSubview(lockImage)
 		view.addSubview(holdToLockLabel)
-
+        
+        view.addSubview(conversionInfoLabel)
 		view.addSubview(messageField)
 		view.addSubview(holdLabel)
 		
@@ -404,6 +417,12 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		flashlightFacade()
 		startObservingKeyboardChanges()
 		
+        
+        conversionInfoLabel.bottomAnchor.constraint(equalTo: messageField.topAnchor, constant: -5).isActive = true
+        conversionInfoLabel.centerXAnchor.constraint(equalTo: messageField.centerXAnchor).isActive = true
+        conversionInfoLabel.leadingAnchor.constraint(equalTo: messageField.leadingAnchor, constant:20).isActive = true
+        conversionInfoLabel.trailingAnchor.constraint(equalTo: messageField.trailingAnchor, constant:-20).isActive = true
+
 		messageField.leadingAnchor.constraint(equalTo: menuBar.leadingAnchor, constant: 20).isActive = true
 		messageField.trailingAnchor.constraint(equalTo: menuBar.trailingAnchor, constant: -20).isActive = true
 		bottomConstraint = self.messageField.bottomAnchor.constraint(equalTo: menuBar.topAnchor)
@@ -589,6 +608,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
 					self.holdLabel.alpha = 0.0
+                    self.conversionInfoLabel.alpha = 0.0
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -603,6 +623,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
 					self.holdLabel.alpha = 0.0
+                    self.conversionInfoLabel.alpha = 0.0
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -618,6 +639,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 					self.liveTextViewController.view.alpha = 1.0
 					self.holdButton.alpha = 0.0
 					self.holdLabel.alpha = 0.0
+                    self.conversionInfoLabel.alpha = 0.8
 					self.loopingButton.alpha = 1.0
 					self.loopingLabel.alpha = 1.0
 				}
@@ -631,6 +653,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 					self.liveTextViewController.view.alpha = 0
 					self.holdButton.alpha = 1.0
 					self.holdLabel.alpha = 1.0
+                    self.conversionInfoLabel.alpha = 0.0
 					self.loopingButton.alpha = 0.0
 					self.loopingLabel.alpha = 0.0
 					self.lightIndicatorViewController.view.alpha = 1.0
