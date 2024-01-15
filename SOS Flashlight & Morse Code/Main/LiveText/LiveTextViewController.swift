@@ -28,7 +28,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var staticLiveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.preferredFont(forTextStyle: .title1).with(weight: .bold)
+		label.font = UIFont.systemFont(ofSize: 50.0, weight: .heavy)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = .orange
@@ -41,7 +41,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var liveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.preferredFont(forTextStyle: .title1).with(weight: .bold)
+		label.font = UIFont.systemFont(ofSize: 50.0, weight: .heavy)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = UIColor.defaultText
@@ -148,7 +148,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	// english to morse corse mode
 	@objc func updateTextConversion(_ sender: Notification) {
-		print(sender.userInfo)
+
 		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_CONVERT] as? String else { return }
 		let morseCodeTree = MorseCodeTree()
 		let englishString = morseCodeTree.translateMorseToEnglish(morse: message)
