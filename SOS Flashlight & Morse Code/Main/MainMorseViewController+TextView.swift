@@ -22,7 +22,7 @@ extension MainMorseViewController: UITextViewDelegate {
 			case .messageConversion:
 				NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
 			case .morseConversion:
-				NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_TEXT), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_TEXT : messageField.text ?? ""])
+				NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_CONVERT), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_CONVERT : messageField.text ?? ""])
 			case .tools, .sos:
 				() // can safely do nothing. the textbox won't appear for sos and tools mode
 		}
@@ -96,8 +96,13 @@ extension MainMorseViewController: UITextViewDelegate {
 		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
 	}
 	
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		textView.text = ""
+	}
+	
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		
 		if text.contains("\n") {
 			// Ignore newline characters
 			textView.endEditing(true)
@@ -121,7 +126,17 @@ extension MainMorseViewController: UITextViewDelegate {
 		}
 		
 		// Define a regular expression pattern for English letters only
-		let pattern = "^[a-zA-Z ]*$"
+		var pattern = ""
+		
+		switch viewModel.flashlight.mode {
+			case .messageConversion:
+				pattern = "^[a-zA-Z ]*$"
+			case .morseConversion:
+				pattern = "^[.\\- ]+$"
+			case .sos, .tools:
+				() // doesn't require regex pattern ..-.-.-.-.-.-.
+		}
+		
 		
 		// Check if the replacement text matches the pattern (only English letters)
 		if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {

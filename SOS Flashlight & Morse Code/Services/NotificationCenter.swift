@@ -13,7 +13,7 @@ extension NotificationCenter {
 	struct NCKeys {
 		static var MESSAGE_TO_FLASH: String = "MessageToFlash"
 		
-		static var MESSAGE_TO_TEXT: String = "MessageToText"
+		static var MESSAGE_TO_CONVERT: String = "MessageToText"
 		
 		static var TRACKED_CHARACTERS: String = "TrackedCharactersLiveText"
 		

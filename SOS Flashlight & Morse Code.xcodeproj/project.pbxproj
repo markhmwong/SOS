@@ -81,6 +81,7 @@
 		4D828C1A2AFC6B7F006592D1 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */; };
 		4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
+		4D95C3B22B2DE2C500E589F5 /* MorseCodeTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */; };
 		4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */; };
 		4DBE741A2B0184660042EA2F /* LightIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
@@ -202,6 +203,7 @@
 		4D828C192AFC6B7F006592D1 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
 		4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewModel.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
+		4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeTree.swift; sourceTree = "<group>"; };
 		4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontFacingLcdViewControoller.swift; sourceTree = "<group>"; };
 		4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightIndicatorViewController.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				4DFC0D6A2461CC9A0033634E /* MorseTypeTiming.swift */,
 				4DED82D5246504870027F385 /* MorseParser.swift */,
 				4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */,
+				4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */,
 			);
 			path = Morse;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */,
 				43423FDA28B0EA3000ADFB89 /* SavedMessagesViewController.swift in Sources */,
 				4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */,
+				4D95C3B22B2DE2C500E589F5 /* MorseCodeTree.swift in Sources */,
 				43199811285E1FAD00AA897A /* MenuBarCell.swift in Sources */,
 				43199813285E21EB00AA897A /* UIFont+Extension.swift in Sources */,
 				4DED82D9246524E20027F385 /* States.swift in Sources */,
@@ -1026,12 +1030,13 @@
 				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1050,12 +1055,13 @@
 				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
