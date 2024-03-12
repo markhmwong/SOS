@@ -18,38 +18,6 @@
             endingLineNumber = "165"
             landmarkName = "handleDone()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6F858B42-9D1E-4508-AE65-23E6CE1F96FA - 6ff2f688af51a6dc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SOS_Flashlight___Morse_Code.ConversionView.handleDone() -&gt; ()"
-                  moduleName = "SOS Flashlight &amp; Morse Code"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mark/Development/SOS/SOS%20Flashlight%20&amp;%20Morse%20Code/Main/Cell/Configurations/ConversionConfiguration.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "165"
-                  endingLineNumber = "165"
-                  offsetFromSymbolStart = "152">
-               </Location>
-               <Location
-                  uuid = "6F858B42-9D1E-4508-AE65-23E6CE1F96FA - 6ff2f688af51a6dc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SOS_Flashlight___Morse_Code.ConversionView.handleDone() -&gt; ()"
-                  moduleName = "SOS Flashlight &amp; Morse Code"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mark/Development/SOS/SOS%20Flashlight%20&amp;%20Morse%20Code/Main/Cell/Configurations/ConversionConfiguration.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "165"
-                  endingLineNumber = "165"
-                  offsetFromSymbolStart = "156">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

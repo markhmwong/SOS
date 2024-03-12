@@ -16,17 +16,17 @@ class MainMorseViewModel: NSObject {
     
     enum SOSMode: Int, CaseIterable {
         case sos = 0
-        case messageConversion // english to morse conversion
-        case morseConversion // morse to english conversion
+        case encodeMorse // english to morse conversion
+        case decodeMorse // morse to english conversion
         case tools // quick tools
         
         var name: String {
             switch self {
             case .sos:
                 return "sos"
-            case .messageConversion:
+            case .encodeMorse:
                 return "message conversion"
-            case .morseConversion:
+            case .decodeMorse:
                 return "morse conversion"
             case .tools:
                 return "tools"

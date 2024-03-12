@@ -147,7 +147,7 @@ class MessageConversionView: UIView, UIContentView, UITextViewDelegate {
 		
         flashlightObserver = config.mainItem.flashlight.observe(\.lightSwitch, options:[.new]) { [self] flashlight, change in
             guard let light = change.newValue else { return }
-            if flashlight.flashlightMode() == .messageConversion {
+            if flashlight.flashlightMode() == .encodeMorse {
                 // front facing
                 if flashlight.facingSide == .rear {
                     light ? self.updateFrontIndicator(UIColor.Indicator.flashing.cgColor) : self.updateFrontIndicator(UIColor.Indicator.dim.cgColor)

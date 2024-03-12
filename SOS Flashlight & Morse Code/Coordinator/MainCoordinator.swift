@@ -60,11 +60,11 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         var icon = ""
         
         switch mode {
-        case .messageConversion:
+        case .encodeMorse:
             title = "Message"
             descriptionLabel = "Have a long message you wish to send through morse? Use this feature to send a longer message."
             icon = "message.and.waveform.fill"
-        case .morseConversion:
+        case .decodeMorse:
             title = "Conversion"
             descriptionLabel = "This feature quickly converts english text to morse code symbols."
             icon = "text.bubble.fill"

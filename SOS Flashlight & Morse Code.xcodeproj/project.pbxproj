@@ -1027,7 +1027,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -1036,7 +1036,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.2;
+				MARKETING_VERSION = 3.0.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1052,7 +1052,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -1061,7 +1061,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.2;
+				MARKETING_VERSION = 3.0.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
