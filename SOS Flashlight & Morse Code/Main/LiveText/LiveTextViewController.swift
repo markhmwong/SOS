@@ -12,7 +12,6 @@ extension LiveTextViewController: MorseStateMachineSystemViewDelegate {
 	func forwardStringTohighlight(string: String) {
 		// fix this. use this instead of KVO TRACKED_CHARACTERS
 //		liveText.animateNextLetterWithColour(searchText: text)
-		print("animate")
 	}
 }
 
@@ -28,7 +27,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var staticLiveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.systemFont(ofSize: 50.0, weight: .heavy)
+        label.font = UIFont.systemFont(ofSize: 28.0, weight: .heavy)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = .orange
@@ -41,7 +40,7 @@ class LiveTextViewController: UIViewController, UITextViewDelegate {
 	
 	lazy var liveText: UITextView = {
 		let label = UITextView()
-		label.font = UIFont.systemFont(ofSize: 50.0, weight: .heavy)
+		label.font = UIFont.systemFont(ofSize: 28.0, weight: .heavy)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "SOS"
 		label.textColor = UIColor.defaultText

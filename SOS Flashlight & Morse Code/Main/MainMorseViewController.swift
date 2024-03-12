@@ -106,7 +106,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
     lazy var conversionInfoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Please delimit each english letter with a space when writing morse code" // front or rear
+        label.text = "Please delimit each english letter with a space when writing morse code i.e. ... --- ..." // front or rear
         label.alpha = 0
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -271,7 +271,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 							toggleSos()
 						}
 						
-					case .messageConversion:
+					case .encodeMorse:
 						TelemetryManager.send(TelemetryManager.Signal.sosMessageConversionDidFire.rawValue)
 						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 						toggleMessage()
@@ -280,7 +280,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 						TelemetryManager.send(TelemetryManager.Signal.sosToolsDidFire.rawValue)
 						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
 						toggleTools()
-					case .morseConversion:
+					case .decodeMorse:
 						TelemetryManager.send(TelemetryManager.Signal.sosMorseConversionDidFire.rawValue)
 						
 						ImpactFeedbackService.shared.impactType(feedBackStyle: .heavy)
@@ -483,7 +483,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         loopingLabel.alpha = loopingButton.alpha
         
 		
-		if viewModel.flashlight.mode != .messageConversion {
+		if viewModel.flashlight.mode != .encodeMorse {
 			messageField.alpha = 0.0
 			messageField.isEditable = false
 		}
@@ -502,7 +502,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             switch mode {
             case .sos:
                 self.mainToggleButton.addGestureRecognizer(self.lockGesture)
-            case .tools, .messageConversion, .morseConversion:
+            case .tools, .encodeMorse, .decodeMorse:
                 self.mainToggleButton.removeGestureRecognizer(self.lockGesture)
             case .none:
                 ()
@@ -584,21 +584,18 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 
 		self.messageField.text = message
 	}
-    
 
-    
-
-    
 	// change tool mode between sos, message, conversion, tools
 	func scrollToMode(_ mode: MainMorseViewModel.SOSMode) {
-
+        messageField.text = ""
+        
 		viewModel.flashlight.updateMode(mode: mode)
 		
 		shutDownStateMachine()
 		
 		// message field configurations
 		switch mode {
-			case .messageConversion:
+			case .encodeMorse:
 				liveTextViewController.updateTextFields(message: "Send a signal")
 				lightIndicatorViewController.view.alpha = 0
 				showMessageField(alpha: 1.0)
@@ -629,7 +626,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 				}
 				holdButton.isEnabled = false
 				loopingButton.isEnabled = true
-			case .morseConversion:
+			case .decodeMorse:
 				lightIndicatorViewController.view.alpha = 0
 				liveTextViewController.updateTextFields(message: "Convert a message")
 				showMessageField(alpha: 1.0)

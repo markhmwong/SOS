@@ -108,7 +108,7 @@ class MainCell: UICollectionViewCell {
             var content = SosItemConfiguration().updated(for: state)
             content.mainItem = item
             contentConfiguration = content
-        case .messageConversion:
+        case .encodeMorse:
             var content = MessageConversionConfiguration().updated(for: state)
             content.mainItem = item
             contentConfiguration = content
@@ -116,7 +116,7 @@ class MainCell: UICollectionViewCell {
             var content = ToolConfiguration().updated(for: state)
             content.mainItem = item
             contentConfiguration = content
-        case .morseConversion:
+        case .decodeMorse:
             var content = ConversionConfiguration().updated(for: state)
             content.mainItem = item
             contentConfiguration = content
