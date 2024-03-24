@@ -35,6 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window?.windowScene = windowScene
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        #if DEBUG
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "b58409e032fccd87205e659e1fc107b8" ]
+        #endif
         let configuration = TelemetryManagerConfiguration(appID: Whizbang.telemetryDeckAppId)
         TelemetryManager.initialize(with: configuration)
 	}

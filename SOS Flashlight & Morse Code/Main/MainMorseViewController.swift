@@ -42,7 +42,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hold to lock"
-        label.layer.opacity = 0.0
+        label.layer.opacity = 1.0
+        label.textColor = UIColor.defaultText
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         return label
     }()
@@ -440,16 +441,19 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		holdLabel.topAnchor.constraint(equalTo: holdButton.bottomAnchor, constant: 10).isActive = true
 		holdLabel.centerXAnchor.constraint(equalTo: holdButton.centerXAnchor).isActive = true
 		
-        var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-        holdToLockLabelConstraint.constant = -70
-        holdToLockLabelConstraint.isActive = true
-
-        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+//        let holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+//        holdToLockLabelConstraint.constant = -70
+//        holdToLockLabelConstraint.isActive = true
+//
+//        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+        
+        // setup ad banner
+        setupAdBanner()
         
         lockImage.bottomAnchor.constraint(equalTo: mainToggleButton.topAnchor, constant: 0).isActive = true
         lockImage.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
         
-        menuBar.bottomAnchor.constraint(equalTo: self.mainToggleButton.topAnchor).isActive = true
+        menuBar.bottomAnchor.constraint(equalTo: self.mainToggleButton.topAnchor, constant: -10).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 12.5).isActive = true
@@ -534,25 +538,38 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
 
-        // setup ad banner
-        if let bool = KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) {
-            if bool {
-				// user has purchased no ads
-				holdToLockLabelConstraint.constant = -15
-            } else {
-				bannerView = GADBannerView(adSize: GADAdSizeBanner)
-				bannerView.translatesAutoresizingMaskIntoConstraints = false
-				bannerView.rootViewController = self
-				bannerView.adUnitID = AdDelivery.UnitId
-				view.addSubview(bannerView)
-				
-				bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
-				bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-				bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-				bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-				
-				bannerView.load(GADRequest())
-            }
+
+
+    }
+    
+    func setupAdBanner() {
+        // chain to the bottom of the screen and adjust constant as required
+        let holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        holdToLockLabelConstraint.constant = 0
+        holdToLockLabelConstraint.isActive = true
+        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+
+        if SubscriptionService.shared.getCustomerProStatusFromKeyChain() {
+            print("MainMorseViewController: pro status")
+            holdToLockLabelConstraint.constant = 0
+        } else {
+            holdToLockLabelConstraint.constant = -70
+            let scale = UIScreen.main.scale
+            let pixels = scale *  holdToLockLabelConstraint.constant
+            print("pixels \(pixels)")
+
+            print("MainMorseViewController: is not pro status")
+            bannerView = GADBannerView(adSize: GADAdSizeBanner)
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            bannerView.rootViewController = self
+            bannerView.adUnitID = AdDelivery.UnitId
+            view.addSubview(bannerView)
+            
+            bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            
+            bannerView.load(GADRequest())
         }
     }
 	

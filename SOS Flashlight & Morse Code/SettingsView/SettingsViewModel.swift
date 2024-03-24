@@ -62,8 +62,7 @@ class SettingsViewModel {
                 SettingsMain(name: "Contact", section: .main),
                 SettingsMain(name: "Write A Review / Rate", detail: "⭐ Rating my apps helps me a ton! ⭐", section: .main),
                 SettingsMain(name: "About", section: .main)
-					],
-
+            ],
 		]
 		updateSnapshot()
 	}
@@ -74,9 +73,7 @@ class SettingsViewModel {
 		
 		diffableDataSourceSnapshot.appendItems(datasourceDict[.main]!, toSection: .main)
         
-		diffableDatasource?.apply(diffableDataSourceSnapshot, animatingDifferences: false, completion: {
-			//
-		})
+		diffableDatasource?.apply(diffableDataSourceSnapshot, animatingDifferences: false, completion: { })
         
 //         add cell to remove ads
         SubscriptionService.shared.availableProducts { package in
@@ -91,9 +88,9 @@ class SettingsViewModel {
                 return SettingsIAP(name: "\(package.storeProduct.localizedTitle)", section: .noAds, package: package)
             }
 
-//            self.datasourceDict = [
-//                .noAds : iapArr,
-//            ]
+            self.datasourceDict = [
+                .noAds : iapArr,
+            ]
 
             snapshot?.appendItems(iapArr, toSection: .noAds)
 

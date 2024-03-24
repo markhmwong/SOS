@@ -82,6 +82,9 @@
 		4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4D95C3B22B2DE2C500E589F5 /* MorseCodeTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */; };
+		4D977CA72BAF94CC00D60EB1 /* IAPProducts+Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */; };
+		4D977CA92BAF96AB00D60EB1 /* PaddedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */; };
+		4D977CAB2BAFC3EA00D60EB1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */; };
 		4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */; };
 		4DBE741A2B0184660042EA2F /* LightIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */; };
 		4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */; };
@@ -204,6 +207,9 @@
 		4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewModel.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeTree.swift; sourceTree = "<group>"; };
+		4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IAPProducts+Items.swift"; sourceTree = "<group>"; };
+		4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedButton.swift; sourceTree = "<group>"; };
+		4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontFacingLcdViewControoller.swift; sourceTree = "<group>"; };
 		4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightIndicatorViewController.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
@@ -309,6 +315,7 @@
 				4DE7EFA9247CE9250017958E /* Whizbang.swift */,
 				4D05F39A2487AD2700FA71D2 /* AppStoreReviewManager.swift */,
 				4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */,
+				4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -410,11 +417,12 @@
 				4DE7EFA7247BA2BF0017958E /* SettingsViewModel.swift */,
 				4DEDB269247BD8A40032B958 /* ProductCache.swift */,
 				4D1910702476381900202FA0 /* SettingsCellTypes.swift */,
-				4D05F38F2487259400FA71D2 /* TipButton.swift */,
 				4D19106D24757EAF00202FA0 /* AboutViewController.swift */,
 				4D19106924757E9D00202FA0 /* MorseCodeSheetViewController.swift */,
 				4D05F3982487ABEE00FA71D2 /* ThankYouViewController.swift */,
 				4DCE3EBE2AF3F1DE006A09CF /* FooterView.swift */,
+				4D05F38F2487259400FA71D2 /* TipButton.swift */,
+				4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -487,6 +495,7 @@
 			children = (
 				4DC69EAB24797E6D009AC9FC /* IAPHelper.swift */,
 				4DC69EAC24797E6D009AC9FC /* IAPProducts.swift */,
+				4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */,
 				4DC69EB424797FA0009AC9FC /* LocalProductManager.swift */,
 			);
 			path = IAP;
@@ -766,6 +775,7 @@
 				43423FDE28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift in Sources */,
 				4DC69EAD24797E6D009AC9FC /* IAPHelper.swift in Sources */,
 				43423FDD28B0EB6300ADFB89 /* SavedMessage+CoreDataClass.swift in Sources */,
+				4D977CA72BAF94CC00D60EB1 /* IAPProducts+Items.swift in Sources */,
 				4DC69EB524797FA0009AC9FC /* LocalProductManager.swift in Sources */,
 				4D05F3902487259400FA71D2 /* TipButton.swift in Sources */,
 				4D6B8BB924693D4F00C6AD60 /* UIDevice+Extension.swift in Sources */,
@@ -813,6 +823,7 @@
 				4D05F3992487ABEE00FA71D2 /* ThankYouViewController.swift in Sources */,
 				4DC194D424658CA200B734B0 /* InternationalMorseCode.swift in Sources */,
 				4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */,
+				4D977CA92BAF96AB00D60EB1 /* PaddedButton.swift in Sources */,
 				43423FDA28B0EA3000ADFB89 /* SavedMessagesViewController.swift in Sources */,
 				4DBE74182B008AF00042EA2F /* FrontFacingLcdViewControoller.swift in Sources */,
 				4D95C3B22B2DE2C500E589F5 /* MorseCodeTree.swift in Sources */,
@@ -849,6 +860,7 @@
 				4D1910712476381900202FA0 /* SettingsCellTypes.swift in Sources */,
 				4D05F39B2487AD2700FA71D2 /* AppStoreReviewManager.swift in Sources */,
 				4D19106E24757EAF00202FA0 /* AboutViewController.swift in Sources */,
+				4D977CAB2BAFC3EA00D60EB1 /* LogService.swift in Sources */,
 				4D6B8BC724693D4F00C6AD60 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
