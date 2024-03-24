@@ -30,17 +30,18 @@ class SubscriptionService: NSObject {
         self.isPro = (keychain.get("isPro") != nil)
     }
     
-    func availableProducts(completionHandler: @escaping ([Package]) ->()) {
+    func availableProducts(completionHandler: @escaping ([Package]?, PublicError?) ->()) {
         Purchases.shared.getOfferings { offerings, error in
             
             if let offerings = offerings?.current?.availablePackages {
-                print(offerings)
+                print("SubscriptionService: \(offerings)")
                 for offer in offerings {
                     print(offer.offeringIdentifier)
                 }
-                completionHandler(offerings)
+                completionHandler(offerings, error)
             } else {
                 print("SubscriptionService: no product retrieved")
+                completionHandler(nil, error)
             }
             
         }

@@ -23,15 +23,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A1DB9DA5-8C62-4683-9601-F14B05289B8E"
-            shouldBeEnabled = "Yes"
+            uuid = "E72BE8B0-8256-4078-A22B-E036128E86C3"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SOS Flashlight &amp; Morse Code/SettingsView/SettingsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "updateSnapshot()"
             landmarkType = "7">
          </BreakpointContent>

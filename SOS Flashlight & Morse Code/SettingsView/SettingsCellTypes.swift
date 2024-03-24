@@ -10,12 +10,12 @@ import UIKit
 import StoreKit
 import RevenueCat
 
-protocol SettingsRowHashable {
+protocol ItemProtocol {
 	var name: String { get set }
 	var section: SettingsSection { get set }
 }
 
-struct SettingsTip: Hashable, SettingsRowHashable {
+struct SettingsTip: Hashable, ItemProtocol {
 	var name: String
 	var description: String
 	var section: SettingsSection
@@ -23,7 +23,7 @@ struct SettingsTip: Hashable, SettingsRowHashable {
 	var tipProduct: SKProduct?
 }
 
-struct SettingsMain: Hashable, SettingsRowHashable {
+struct SettingsMain: Hashable, ItemProtocol {
 	var name: String
 	var detail: String? = nil
 	var section: SettingsSection
@@ -31,7 +31,7 @@ struct SettingsMain: Hashable, SettingsRowHashable {
 }
 
 // currently used for ads
-struct SettingsIAP: Hashable, SettingsRowHashable {
+struct SettingsIAP: Hashable, ItemProtocol {
     var name: String
     var detail: String?
     var section: SettingsSection
