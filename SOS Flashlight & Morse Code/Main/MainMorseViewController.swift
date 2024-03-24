@@ -32,7 +32,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 27, weight: .bold, scale: .large)
         let image = UIImage(systemName: "togglepower", withConfiguration: config)
         button.setImage(image, for: .normal)
-        button.tintColor = .defaultText
+        button.tintColor = .systemOrange
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -492,7 +492,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 			messageField.isEditable = false
 		}
 		
-		
         //gestures
         longPress = createLongGestureRecognizer()
         lockGesture = createLockGestureRecognizer()
@@ -513,7 +512,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         
-        
         // handle the gesture recogniser when the tool mode is pressed
         toolModeObserver = viewModel.flashlight.observe(\.observableToolMode, options: [.new]) { [weak self] flashlight, change in
             guard let newValue = change.newValue else { return }
@@ -529,7 +527,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                 ()
             }
         }
-		
         
         // switch between front and rear text for the labele
         facingSideObserver = viewModel.flashlight.observe(\.observableFacingSide, options: [.new], changeHandler: { [weak self] flashlight, change in
@@ -537,9 +534,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             guard let self = self else { return }
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
-
-
-
     }
     
     func setupAdBanner() {
