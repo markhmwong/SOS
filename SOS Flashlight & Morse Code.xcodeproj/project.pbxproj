@@ -210,6 +210,7 @@
 		4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IAPProducts+Items.swift"; sourceTree = "<group>"; };
 		4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedButton.swift; sourceTree = "<group>"; };
 		4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
+		4DB602692BB21C62008C8788 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontFacingLcdViewControoller.swift; sourceTree = "<group>"; };
 		4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightIndicatorViewController.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
@@ -508,6 +509,7 @@
 		4DFC0D272461AE460033634E = {
 			isa = PBXGroup;
 			children = (
+				4DB602692BB21C62008C8788 /* PrivacyInfo.xcprivacy */,
 				43423FDB28B0EB6300ADFB89 /* SavedMessage+CoreDataClass.swift */,
 				43423FDC28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift */,
 				43423FD328AFD1E800ADFB89 /* Recent+CoreDataClass.swift */,

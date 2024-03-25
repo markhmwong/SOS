@@ -28,13 +28,6 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPrivacyAccessedAPITypes</key>
-	<dict>
-		<key>NSPrivacyAccessedAPICategoryDiskSpace</key>
-		<array>
-			<string>E174.1</string>
-		</array>
-	</dict>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Allow app to track your IDFA key for advertisers to personalise the ads</string>
 	<key>SKAdNetworkItems</key>
