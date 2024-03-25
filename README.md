@@ -72,3 +72,4 @@ link indicator to tools screen @done
 2. High Contrast
 3. Korean translation for localization
 4. Rework Settings Page
+5. IAP fix
