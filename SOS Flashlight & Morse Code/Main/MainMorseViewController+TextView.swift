@@ -93,17 +93,27 @@ extension MainMorseViewController: UITextViewDelegate {
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-		NotificationCenter.default.post(name: Notification.Name(NotificationCenter.NCKeys.MESSAGE_TO_FLASH), object: nil, userInfo: [NotificationCenter.NCKeys.MESSAGE_TO_FLASH : messageField.text ?? ""])
+
+        textView.text.isEmpty
 	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.text = ""
 	}
-
+   
+    @discardableResult
+    private func textViewDismissKeyboard(_ textView: UITextView, text: String) -> Bool? {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        viewModel.dismissFlag = false
+        return nil
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Define your character limit
-//        let characterLimit = 100
-
+        
+        textViewDismissKeyboard(textView, text: text)
         // Get the current text
         guard let currentText = textView.text else {
             return true
@@ -112,10 +122,6 @@ extension MainMorseViewController: UITextViewDelegate {
         // Calculate the new text if the replacement is allowed
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
 
-        // Ensure the text length doesn't exceed the character limit
-//        if newText.count > characterLimit {
-//            return false
-//        }
 
         // Define a regular expression pattern for alphanumeric characters and spaces
         var pattern = ""
@@ -128,71 +134,18 @@ extension MainMorseViewController: UITextViewDelegate {
                 () // doesn't require regex pattern ..-.-.-.-.-.-.
         }
 
-
         // Check if the replacement text matches the pattern
         if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
             let range = NSRange(location: 0, length: newText.utf16.count)
             if regex.firstMatch(in: newText, options: [], range: range) == nil {
                 return false
             }
+            
         } else {
             return false
         }
-
+        
         return true
     }
-
-	
-//	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//		
-////		if text.contains("\n") {
-////			// Ignore newline characters
-////			textView.endEditing(true)
-////			return false
-////		}
-////		
-////		// Define your character limit
-//		let characterLimit = 100
-////		
-////		// Get the current text
-//		guard let currentText = textView.text, let textRange = Range(range, in: text) else {
-//			return false
-//		}
-////		
-////		// Calculate the new text if the replacement is allowed
-//		let newText = currentText.replacingCharacters(in: textRange, with: text)
-////		print(newText)
-////		// Ensure the text length doesn't exceed the character limit
-//		if newText.count > characterLimit {
-//			return false
-//		}
-//		
-////        if let text = textView.text,
-////           let textRange = Range(range, in: text) {
-////           let updatedText = text.replacingCharacters(in: textRange,
-////                                                       with: text)
-////           return validateString(updatedText)
-////        }
-////        return true
-//        
-////        print(viewModel.flashlight.mode)
-////        return validateString(newText)
-//        var pattern = ""
-//		switch viewModel.flashlight.mode {
-//			case .encodeMorse:
-//				pattern = "^[a-zA-Z ]*$"
-//			case .decodeMorse:
-//				pattern = "^[.\\- ]*$"
-//			case .sos, .tools:
-//				() // doesn't require regex pattern ..-.-.-.-.-.-.
-//		}
-//		
-//		
-////		 Check if the replacement text matches the pattern (only English letters)
-//        let predicate = NSPredicate(format:"SELF MATCHES %@", pattern)
-//        let isValid = predicate.evaluate(with: newText)
-//		
-//		return isValid
-//	}
 }
 

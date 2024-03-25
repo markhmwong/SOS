@@ -32,7 +32,7 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let config = UIImage.SymbolConfiguration(pointSize: UIScreen.main.bounds.height / 27, weight: .bold, scale: .large)
         let image = UIImage(systemName: "togglepower", withConfiguration: config)
         button.setImage(image, for: .normal)
-        button.tintColor = .defaultText
+        button.tintColor = .systemOrange
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -42,7 +42,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hold to lock"
-        label.layer.opacity = 0.0
+        label.layer.opacity = 1.0
+        label.textColor = UIColor.defaultText
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         return label
     }()
@@ -121,8 +122,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.font = UIFont.preferredFont(forTextStyle: .body)
 		textField.layer.cornerRadius = 0
 		textField.translatesAutoresizingMaskIntoConstraints = false
-		textField.keyboardType = .alphabet
-		textField.returnKeyType = .done
+        textField.keyboardType = .alphabet
+        textField.returnKeyType = .default
 		textField.enablesReturnKeyAutomatically = false
 		textField.text = "Type a message"
 		textField.delegate = self
@@ -440,16 +441,19 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		holdLabel.topAnchor.constraint(equalTo: holdButton.bottomAnchor, constant: 10).isActive = true
 		holdLabel.centerXAnchor.constraint(equalTo: holdButton.centerXAnchor).isActive = true
 		
-        var holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-        holdToLockLabelConstraint.constant = -70
-        holdToLockLabelConstraint.isActive = true
-
-        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+//        let holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+//        holdToLockLabelConstraint.constant = -70
+//        holdToLockLabelConstraint.isActive = true
+//
+//        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
+        
+        // setup ad banner
+        setupAdBanner()
         
         lockImage.bottomAnchor.constraint(equalTo: mainToggleButton.topAnchor, constant: 0).isActive = true
         lockImage.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
         
-        menuBar.bottomAnchor.constraint(equalTo: self.mainToggleButton.topAnchor).isActive = true
+        menuBar.bottomAnchor.constraint(equalTo: self.mainToggleButton.topAnchor, constant: -10).isActive = true
         menuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 12.5).isActive = true
@@ -488,7 +492,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 			messageField.isEditable = false
 		}
 		
-		
         //gestures
         longPress = createLongGestureRecognizer()
         lockGesture = createLockGestureRecognizer()
@@ -509,7 +512,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         
-        
         // handle the gesture recogniser when the tool mode is pressed
         toolModeObserver = viewModel.flashlight.observe(\.observableToolMode, options: [.new]) { [weak self] flashlight, change in
             guard let newValue = change.newValue else { return }
@@ -525,7 +527,6 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
                 ()
             }
         }
-		
         
         // switch between front and rear text for the labele
         facingSideObserver = viewModel.flashlight.observe(\.observableFacingSide, options: [.new], changeHandler: { [weak self] flashlight, change in
@@ -533,26 +534,34 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             guard let self = self else { return }
             self.facingLabel.text =  FlashFacingSide.init(rawValue: newValue)?.name
         })
+    }
+    
+    func setupAdBanner() {
+        // chain to the bottom of the screen and adjust constant as required
+        let holdToLockLabelConstraint = holdToLockLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        holdToLockLabelConstraint.constant = 0
+        holdToLockLabelConstraint.isActive = true
+        holdToLockLabel.centerXAnchor.constraint(equalTo: mainToggleButton.centerXAnchor).isActive = true
 
-        // setup ad banner
-        if let bool = KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) {
-            if bool {
-				// user has purchased no ads
-				holdToLockLabelConstraint.constant = -15
-            } else {
-				bannerView = GADBannerView(adSize: GADAdSizeBanner)
-				bannerView.translatesAutoresizingMaskIntoConstraints = false
-				bannerView.rootViewController = self
-				bannerView.adUnitID = AdDelivery.UnitId
-				view.addSubview(bannerView)
-				
-				bannerView.topAnchor.constraint(equalTo: holdToLockLabel.bottomAnchor, constant: 10).isActive = true
-				bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-				bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-				bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-				
-				bannerView.load(GADRequest())
-            }
+        if SubscriptionService.shared.getCustomerProStatusFromKeyChain() {
+            print("MainMorseViewController: pro status")
+            holdToLockLabelConstraint.constant = 0
+        } else {
+            holdToLockLabelConstraint.constant = -70
+
+            print("MainMorseViewController: is not pro status")
+           
+            bannerView = GADBannerView(adSize: GADAdSizeBanner)
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            bannerView.rootViewController = self
+            bannerView.adUnitID = AdDelivery.UnitId
+            view.addSubview(bannerView)
+            
+            bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            
+            bannerView.load(GADRequest())
         }
     }
 	

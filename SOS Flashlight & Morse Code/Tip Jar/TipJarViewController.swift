@@ -18,6 +18,16 @@ class TipJarViewController: UICollectionViewController {
     
     static let sectionElementKind = "tip-jar-section"
     
+    private lazy var unableToLoadLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Unable to load tips"
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textColor = UIColor.defaultText
+        label.layer.opacity = 0
+        return label
+    }()
+    
     init(viewModel: TipJarViewModel, coordinator: TipJarCoordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -45,6 +55,8 @@ class TipJarViewController: UICollectionViewController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleSuccessfulTransaction), name: .IAPHelperPurchaseCompleteNotification, object: nil)
         self.grabTipsProducts()
         viewModel.configureDataSource(collectionView: collectionView)
+        
+        
     }
     
     func grabTipsProducts() {
@@ -59,6 +71,11 @@ class TipJarViewController: UICollectionViewController {
                 self.viewModel.updateTipButtons(products: products)
             } else {
                 // requires internet access
+                // unable to load tips
+                self.unableToLoadLabel.layer.opacity = 1.0
+                self.view.addSubview(self.unableToLoadLabel)
+                self.unableToLoadLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+                self.unableToLoadLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             }
         }
     }

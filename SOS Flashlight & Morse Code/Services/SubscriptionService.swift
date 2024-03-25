@@ -13,27 +13,35 @@ import UIKit
 
 class SubscriptionService: NSObject {
     
+    // trigger this on or off for testing purposes
+    private let debugFlagProStatus: Bool = false
+    
     static var shared: SubscriptionService = SubscriptionService()
     
     private let keychain = KeychainSwift()
     
     private var isPro: Bool = false
     
+    private var purchasedProductIdentifiers: Set<ProductIdentifier> = []
+
     override init() {
         super.init()
         self.keychain.synchronizable = true
         self.isPro = (keychain.get("isPro") != nil)
     }
     
-    func availableProducts(completionHandler: @escaping ([Package]) ->()) {
+    func availableProducts(completionHandler: @escaping ([Package]?, PublicError?) ->()) {
         Purchases.shared.getOfferings { offerings, error in
             
             if let offerings = offerings?.current?.availablePackages {
-                print(offerings)
+                print("SubscriptionService: \(offerings)")
                 for offer in offerings {
                     print(offer.offeringIdentifier)
                 }
-                completionHandler(offerings)
+                completionHandler(offerings, error)
+            } else {
+                print("SubscriptionService: no product retrieved")
+                completionHandler(nil, error)
             }
             
         }
@@ -43,22 +51,27 @@ class SubscriptionService: NSObject {
     func initialiseNoAdsKeychain() {
         if KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) == nil {
             KeychainWrapper.standard.set(false, forKey: IAPProducts.adsId)
+        } else {
+            print("SubscriptionService: Keychain wrapper ads key has been set. Great!")
         }
     }
     
     func buyAdRemovalIAP() {
         if KeychainWrapper.standard.bool(forKey: IAPProducts.adsId) != nil {
             KeychainWrapper.standard.set(true, forKey: IAPProducts.adsId)
+        } else {
+            print("SubscriptionService: keychain wrapper ads key not set")
         }
     }
     
-    // check whether a product is purcahsed or not
-    func isProductPurchased(completionHandler: @escaping () ->()) {
+    // check whether a product is purchased or not
+    func isProductPurchased(completionHandler: @escaping (String) -> ()) {
         Purchases.shared.getCustomerInfo { customerInfo, error in
             if let purchasedProductId = customerInfo?.allPurchasedProductIdentifiers {
                 for purchasedProduct in purchasedProductId {
+                    print("SubscriptionService: PURCHASED PRODUCTS \(purchasedProduct)")
                     if purchasedProduct == IAPProducts.adsId {
-                        completionHandler()
+                        completionHandler(purchasedProduct)
                     }
                 }
             }
@@ -70,25 +83,24 @@ class SubscriptionService: NSObject {
             // custInfo
             if let entitlements = custInfo?.entitlements["pro"] {
                 self.updateProState(entitlements.isActive)
-
             }
         }
     }
     
-    func updateProState(_ state: Bool) {
+    private func updateProState(_ state: Bool) {
         keychain.set(state, forKey: "isPro")
     }
     
-    func proStatus() -> Bool {
+    func getCustomerProStatusFromKeyChain() -> Bool {
         #if DEBUG
-        return true
+        return debugFlagProStatus
         #else
         return keychain.getBool("isPro") ?? false
         #endif
     }
     
     func lockImage(_ imageName: String? = nil) -> UIImage? {
-        if self.proStatus() {
+        if self.getCustomerProStatusFromKeyChain() {
             return UIImage(systemName: "\(imageName ?? "")")
         } else {
             return UIImage(systemName: "lock.fill")

@@ -41,6 +41,8 @@ class MainMorseViewModel: NSObject {
         let flashlight: Flashlight
     }
     
+    var dismissFlag: Bool = false
+    
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MainItem>! = nil
 
     var mainMorseViewController: MainMorseViewController! = nil
@@ -80,10 +82,10 @@ class MainMorseViewModel: NSObject {
 	}
     
     @objc func updateMessageToSignal(_ sender: NSNotification) {
-
+        #if DEBUG
 		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] != nil, "Message is nil")
-		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
-        
+//		assert(sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as! String != "", "Message is empty")
+        #endif
 		guard let message = sender.userInfo?[NotificationCenter.NCKeys.MESSAGE_TO_FLASH] as? String else { return }
         messageToBeSignalled = message
     }

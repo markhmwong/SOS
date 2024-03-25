@@ -38,7 +38,7 @@ class SettingsViewModel {
         return Whizbang.emailBody
     }
 	
-	private var diffableDatasource: UITableViewDiffableDataSource<SettingsSection, AnyHashable>?
+	var diffableDatasource: UITableViewDiffableDataSource<SettingsSection, AnyHashable>?
 	
 	var datasource: [AnyHashable] = []
 	
@@ -62,8 +62,7 @@ class SettingsViewModel {
                 SettingsMain(name: "Contact", section: .main),
                 SettingsMain(name: "Write A Review / Rate", detail: "⭐ Rating my apps helps me a ton! ⭐", section: .main),
                 SettingsMain(name: "About", section: .main)
-					],
-
+            ],
 		]
 		updateSnapshot()
 	}
@@ -74,26 +73,33 @@ class SettingsViewModel {
 		
 		diffableDataSourceSnapshot.appendItems(datasourceDict[.main]!, toSection: .main)
         
-		diffableDatasource?.apply(diffableDataSourceSnapshot, animatingDifferences: false, completion: {
-			//
-		})
+		diffableDatasource?.apply(diffableDataSourceSnapshot, animatingDifferences: false, completion: { })
         
 //         add cell to remove ads
-        SubscriptionService.shared.availableProducts { package in
-
+        SubscriptionService.shared.availableProducts { package, error in
+            
             var snapshot = self.diffableDatasource?.snapshot()
 
             snapshot?.insertSections([SettingsSection.noAds], beforeSection: .main)
 
+            guard let package = package, error != nil else {
+                print("SettingsViewModel: \(error)")
+                let iap = SettingsIAP(name: "Remove Ads", detail: "Not available", section: .noAds, package: nil)
+                snapshot?.appendItems([iap], toSection: .noAds)
+
+                self.diffableDatasource?.apply(snapshot!, animatingDifferences: true, completion: { })
+                return
+            }
+            
             let iapArr = package.map { package in
-                print("package \(package.storeProduct.localizedTitle)")
+                print("SettingsViewModel: package \(package.storeProduct.localizedTitle)")
                 self.removeAdPackage = package // this may cause problems
                 return SettingsIAP(name: "\(package.storeProduct.localizedTitle)", section: .noAds, package: package)
             }
 
-//            self.datasourceDict = [
-//                .noAds : iapArr,
-//            ]
+            self.datasourceDict = [
+                .noAds : iapArr,
+            ]
 
             snapshot?.appendItems(iapArr, toSection: .noAds)
 
@@ -121,18 +127,18 @@ class SettingsViewModel {
 	}
 	
 	// cell factory
-	func cellForRowTip(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
+	func cellForRowTip(tableView: UITableView, indexPath: IndexPath, row: ItemProtocol) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId, for: indexPath) as! SettingsTipCell
 		cell.setupCell(with: row as! SettingsTip, indexPath: indexPath)
 		return cell
 	}
     
-    private func initMainCell(_ tableView: UITableView, row: SettingsRowHashable) -> SettingsMainCell {
+    private func initMainCell(_ tableView: UITableView, item: ItemProtocol) -> SettingsMainCell {
         var cell: UITableViewCell? = nil
-        cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId)
-        let casted = row as! SettingsMain
+        cell = tableView.dequeueReusableCell(withIdentifier: item.section.cellId)
+        let casted = item as! SettingsMain
         if cell == nil {
-            cell = SettingsMainCell(style: .subtitle, reuseIdentifier: row.section.cellId)
+            cell = SettingsMainCell(style: .subtitle, reuseIdentifier: item.section.cellId)
         }
         var config = UIListContentConfiguration.subtitleCell()
         cell?.contentConfiguration = config
@@ -144,13 +150,13 @@ class SettingsViewModel {
         return cell as! SettingsMainCell
     }
     
-    private func initIAPCell(_ tableView: UITableView, row: SettingsRowHashable) -> SettingsMainCell {
+    private func initIAPCell(_ tableView: UITableView, item: ItemProtocol) -> SettingsMainCell {
         var cell: SettingsMainCell? = nil
-        cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId) as? SettingsMainCell
+        cell = tableView.dequeueReusableCell(withIdentifier: item.section.cellId) as? SettingsMainCell
         
-        let casted = row as? SettingsIAP
+        let casted = item as? SettingsIAP
         if cell == nil {
-            cell = SettingsMainCell(style: .subtitle, reuseIdentifier: row.section.cellId)
+            cell = SettingsMainCell(style: .subtitle, reuseIdentifier: item.section.cellId)
         }
         var config = UIListContentConfiguration.subtitleCell()
         cell?.contentConfiguration = config
@@ -162,20 +168,25 @@ class SettingsViewModel {
         
         cell?.initialiseActivityView()
         cell?.priceLabel.text = "\(casted?.package?.localizedPriceString ?? "n/a")"
+        if casted?.package == nil {
+            cell?.layer.opacity = 0.3
+            cell?.isUserInteractionEnabled = false
+        }
+
         return cell!
     }
 	
-	func cellForRowMain(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
+	func cellForRowMain(tableView: UITableView, indexPath: IndexPath, row: ItemProtocol) -> UITableViewCell {
         
         switch row.section {
         case .main:
-            return self.initMainCell(tableView, row: row)
+            return self.initMainCell(tableView, item: row)
         case .noAds:
-            return self.initIAPCell(tableView, row: row)
+            return self.initIAPCell(tableView, item: row)
         }
 	}
 	
-	func cellForRowDefault(tableView: UITableView, indexPath: IndexPath, row: SettingsRowHashable) -> UITableViewCell {
+	func cellForRowDefault(tableView: UITableView, indexPath: IndexPath, row: ItemProtocol) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: row.section.cellId, for: indexPath) as! SettingsMainCell
         var config = UIListContentConfiguration.subtitleCell()
         cell.contentConfiguration = config
