@@ -279,14 +279,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4341038728AA6F9E002374CC /* Ad */ = {
-			isa = PBXGroup;
-			children = (
-				4341038828AA6FAD002374CC /* AdDelivery.swift */,
-			);
-			path = Ad;
-			sourceTree = "<group>";
-		};
 		43423FCE28AFC5F400ADFB89 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,26 +288,18 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
-		43423FE128B16C8000ADFB89 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				43423FDF28B16C7B00ADFB89 /* WarningBox.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
 		43423FE228B16C8C00ADFB89 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4389396229CF9A66003B6B7C /* SubscriptionService.swift */,
+				4341038828AA6FAD002374CC /* AdDelivery.swift */,
 				434B56E0294C3EDE00F4A3D7 /* AdService.swift */,
-				43423FE128B16C8000ADFB89 /* Alert */,
-				4341038728AA6F9E002374CC /* Ad */,
-				430634862867F69E0097E238 /* NotificationCenter.swift */,
-				4DE7EFA9247CE9250017958E /* Whizbang.swift */,
 				4D05F39A2487AD2700FA71D2 /* AppStoreReviewManager.swift */,
 				4D6B8BCF246BB93F00C6AD60 /* ImpactFeedbackService.swift */,
 				4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */,
+				430634862867F69E0097E238 /* NotificationCenter.swift */,
+				4389396229CF9A66003B6B7C /* SubscriptionService.swift */,
+				43423FDF28B16C7B00ADFB89 /* WarningBox.swift */,
+				4DE7EFA9247CE9250017958E /* Whizbang.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -391,10 +375,10 @@
 		4D01FA922480C86B00F105B9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4D34270B2AE9742F00C522FD /* LiveText */,
 				4D828C102AFAFA8E006592D1 /* Once.swift */,
 				4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */,
 				4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */,
-				4D34270B2AE9742F00C522FD /* LiveText */,
 				4319980A285DE31E00AA897A /* MainMorseViewController.swift */,
 				43FF12C1286096E10021686B /* MainMorseViewModel.swift */,
 				4D828C122AFB0A9D006592D1 /* MainMorseViewController+TextView.swift */,

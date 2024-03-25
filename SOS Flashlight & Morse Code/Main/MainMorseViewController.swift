@@ -122,8 +122,8 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
 		textField.font = UIFont.preferredFont(forTextStyle: .body)
 		textField.layer.cornerRadius = 0
 		textField.translatesAutoresizingMaskIntoConstraints = false
-		textField.keyboardType = .alphabet
-		textField.returnKeyType = .done
+        textField.keyboardType = .alphabet
+        textField.returnKeyType = .default
 		textField.enablesReturnKeyAutomatically = false
 		textField.text = "Type a message"
 		textField.delegate = self
@@ -548,11 +548,9 @@ class MainMorseViewController: UIViewController, UICollectionViewDelegate {
             holdToLockLabelConstraint.constant = 0
         } else {
             holdToLockLabelConstraint.constant = -70
-            let scale = UIScreen.main.scale
-            let pixels = scale *  holdToLockLabelConstraint.constant
-            print("pixels \(pixels)")
 
             print("MainMorseViewController: is not pro status")
+           
             bannerView = GADBannerView(adSize: GADAdSizeBanner)
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             bannerView.rootViewController = self

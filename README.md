@@ -30,9 +30,6 @@ move loop/rear options to the bottom to next the flash/conversion button
 split the tipping and settings
 move tipping to the top right navigation
 
-v2.1.24
-High Contrast accessibility
-Korean
 
 v2.2
 add subscriptions  (revenue cat)
@@ -67,3 +64,11 @@ fix color for dark/light mode @done
 front/rear facing light @done
 link indicator to tools screen @done
 
+# Upcoming Features
+1. Rework of Morse Code Sheet
+    - Larger font size of morse code, design similar to kids flash cards for an alphabet
+    - scrollable
+    - signal preview
+2. High Contrast
+3. Korean translation for localization
+4. Rework Settings Page
