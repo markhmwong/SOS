@@ -82,6 +82,7 @@
 		4D828C1C2AFC6CA3006592D1 /* RecentMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */; };
 		4D9325922465A3460073802F /* MorseStateMachineSystemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */; };
 		4D95C3B22B2DE2C500E589F5 /* MorseCodeTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */; };
+		4D9760DF2BB3F535003BF98D /* FeatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9760DE2BB3F535003BF98D /* FeatureService.swift */; };
 		4D977CA72BAF94CC00D60EB1 /* IAPProducts+Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */; };
 		4D977CA92BAF96AB00D60EB1 /* PaddedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */; };
 		4D977CAB2BAFC3EA00D60EB1 /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */; };
@@ -207,9 +208,11 @@
 		4D828C1B2AFC6CA3006592D1 /* RecentMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessagesViewModel.swift; sourceTree = "<group>"; };
 		4D9325912465A3460073802F /* MorseStateMachineSystemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStateMachineSystemDelegate.swift; sourceTree = "<group>"; };
 		4D95C3B12B2DE2C500E589F5 /* MorseCodeTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeTree.swift; sourceTree = "<group>"; };
+		4D9760DE2BB3F535003BF98D /* FeatureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureService.swift; sourceTree = "<group>"; };
 		4D977CA62BAF94CC00D60EB1 /* IAPProducts+Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IAPProducts+Items.swift"; sourceTree = "<group>"; };
 		4D977CA82BAF96AB00D60EB1 /* PaddedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedButton.swift; sourceTree = "<group>"; };
 		4D977CAA2BAFC3EA00D60EB1 /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
+		4DB602692BB21C62008C8788 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4DBE74172B008AF00042EA2F /* FrontFacingLcdViewControoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontFacingLcdViewControoller.swift; sourceTree = "<group>"; };
 		4DBE74192B0184660042EA2F /* LightIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightIndicatorViewController.swift; sourceTree = "<group>"; };
 		4DC194D324658CA200B734B0 /* InternationalMorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternationalMorseCode.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 				4389396229CF9A66003B6B7C /* SubscriptionService.swift */,
 				43423FDF28B16C7B00ADFB89 /* WarningBox.swift */,
 				4DE7EFA9247CE9250017958E /* Whizbang.swift */,
+				4D9760DE2BB3F535003BF98D /* FeatureService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -508,6 +512,7 @@
 		4DFC0D272461AE460033634E = {
 			isa = PBXGroup;
 			children = (
+				4DB602692BB21C62008C8788 /* PrivacyInfo.xcprivacy */,
 				43423FDB28B0EB6300ADFB89 /* SavedMessage+CoreDataClass.swift */,
 				43423FDC28B0EB6300ADFB89 /* SavedMessage+CoreDataProperties.swift */,
 				43423FD328AFD1E800ADFB89 /* Recent+CoreDataClass.swift */,
@@ -781,6 +786,7 @@
 				4D6B8BDA246D7CE400C6AD60 /* Coordinator.swift in Sources */,
 				4DFC0D342461AE460033634E /* AppDelegate.swift in Sources */,
 				4D6B8BC124693D4F00C6AD60 /* UIViewController+Extension.swift in Sources */,
+				4D9760DF2BB3F535003BF98D /* FeatureService.swift in Sources */,
 				4D6B8BC424693D4F00C6AD60 /* UITextView+Extension.swift in Sources */,
 				4DC69EAE24797E6D009AC9FC /* IAPProducts.swift in Sources */,
 				4D6B8BBE24693D4F00C6AD60 /* UIView+Extension.swift in Sources */,
@@ -1026,16 +1032,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1051,16 +1057,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SOS Flashlight & Morse Code/SOS Flashlight & Morse Code.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = GEKZN86RYS;
 				INFOPLIST_FILE = "SOS Flashlight & Morse Code/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.whizbang.SOS-Flashlight---Morse-Code";
 				PRODUCT_NAME = "$(TARGET_NAME)";

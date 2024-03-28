@@ -46,8 +46,9 @@ class TipJarViewController: UICollectionViewController {
         collectionView.backgroundColor = view.backgroundColor
         
         self.navigationItem.title = "Tip Jar"
-        let right = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDismiss))
-        self.navigationItem.rightBarButtonItem = right
+        
+        let left = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(handleDismiss))
+        self.navigationItem.rightBarButtonItem = left
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Theme.Font.DefaultColor]
 

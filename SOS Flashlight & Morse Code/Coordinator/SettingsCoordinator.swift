@@ -26,7 +26,7 @@ class SettingsCoordinator: NSObject, Coordinator, UINavigationControllerDelegate
 		let nav = UINavigationController(rootViewController: vc)
 		parentNavController = nav
 		vc.navigationItem.title = "Settings"
-		let back = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(handleDismiss))
+		let back = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(handleDismiss))
         back.tintColor = UIColor.defaultText
 		vc.navigationItem.leftBarButtonItem = back
 		navigationController.present(nav, animated: true) {
