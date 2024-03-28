@@ -9,7 +9,7 @@
 import UIKit
 
 struct SosItemConfiguration : UIContentConfiguration {
-    var mainItem: MainMorseViewModel.MainItem! = nil
+    var mainItem: SystemModeItem! = nil
 
     
     func makeContentView() -> UIView & UIContentView {

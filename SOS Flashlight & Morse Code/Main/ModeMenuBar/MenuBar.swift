@@ -81,7 +81,7 @@ class MenuBar: UIView, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		guard let mode = MainMorseViewModel.SOSMode.init(rawValue: indexPath.item) else {
+		guard let mode = MainMorseViewModel.SystemMode.init(rawValue: indexPath.item) else {
 			return
 		}
 		self.parentViewController.scrollToMode(mode)

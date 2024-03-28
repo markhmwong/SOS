@@ -14,7 +14,7 @@ class MainMorseViewModel: NSObject {
         case main
     }
     
-    enum SOSMode: Int, CaseIterable {
+    enum SystemMode: Int, CaseIterable {
         case sos = 0
         case encodeMorse // english to morse conversion
         case decodeMorse // morse to english conversion
@@ -34,16 +34,11 @@ class MainMorseViewModel: NSObject {
         }
     }
     
-    struct MainItem: Hashable {
-        let name: String
-        let section: Section
-        let item: SOSMode
-        let flashlight: Flashlight
-    }
+
     
     var dismissFlag: Bool = false
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, MainItem>! = nil
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, SystemModeItem>! = nil
 
     var mainMorseViewController: MainMorseViewController! = nil
     
@@ -102,8 +97,8 @@ class MainMorseViewModel: NSObject {
 		}
 	}
 
-    private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, MainItem> {
-        let cellConfig = UICollectionView.CellRegistration<MainCell, MainItem> { (cell, indexPath, item) in
+    private func configureCellRegistration() -> UICollectionView.CellRegistration<MainCell, SystemModeItem> {
+        let cellConfig = UICollectionView.CellRegistration<MainCell, SystemModeItem> { (cell, indexPath, item) in
             cell.item = item
         }
         return cellConfig
@@ -111,7 +106,7 @@ class MainMorseViewModel: NSObject {
     
     func configureDataSource(collectionView: UICollectionView) {
         let cellRego = self.configureCellRegistration()
-        diffableDataSource = UICollectionViewDiffableDataSource<Section, MainItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+        diffableDataSource = UICollectionViewDiffableDataSource<Section, SystemModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRego, for: indexPath, item: item)
             return cell
         }
@@ -119,8 +114,8 @@ class MainMorseViewModel: NSObject {
         diffableDataSource.apply(configureSnapshot())
     }
     
-    private func configureSnapshot() -> NSDiffableDataSourceSnapshot<Section, MainItem> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MainItem>()
+    private func configureSnapshot() -> NSDiffableDataSourceSnapshot<Section, SystemModeItem> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SystemModeItem>()
         snapshot.appendSections([.main])
         for obj in self.createItems() {
             snapshot.appendItems([obj], toSection: obj.section)
@@ -128,11 +123,11 @@ class MainMorseViewModel: NSObject {
         return snapshot
     }
     
-    private func createItems() -> [MainItem] {
+    private func createItems() -> [SystemModeItem] {
         
-        var items: [MainItem] = []
-        for i in SOSMode.allCases {
-            items.append(MainItem(name: i.name, section: .main, item: i, flashlight: flashlight))
+        var items: [SystemModeItem] = []
+        for i in SystemMode.allCases {
+            items.append(SystemModeItem(name: i.name, section: .main, item: i, flashlight: flashlight))
         }
         return items
     }
