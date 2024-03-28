@@ -82,9 +82,10 @@ class SettingsViewModel {
 
             snapshot?.insertSections([SettingsSection.noAds], beforeSection: .main)
 
-            guard let package = package, error != nil else {
+            guard let package = package, error == nil else {
                 print("SettingsViewModel: \(error)")
-                let iap = SettingsIAP(name: "Remove Ads", detail: "Not available", section: .noAds, package: nil)
+
+                let iap = SettingsIAP(name: "Remove Ads", detail: "Temporarily Unavailble", section: .noAds, package: nil)
                 snapshot?.appendItems([iap], toSection: .noAds)
 
                 self.diffableDatasource?.apply(snapshot!, animatingDifferences: true, completion: { })

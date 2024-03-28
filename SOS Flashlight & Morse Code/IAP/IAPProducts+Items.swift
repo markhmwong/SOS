@@ -14,6 +14,6 @@ extension IAPProducts {
     static let mediumId = "com.whizbang.SOSFlashlightMorseCode.tip.medium"
     static let bigId = "com.whizbang.SOSFlashlightMorseCode.tip.big"
     static let astronomicalId = "com.whizbang.SOSFlashlightMorseCode.tip.astronomical"
-    static let adsId = "com.whizbang.morsecodetool.purchase.removead"
     
+    static let adsId = "com.whizbang.morsecodetool.purchase.removead"
 }
