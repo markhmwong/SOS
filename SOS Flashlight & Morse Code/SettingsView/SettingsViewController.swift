@@ -109,7 +109,7 @@ class SettingsViewController: UITableViewController {
                     writeReview()
             }
             case .noAds:
-                let cell = tableView.cellForRow(at: indexPath) as! SettingsMainCellIAP
+                let cell = tableView.cellForRow(at: indexPath) as! SettingsCellPurchaseable
                 cell.activityIndicatorEnable()
                 viewModel?.purchase(cell, vc: self)
 			}

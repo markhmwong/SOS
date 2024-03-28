@@ -149,7 +149,7 @@ class SettingsTipCell: UITableViewCell {
 }
 
 //MARK: Main Cell
-class SettingsMainCell: UITableViewCell, SettingsMainCellIAP {
+class SettingsMainCell: UITableViewCell, SettingsCellPurchaseable {
 
     func activityIndicatorEnable() {
         activityIndicatorView.startAnimating()
@@ -191,7 +191,7 @@ class SettingsMainCell: UITableViewCell, SettingsMainCellIAP {
 	}
 }
 
-protocol SettingsMainCellIAP {
+protocol SettingsCellPurchaseable {
     var activityIndicatorView: UIActivityIndicatorView! { get }
     var priceLabel: UILabel { get }
     func initialiseActivityView()
@@ -199,7 +199,7 @@ protocol SettingsMainCellIAP {
     func activityIndicatorDisable()
 }
 
-extension SettingsMainCellIAP {
+extension SettingsCellPurchaseable {
     private var cellPriceLabel: UILabel! {
         return nil
     }

@@ -211,7 +211,7 @@ class SettingsViewModel {
 		settingsViewController.showThankYou()
 	}
     
-    func purchase(_ cell: SettingsMainCellIAP, vc: SettingsViewController) {
+    func purchase(_ cell: SettingsCellPurchaseable, vc: SettingsViewController) {
         Purchases.shared.purchase(package: self.removeAdPackage) { storeTransaction, customerInfo, error, state in
             
             if error != nil {
